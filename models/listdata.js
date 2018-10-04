@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
 
-    list: {
+    list:{
         type: String,
         unique: true,
-        required: [true, "Enter a valid list item"]
+        required: "need something"
     }
 
 });
 
-const Lists = mongoose.model('Lists', ListSchema);
+const Lists = mongoose.model('ListModel', ListSchema);
 
 module.exports = Lists;
