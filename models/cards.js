@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const Cards = new Schema({
 
-    Card: {
+    card: {
         type: String,
         unique: true,
         trim: true,
@@ -12,6 +12,6 @@ const Cards = new Schema({
 
 });
 
-const Cards = mongoose.model('ToDoModel', Cards);
+const CardModel = mongoose.model('ToDoModel', Cards);
 
-module.exports = Cards;
+module.exports = CardModel;
