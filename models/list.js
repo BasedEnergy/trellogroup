@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const listSchema = new Schema({
-    itemName: {
+const ListSchema = new Schema({
+
+    list: {
         type: String,
         unique: true,
-        required: [true, 'Enter a list name']
+        required: [true, "Enter a valid list item"]
     }
+
 });
 
-let listItem = mongoose.model('listItem', listSchema);
+const Lists = mongoose.model('Lists', ListSchema);
 
-module.exports = listItem;
+module.exports = Lists;

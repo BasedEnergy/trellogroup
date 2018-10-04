@@ -1,46 +1,58 @@
-module.exports = function(info){
+const db = require('../data/2dataexam');
 
-    info.app.get('/api/data', function(req, res) {
-        info.db.collection(info.COLLECTION).find({}).toArray(function(err, docs) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to get contacts.");
-            } else {
-                return res.send(docs);
-            }
-        });
-    });
+module.exports = function(app){
 
-    info.app.post('/api/data', function(req, res) {
-        if (!(req.body.item.label || req.body.item.checked)) {
-            console.log(res, "Invalid user input", "Must provide a label and checked state.", 400);
-        }
+    app.get('/api/cards',function(req,res){
+        db.Cards.find({})
+        .then(function(cards){
+            res.json(cards);
+        })
+    })
 
-        info.db.collection(info.COLLECTION).insertOne(req.body.item, function(err, doc) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to create new item.");
-            } else {
-                return res.send(true);
-            }
-        });
-    });
+    app.get('/api/lists',function(req,res){
+        db.Lists.find({})
+        .then(function(lists){
+            res.json(lists);
+        })
+    })
 
-    info.app.put('/api/data', function (req, res) {
-        info.db.collection(info.COLLECTION).updateOne({_id: new info.ObjectID(req.body._id)}, {$set: {checked: req.body.checked}}, function(err, doc) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to update contact");
-            } else {
-                return res.send(true);
-            }
-        });
-    });
+    app.post('/api/cards',function(req,res){
+        db.Cards.create(req.body)
+            .then(function(cards){
+                res.json(cards);
+            })
+    })
+    app.post('/app/lists',function(req,res){
+        db.Lists.create(req.body)
+        .then(function(lists){
+            res.json(lists);
+        })
+    })
 
-    info.app.delete('/api/data', function (req, res) {
-        info.db.collection(info.COLLECTION).deleteOne({_id: new info.ObjectID(req.body._id)}, function(err, result) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to delete contact");
-            } else {
-                return res.send(true);
-            }
-        });
-    });
+    app.put('/app/cards/',function(req,res){
+            db.Cards.findOneAndUpdate({_id: req.body._id},{set:{card: req.body.card}})
+            .then(function(cards){
+                res.json(cards);
+            })
+    })
+    app.put('/app/lists',function(req,res){
+        db.Lists.findOneAndUpdate({_id: req.body._id},{set:{list: req.body.list}})
+        .then(function(lists){
+            res.json(lists);
+        })
+    })
+
+    app.delete('/app/cards',function(req,res){
+        db.Cards.findOneAndDelete(req.body)
+        .then(function(cards){
+            res.json(cards);
+        })
+    })
+
+    app.delete('/app/lists',function(req,res){
+        db.Lists.findOneAndDelete(req.body)
+        .then(function(lists){
+            res.json(lists);
+        })
+    })
 };
