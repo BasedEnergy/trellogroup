@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const Cards = new Schema({
-
-    Card: {
+const CardSchema = new Schema({
+   
+    card:{
         type: String,
         unique: true,
-        trim: true,
+        require: "need something"
     }
 
 });
 
-const Cards = mongoose.model('ToDoModel', Cards);
+var Cards = mongoose.model('Cards', CardSchema);
 
 module.exports = Cards;
