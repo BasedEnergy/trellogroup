@@ -1,4 +1,4 @@
-const db = require('../data/2dataexam');
+const db = require('../models/index');
 
 module.exports = function(app){
 
