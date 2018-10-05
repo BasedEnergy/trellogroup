@@ -24,5 +24,10 @@ $(function(){
             $(`.content`).html(contentHtml);
         })
 }
+
+    const addList = function () {
+        
+        $.ajax({ url: 'app/lists', method: 'POST', data:})
+    }
 renderList();
 });
