@@ -13,8 +13,8 @@ var info = {
 const mongoose = require('mongoose');
 info.ObjectID = mongoose.Types.ObjectId;
 info.COLLECTION = 'trelloclone';
-const MONGODB_URI = 'mongodb://trellogroup:trello123@ds121203.mlab.com:21203/heroku_906ff17q';
-
+// const MONGODB_URI = 'mongodb://trellogroup:trello123@ds121203.mlab.com:21203/heroku_906ff17q';
+const MONGODB_URI = mongoose.connect('mongodb://localhost/trellodata',{useNewUrlParser: true});
 
 
 info.app = express();
