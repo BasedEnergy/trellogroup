@@ -12,7 +12,10 @@ $(function(){
                     $(`<div>`)
                         .addClass('list').append(
                         $('<header>')
-                            .text(e.list)
+                            .text(e.list),
+                        $('<button>')
+                            .attr('id','deleteList')
+                            .text('Delete this List')
                         )
                 )
             })
@@ -32,9 +35,13 @@ $(function(){
                 )
             )
             $(`.lists`).append(contentHtml);
+            $('#deleteList').on('click', deleteList);
+            $('#addList').on('click', addList);
+            
         })
 }
-    const addList = function(){
+
+    const addList = function () {
         let listInput = $('.inputList').val().trim();
         let newData = {
             list: listInput
@@ -48,6 +55,18 @@ $(function(){
                 res.json(err);
             })
     }
-$(document).on('click', '#addList' , addList);
+
+    const deleteList = function () {
+        const deleteItem = $(this);
+        console.log(deleteItem);
+        $.ajax({url:`/api/lists`, method: "DELETE", data: deleteItem})
+            .then(function(res){
+                res.json(res)
+                renderList();
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+    }
 renderList();
 });
