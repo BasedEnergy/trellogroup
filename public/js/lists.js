@@ -1,43 +1,53 @@
 $(function(){
 
-const renderList = function (event) {
-    event.preventDefault();
+    const renderList = function () {
+    $('.content').empty();
+
+
     $.ajax({ url: "/api/lists", method: "GET" })
         .then(function (dataList) {
-            let contentHtml = $('<ul>').addClass('contentbox');
-            console.log(contentHtml);
+            let contentHtml = $('.lists');
             dataList.forEach(e => {
                 contentHtml.append(
-                    $('<div>').append(
-                        $(`<ul>`)
-                            .addClass('contentList')
-                            .text(`${e.list}`),
-                        //div where the card should be placed
-                        $(`<button>`)
-                            .addClass('addButton')
-                            .text('click to add cards')
-                    )
+                    $(`<div>`)
+                        .addClass('list').append(
+                        $('<header>')
+                            .text(e.list)
+                        )
                 )
             })
-            $(`.content`).html(contentHtml);
+            contentHtml.append(
+                $('<div>').addClass('add').append(
+                    $('<header>')
+                        .text('Make a new list!'),
+                    $('<form>').append(
+                        $('<input>')
+                            .addClass('inputList')
+                            .attr('type',"text")
+                            .attr('placeholder',"enter list title"),
+                        $('<button>')
+                            .attr('id','addList')
+                            .text('Add a List')
+                    )
+                )
+            )
+            $(`.lists`).append(contentHtml);
         })
 }
-
-    // const addList = function (event) {
-    //     event.preventDefault();
-    //     const listInput = {
-    //         list: $('.list-input').val().trim()
-    //     }
-    //     console.log(listInput);
-    //     $.ajax({ url: 'app/lists', method: 'POST', data: listInput})
-    //         .then(function(dataList){
-    //             if(dataList._id){
-    //                 renderList();
-    //             }
-    //         })
-    // }
-
+    const addList = function(){
+        let listInput = $('.inputList').val().trim();
+        let newData = {
+            list: listInput
+        }
+        $.ajax({url: '/api/lists', method: 'POST', data: newData})
+            .then(function(res){
+                res.json(res);
+                renderList();
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+    }
+$(document).on('click', '#addList' , addList);
 renderList();
-
 });
-$('.submit-list').on('click', addList);
