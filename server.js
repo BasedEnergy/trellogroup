@@ -30,7 +30,7 @@ info.app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 
-require('./routes/routes.js')(info);
+require('./routes/api-routes.js')(info.app);
 
 // Connect to the database before starting the info.application server.
 mongoose.connect(MONGODB_URI,{ useNewUrlParser: true }, function (err, database) {
