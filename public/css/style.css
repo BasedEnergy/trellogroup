@@ -79,3 +79,34 @@ body {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+
+.add {
+    display: block;
+    border-radius: 5px;
+    background-color: #e2e4e6;
+    height: fit-content;
+    width: 300px;
+    color: #333;
+}
+
+.add header {
+    text-align: left;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.add form {
+    background-color: #e2e4e6;
+    padding-top: 10px;
+    display: grid;
+    text-align: center;
+    justify-content: center;
+}
+
+input {
+    border-radius: 3px;
+    height: 15px;
+}
