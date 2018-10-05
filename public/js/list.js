@@ -1,22 +1,28 @@
-const listFunctions = {
-    get: function () {
-    $.ajax({ url: '/api/get', method: 'GET' })
-        .then(function(event){
 
+$(function(){
+
+    const renderList = function () {
+    $('.content').empty();
+
+
+    $.ajax({ url: "/api/lists", method: "GET" })
+        .then(function (dataList) {
+            let contentHtml = $('<ul>').addClass('contentbox');
+            dataList.forEach(e => {
+                contentHtml.append(
+                    $('<div>').append(
+                        $(`<ul>`)
+                            .addClass('contentList')
+                            .text(`${e.list}`),
+                        //div where the card should be placed
+                        $(`<button>`)
+                            .addClass('addButton')
+                            .text('click to add cards')
+                    )
+                )
+            })
+            $(`.content`).html(contentHtml);
         })
-    }, 
-
-    post: function () {
-    $.ajax({ url: '/api/post', method: 'POST'})
-        .then(function(event){
-
-        })
-    },
-
-    put: function () {
-    $.ajax({ url: '/api/put', method: 'PUT'})
-        .then(function(){
-            
-        })
-    },
 }
+renderList();
+});
