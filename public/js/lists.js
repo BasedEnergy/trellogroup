@@ -14,7 +14,8 @@ $(function(){
                         $('<header>')
                             .text(e.list),
                         $('<button>')
-                            .attr('id','deleteList')
+                            .attr('data-id',`${e._id}`)
+                            .attr('class', 'delete-btn')
                             .text('Delete this List')
                         )
                 )
@@ -29,14 +30,14 @@ $(function(){
                             .attr('type',"text")
                             .attr('placeholder',"enter list title"),
                         $('<button>')
-                            .attr('id','addList')
+                            .attr('id','add-btn')
                             .text('Add a List')
                     )
                 )
             )
             $(`.lists`).append(contentHtml);
-            $('#deleteList').on('click', deleteList);
-            $('#addList').on('click', addList);
+            $('.delete-btn').on('click', deleteList);
+            $('#add-btn').on('click', addList);
             
         })
 }
@@ -57,16 +58,14 @@ $(function(){
     }
 
     const deleteList = function () {
-        const deleteItem = $(this);
+        const deleteItem = $(this).attr('data-id');
         console.log(deleteItem);
-        $.ajax({url:`/api/lists`, method: "DELETE", data: deleteItem})
-            .then(function(res){
-                res.json(res)
+        $.ajax({url:`/api/lists`, method: "DELETE", data: {_id: deleteItem}})
+            .then(function(){
+                
                 renderList();
             })
-            .catch(function(err){
-                res.json(err);
-            })
+            
     }
 renderList();
 });
