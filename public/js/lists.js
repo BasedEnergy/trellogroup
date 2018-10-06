@@ -58,11 +58,10 @@ $(function(){
     }
 
     const deleteList = function () {
-        const deleteItem = $(this).attr('data-id');
+        const deleteItem = $(event.target).attr('data-id');
         console.log(deleteItem);
-        $.ajax({url:`/api/lists`, method: "DELETE", data: {_id: deleteItem}})
+        $.ajax({url:`/api/lists/${deleteItem}`, method: "DELETE"})
             .then(function(){
-                
                 renderList();
             })
             
