@@ -73,7 +73,7 @@ module.exports = function (app) {
     });
 
     app.delete('/api/lists/:id', function (req, res) {
-        db.Lists.deleteOne({_id: req.params._id})
+        db.Lists.deleteOne({_id: req.params.id})
             .then(function (lists) {
                 res.json(lists);
             })
