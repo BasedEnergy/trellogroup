@@ -15,9 +15,11 @@ $(function () {
                                 $('<header>')
                                     .text(e.list),
                                 $('<button>')
+                                    .text('Add card'),
+                                $('<button>')
                                     .attr('data-id', `${e._id}`)
                                     .addClass('delete-btn')
-                                    .text('Delete this List')
+                                    .text('Delete this List')       
                             )
                     )
                 })
