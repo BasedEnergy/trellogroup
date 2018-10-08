@@ -7,13 +7,14 @@ const ListSchema = new Schema({
     list:{
         type: String,
         unique: true,
-        require: "need something"
+        trim: true,
+        required: [true, "need something"]
     }
 
 });
 
 
-var Lists = mongoose.model('Lists', ListSchema);
+const Lists = mongoose.model('Lists', ListSchema);
 
 
 module.exports = Lists;

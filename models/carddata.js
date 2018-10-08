@@ -7,7 +7,7 @@ const CardSchema = new Schema({
     card:{
         type: String,
         unique: true,
-        require: "need something"
+        required: "need something"
     }
 
 });
