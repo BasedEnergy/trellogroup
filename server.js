@@ -1,16 +1,53 @@
+// Imports express into our info.app and sets it up for use
 const express = require('express');
-const bodyParser = require('body-parser');
+
+var info = {
+    app: undefined,
+    db: undefined,
+    COLLECTION: undefined,
+    ObjectID: undefined,
+    Item: undefined
+};
+
+//MongoDB requirements
 const mongoose = require('mongoose');
-const PORT = process.env.PORT || 8080;
-const app = express();
+info.ObjectID = mongoose.Types.ObjectId;
+info.COLLECTION = 'trelloclone';
+//Using username and pw inside code structure is bad practice
+//Mongo uri setup internally through heroku command line
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/todolist', { useNewUrlParser: true });
 
-require('./routes/routes')(app);
+info.app = express();
 
-app.listen(PORT, function() {
-    console.log(`App is now listening on PORT: ${PORT}`)
-})
+// make express look in the public directory for assets (css/js/img)
+info.app.use(express.static(__dirname + '/public'));
+
+
+const bodyParser = require('body-parser');
+// Sets up our server to parse our request body for usage
+info.app.use(bodyParser.json());
+info.app.use(bodyParser.urlencoded({ extended: true }));
+
+// Routes
+
+require('./routes/api-routes.js')(info.app);
+
+// Connect to the database before starting the info.application server.
+//Mongo Uri pulled from heroku itself using 'process.env.MONGODB_URI
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true }, function (err, database) {
+    if (err) {
+        console.log(err);
+        process.exit(1);
+    }
+
+    info.db = database;
+
+    console.log("Database connection ready");
+
+    // Starts our server on the predefined PORT
+    //Using process.env.PORT to allow Heroku to dynamically choose its own port
+    info.app.listen(process.env.PORT || 8080, function(){
+        console.log(`app is now listening on PORT `+ process.env.PORT);
+    });
+});
