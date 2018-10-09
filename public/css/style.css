@@ -50,6 +50,9 @@ body {
     font-weight: bold;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    word-wrap: break-word;
 }
 .list footer {
     line-height: 36px;
@@ -128,6 +131,6 @@ body {
 }
 .fa-window-close{
     cursor: pointer;
-    position: relative;
-    left:209px;
+    justify-self: right;
+    padding-top: 5px;
 }

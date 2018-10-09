@@ -17,7 +17,7 @@ $(function () {
                                         $('<i>')
                                             .addClass('far fa-window-close')
                                             .attr('data-id', `${e._id}`)
-                                        .addClass('delete-btn'),
+                                            .addClass('delete-btn'),
                                     ),
                                 $('<ul>')
                                     .addClass('locateCard'),
@@ -25,7 +25,7 @@ $(function () {
                                 $('<footer>')
                                     .text('Add a card...')
                                     .attr('id', 'clickAddList'),
-                    
+
                             )
                     )
                 })
@@ -37,6 +37,7 @@ $(function () {
                             $('<input>')
                                 .addClass('list-input')
                                 .attr('type', "text")
+                                
                                 .attr('placeholder', "enter list title"),
                             $('<button>')
                                 .attr('id', 'add-btn')
