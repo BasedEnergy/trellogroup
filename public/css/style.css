@@ -67,6 +67,7 @@ body {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     color: #888;
+    cursor: pointer;
 }
 
 .list ul {
@@ -98,4 +99,56 @@ body {
 .far {
     font-weight: 400;
     padding-left: 160px;
+}
+
+.add {
+    display: block;
+    border-radius: 5px;
+    background-color: #e2e4e6;
+    height: fit-content;
+    width: 300px;
+    color: #333;
+}
+
+.add header {
+    padding-left: 10px;
+    text-align: left;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.add form {
+    background-color: #e2e4e6;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    text-align: center;
+    justify-content: center;
+}
+
+.add form button {
+    background-color: #5aac44;
+    box-shadow: 0 1px 0 0 #3f6f21;
+    border: none;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.add form input {
+    background: #fff;
+    border: 1px solid #5ba4cf;
+    box-shadow: 0 0 0 1px #5ba4cf;
+    display: block;
+    margin: 0;
+    width: 100%;
+}
+
+.fa-window-close {
+    cursor: pointer;
+    position: relative;
+    left: 209px;
 }
