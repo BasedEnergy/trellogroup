@@ -26,14 +26,18 @@ info.app.use(express.static(__dirname + '/public'));
 const bodyParser = require('body-parser');
 // Sets up our server to parse our request body for usage
 info.app.use(bodyParser.json());
-info.app.use(bodyParser.urlencoded({ extended: true }));
+info.app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Routes
 
-require('./routes/routes.js')(info);
+require('./routes/api-routes.js')(info);
 
 // Connect to the database before starting the info.application server.
-mongoose.connect(MONGODB_URI,{ useNewUrlParser: true }, function (err, database) {
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true
+}, function (err, database) {
     if (err) {
         console.log(err);
         process.exit(1);
@@ -45,7 +49,7 @@ mongoose.connect(MONGODB_URI,{ useNewUrlParser: true }, function (err, database)
 
     // Starts our server on the predefined PORT
     //Using process.env.PORT to allow Heroku to dynamically choose its own port
-    info.app.listen(process.env.PORT || 8080, function(){
-        console.log(`app is now listening on PORT `+ process.env.PORT);
+    info.app.listen(process.env.PORT || 8080, function () {
+        console.log(`app is now listening on PORT ` + process.env.PORT);
     });
 });
