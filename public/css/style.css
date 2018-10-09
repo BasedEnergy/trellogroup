@@ -126,3 +126,8 @@ body {
     margin: 0;
     width: 100%;
 }
+.fa-window-close{
+    cursor: pointer;
+    position: relative;
+    left:209px;
+}
