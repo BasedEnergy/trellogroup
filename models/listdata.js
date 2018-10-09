@@ -8,7 +8,15 @@ const ListSchema = new Schema({
         type: String,
         unique: true,
         trim: true,
-        required: [true, "need something"]
+        required: "need something",
+        cards:[
+            {
+                type: String,
+                unique: true,
+                trim:true,
+                required: "need something",
+            }
+        ],
     }
 
 });
