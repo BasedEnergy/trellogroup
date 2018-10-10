@@ -10,16 +10,22 @@ $(function () {
                 dataList.forEach(e => {
                     contentHtml.append(
                         $(`<div>`)
-                        .attr('id', `${e._id}`)
+                            .attr('id', `${e._id}`)
                             .addClass(`list`).append(
                                 $('<header>')
-                                    .text(e.list),
-                                $('<button>')
-                                    .text('Add card'),
-                                $('<button>')
-                                    .attr('data-id', `${e._id}`)
-                                    .addClass('delete-btn')
-                                    .text('Delete this List')       
+                                    .text(e.list).append(
+                                        $('<i>')
+                                            .addClass('far fa-window-close')
+                                            .attr('data-id', `${e._id}`)
+                                            .addClass('delete-btn'),
+                                    ),
+                                $('<ul>')
+                                    .addClass('locateCard'),
+                                // create a footer add a card /button
+                                $('<footer>')
+                                    .text('Add a card...')
+                                    .attr('id', 'clickAddList'),
+
                             )
                     )
                 })
@@ -31,6 +37,7 @@ $(function () {
                             $('<input>')
                                 .addClass('list-input')
                                 .attr('type', "text")
+                                
                                 .attr('placeholder', "enter list title"),
                             $('<button>')
                                 .attr('id', 'add-btn')
