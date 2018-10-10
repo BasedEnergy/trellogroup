@@ -22,9 +22,11 @@ $(function () {
                                 $('<ul>')
                                     .addClass('locateCard'),
                                 // create a footer add a card /button
-                                $('<footer>')
+                                $('<footer>').append(
+                                    $('<button>')
                                     .text('Add a card...')
-                                    .attr('id', 'clickAddList'),
+                                    .attr('id', 'clickAddCard'),
+                                )
 
                             )
                     )
@@ -37,7 +39,7 @@ $(function () {
                             $('<input>')
                                 .addClass('list-input')
                                 .attr('type', "text")
-                                
+
                                 .attr('placeholder', "enter list title"),
                             $('<button>')
                                 .attr('id', 'add-btn')
@@ -48,6 +50,16 @@ $(function () {
                 $(`.lists`).append(contentHtml);
                 $('#add-btn').on('click', addList);
                 $('.delete-btn').on('click', deleteList);
+                $('#clickAddCard').on('click', function () {
+                    $('footer').hide('#clickAddCard').append(
+                        $('<form>').append(
+                        $('<input>')
+                            .addClass('card-input'),
+                        $('<button>')
+                            .text('Add card')
+                    )
+                )
+                })
 
             })
     }
