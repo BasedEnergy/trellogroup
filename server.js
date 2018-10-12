@@ -33,20 +33,13 @@ info.app.use(bodyParser.urlencoded({
 
 // Routes
 
-<<<<<<< HEAD
-require('./routes/api-routes.js')(info);
-
-// Connect to the database before starting the info.application server.
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true
-}, function (err, database) {
-=======
 require('./routes/api-routes.js')(info.app);
 
 // Connect to the database before starting the info.application server.
 //Mongo Uri pulled from heroku itself using 'process.env.MONGODB_URI
-mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true }, function (err, database) {
->>>>>>> 4f16146e8e5b9283438eb39dc42a7c5dec5074fa
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true
+}, function (err, database) {
     if (err) {
         console.log(err);
         process.exit(1);
