@@ -1,10 +1,10 @@
 $(function () {
 
     const renderList = function () {
-        // $('.content').empty();
+        $('.lists').empty();
 
 
-        $.getJSON("/api/lists")
+        $.ajax({url:"/api/lists",method:"GET"})
             .then(function (dataList) {
                 let contentHtml = $('.lists');
                 dataList.forEach(e => {
@@ -32,7 +32,7 @@ $(function () {
                 contentHtml.append(
                     $('<div>').addClass('add').append(
                         $('<header>')
-                            .text('Make a new list!'),
+                        .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
                                 .addClass('list-input')
@@ -40,14 +40,14 @@ $(function () {
                                 
                                 .attr('placeholder', "enter list title"),
                             $('<button>')
-                                .attr('id', 'add-btn')
-                                .text('Add a List')
+                            .attr('id', 'add-btn')
+                            .text('Add a List')
                         )
                     )
                 )
                 $(`.lists`).append(contentHtml);
                 $('#add-btn').on('click', addList);
-                $('.delete-btn').on('click', deleteList);
+                
 
             })
     }
@@ -56,20 +56,28 @@ $(function () {
         let newData = {
             list: $('.list-input').val().trim()
         }
-        $.ajax({ url: '/api/lists', method: 'POST', data: newData })
+        $.ajax({
+                url: '/api/lists',
+                method: 'POST',
+                data: newData
+            })
             .then(function () {
                 // renderList();
             })
     }
 
-    const deleteList = function () {
-        const deleteID = $(event.target).attr('data-id');
-        $.ajax({ url: `/api/lists/${deleteID}`, method: "DELETE" })
-            .then(function () {
-                $(`#${deleteID}`).remove();
-                // renderList();
+    $(document).on('click','.delete-btn',function(){
+        const deleteID = $(this).data('id');
+        console.log(deleteID)
+        $.ajax({
+                url: `/api/lists`,
+                method: "DELETE",
+                data: deleteID
             })
+            .then(function(){
+                renderList();
+            })
+    });
 
-    }
     renderList();
 });
