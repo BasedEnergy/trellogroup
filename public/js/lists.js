@@ -13,7 +13,8 @@ $(function () {
                             .attr('id', `${e._id}`)
                             .addClass(`list`).append(
                                 $('<header>')
-                                    .text(e.list).append(
+                                    .text(e.list)
+                                    .append(
                                         $('<i>')
                                             .addClass('far fa-window-close')
                                             .attr('data-id', `${e._id}`)
@@ -40,26 +41,16 @@ $(function () {
                                 .addClass('list-input')
                                 .attr('type', "text")
 
-                                .attr('placeholder', "enter list title"),
+                                .attr('placeholder', "Enter list title..."),
                             $('<button>')
                                 .attr('id', 'add-btn')
-                                .text('Add a List')
+                                .text('Add List')
                         )
                     )
                 )
                 $(`.lists`).append(contentHtml);
                 $('#add-btn').on('click', addList);
                 $('.delete-btn').on('click', deleteList);
-                $('#clickAddCard').on('click', function () {
-                    $('footer').hide('#clickAddCard').append(
-                        $('<form>').append(
-                        $('<input>')
-                            .addClass('card-input'),
-                        $('<button>')
-                            .text('Add card')
-                    )
-                )
-                })
 
             })
     }

@@ -4,11 +4,12 @@ body {
     font-size: 14px;
     line-height: 1.3em;
 }
+
 .ui {
     height: 100vh;
     display: grid;
     grid-template-rows: 40px 50px 1fr;
-    background-color: #0079bf;
+    background-color: #117ab6;
     color: #eee;
 }
 .navbar {
@@ -17,8 +18,11 @@ body {
     align-items: center;
 }
 .navbar.app {
-    background-color: #0067a3;
-    font-size: 1.5rem;
+    background-color: #126ca0;
+    background-image: url("../assets/trello-logo-white.png");
+    background-size: 78px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .navbar.board {
     font-size: 1.1rem;
@@ -133,4 +137,8 @@ body {
     cursor: pointer;
     justify-self: right;
     padding-top: 5px;
+}
+
+#add-btn {
+    font-family: 'Helvetica Neue,Arial,Helvetica,sans-serif';
 }
