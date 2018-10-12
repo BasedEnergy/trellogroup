@@ -1,7 +1,7 @@
 $(function () {
 
     const renderList = function () {
-        // $('.content').empty();
+        $('.lists').empty();
 
 
         $.getJSON("/api/lists")
@@ -67,10 +67,10 @@ $(function () {
 
     const deleteList = function () {
         const deleteID = $(event.target).attr('data-id');
-        $.ajax({ url: `/api/lists/${deleteID}`, method: "DELETE" })
+        $.ajax({ url: `/api/lists/`, method: "DELETE", data: deleteID })
             .then(function () {
-                $(`#${deleteID}`).remove();
-                // renderList();
+                // $(`#${deleteID}`).remove();
+                renderList();
             })
 
     }
