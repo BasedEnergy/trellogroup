@@ -139,7 +139,7 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/lists/', function (req, res) {
+    app.delete('/api/lists', function (req, res) {
         db.Lists.findOneAndDelete(req._id)
             .then(function (lists) {
                 res.json(lists);
