@@ -10,7 +10,6 @@ $(function () {
                 dataList.forEach(e => {
                     contentHtml.append(
                         $(`<div>`)
-<<<<<<< HEAD
                         .attr('id', `${e._id}`)
                         .addClass(`list`).append(
                             $('<header>')
@@ -28,25 +27,6 @@ $(function () {
                             .attr('id', 'clickAddList'),
 
                         )
-=======
-                            .attr('id', `${e._id}`)
-                            .addClass(`list`).append(
-                                $('<header>')
-                                    .text(e.list).append(
-                                        $('<i>')
-                                            .addClass('far fa-window-close')
-                                            .attr('data-id', `${e._id}`)
-                                            .addClass('delete-btn'),
-                                    ),
-                                $('<ul>')
-                                    .addClass('locateCard'),
-                                // create a footer add a card /button
-                                $('<footer>')
-                                    .text('Add a card...')
-                                    .attr('id', 'clickAddList'),
-
-                            )
->>>>>>> c3761eebd0d4c2d0da473d5a6b96749acba8699e
                     )
                 })
                 contentHtml.append(
@@ -55,16 +35,10 @@ $(function () {
                         .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
-<<<<<<< HEAD
                             .addClass('list-input')
                             .attr('type', "text")
+
                             .attr('placeholder', "enter list title"),
-=======
-                                .addClass('list-input')
-                                .attr('type', "text")
-                                
-                                .attr('placeholder', "enter list title"),
->>>>>>> c3761eebd0d4c2d0da473d5a6b96749acba8699e
                             $('<button>')
                             .attr('id', 'add-btn')
                             .text('Add a List')

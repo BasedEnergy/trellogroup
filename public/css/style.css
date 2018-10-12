@@ -112,6 +112,8 @@ body {
     display: none;
     border-radius: 5px;
     margin: 1px;
+    padding-bottom: 7px;
+
 }
 
 .add header {
@@ -127,6 +129,8 @@ body {
 .far {
     font-weight: 400;
     padding-left: 140px;
+    cursor: pointer;
+
 }
 
 #notes-render {
@@ -145,6 +149,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .note-input {
@@ -153,6 +158,11 @@ body {
     height: 65px;
     border-radius: 5px;
     border: none;
+}
+
+.closeBtn {
+    cursor: pointer;
+
 }
 
 .add form {
