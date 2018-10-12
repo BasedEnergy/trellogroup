@@ -34,8 +34,8 @@ $(function () {
                 })
                 contentHtml.append(
                     $('<div>').addClass('add').append(
-                        $('<header>')
-                            .text('Make a new list!'),
+                        // $('<header>')
+                        //     .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
                                 .addClass('list-input')
