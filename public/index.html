@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src = "./js/lists.js"></script>
+    <script src="./js/lists.js"></script>
 </head>
+
 <body>
     <div class="ui">
         <nav class="navbar app">Welcome to Jello!</nav>
@@ -20,25 +22,18 @@
             <div class="list">
                 <header>Starter List</header>
                 <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet</li>
-                    <li>
-                        <!-- <img src="holder.js/300x150?auto=yes&bg=#ccc" alt=""> -->
-                        Lorem ipsum dolor sit amet
-                    </li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet metus
-                        laoreet, ut condimentum</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet metus
-                        laoreet, ut condimentum</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis enim sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing eliti <i id="modal" class="far fa-comment"></i></li>
+
+
                 </ul>
                 <footer>Add a card...</footer>
+                <div class="modal-content">
+                    <span class="closeBtn"> &times; </span>
+                    <input class="note-input"></input>
+                    <p id="note-placement">Activities</p>
+                    <p id="notes-render"></p>
+                    <button class="button-save">Save</button>
+                </div>
             </div>
             <!-- <div class="add">
                 <header>Make a new list!</header>
@@ -49,6 +44,7 @@
             </div> -->
         </div>
     </div>
-    
+    <script src="js/note.js"></script>
 </body>
+
 </html>

@@ -4,6 +4,7 @@ body {
     font-size: 14px;
     line-height: 1.3em;
 }
+
 .ui {
     height: 100vh;
     display: grid;
@@ -11,39 +12,48 @@ body {
     background-color: #0079bf;
     color: #eee;
 }
+
 .navbar {
     padding-left: 10px;
     display: flex;
     align-items: center;
 }
+
 .navbar.app {
     background-color: #0067a3;
     font-size: 1.5rem;
 }
+
 .navbar.board {
     font-size: 1.1rem;
 }
+
 .lists {
     display: flex;
     overflow-x: auto;
 }
-  .lists > * {
+
+.lists>* {
     flex: 0 0 auto;
     margin-left: 10px;
 }
+
 .lists::after {
     content: '';
     flex: 0 0 10px;
 }
+
 .list {
     width: 300px;
     height: calc(100% - 10px - 17px);
 }
-  .list > * {
+
+.list>* {
     background-color: #e2e4e6;
     color: #333;
     padding: 0 10px;
 }
+
 .list header {
     line-height: 36px;
     font-size: 16px;
@@ -54,6 +64,7 @@ body {
     grid-template-columns: 200px 1fr;
     word-wrap: break-word;
 }
+
 .list footer {
     line-height: 36px;
     border-bottom-left-radius: 5px;
@@ -61,21 +72,25 @@ body {
     color: #888;
     cursor: pointer;
 }
+
 .list ul {
     list-style: none;
     margin: 0;
     max-height: calc(100% - 36px - 36px);
     overflow-y: auto;
 }
+
 .list ul li {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
+
 .list ul li:not(:last-child) {
     margin-bottom: 10px;
 }
+
 .list ul li img {
     display: block;
     width: calc(100% + 2 * 10px);
@@ -93,6 +108,14 @@ body {
     color: #333;
 }
 
+.modal-content {
+    display: none;
+    border-radius: 5px;
+    margin: 1px;
+    padding-bottom: 7px;
+
+}
+
 .add header {
     padding-left: 10px;
     text-align: left;
@@ -101,6 +124,45 @@ body {
     font-weight: bold;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+
+.far {
+    font-weight: 400;
+    padding-left: 140px;
+    cursor: pointer;
+
+}
+
+#notes-render {
+    display: flex;
+    justify-content: center;
+}
+
+.button-save {
+    display: none;
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.note-input {
+    margin: 0px;
+    width: 273px;
+    height: 65px;
+    border-radius: 5px;
+    border: none;
+}
+
+.closeBtn {
+    cursor: pointer;
+
 }
 
 .add form {
@@ -129,7 +191,8 @@ body {
     margin: 0;
     width: 100%;
 }
-.fa-window-close{
+
+.fa-window-close {
     cursor: pointer;
     justify-self: right;
     padding-top: 5px;

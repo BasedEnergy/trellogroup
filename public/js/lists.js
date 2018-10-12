@@ -4,29 +4,30 @@ $(function () {
         $('.lists').empty();
 
 
+
         $.ajax({url:"/api/lists",method:"GET"})
             .then(function (dataList) {
                 let contentHtml = $('.lists');
                 dataList.forEach(e => {
                     contentHtml.append(
                         $(`<div>`)
-                            .attr('id', `${e._id}`)
-                            .addClass(`list`).append(
-                                $('<header>')
-                                    .text(e.list).append(
-                                        $('<i>')
-                                            .addClass('far fa-window-close')
-                                            .attr('data-id', `${e._id}`)
-                                            .addClass('delete-btn'),
-                                    ),
-                                $('<ul>')
-                                    .addClass('locateCard'),
-                                // create a footer add a card /button
-                                $('<footer>')
-                                    .text('Add a card...')
-                                    .attr('id', 'clickAddList'),
+                        .attr('id', `${e._id}`)
+                        .addClass(`list`).append(
+                            $('<header>')
+                            .text(e.list).append(
+                                $('<i>')
+                                .addClass('far fa-window-close')
+                                .attr('data-id', `${e._id}`)
+                                .addClass('delete-btn'),
+                            ),
+                            $('<ul>')
+                            .addClass('locateCard'),
+                            // create a footer add a card /button
+                            $('<footer>')
+                            .text('Add a card...')
+                            .attr('id', 'clickAddList'),
 
-                            )
+                        )
                     )
                 })
                 contentHtml.append(
@@ -35,10 +36,10 @@ $(function () {
                         .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
-                                .addClass('list-input')
-                                .attr('type', "text")
-                                
-                                .attr('placeholder', "enter list title"),
+                            .addClass('list-input')
+                            .attr('type', "text")
+
+                            .attr('placeholder', "enter list title"),
                             $('<button>')
                             .attr('id', 'add-btn')
                             .text('Add a List')
@@ -73,9 +74,10 @@ $(function () {
                 url: `/api/lists`,
                 method: "DELETE",
                 data: deleteID
+        })
             })
             .then(function(){
-                renderList();
+                $(`#${deleteID}`).remove();
             })
     });
 
