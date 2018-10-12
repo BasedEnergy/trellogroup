@@ -139,8 +139,8 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/lists', function (req, res) {
-        db.Lists.findOneAndDelete(req._id)
+    app.delete('/api/lists/:id', function (req, res) {
+        db.Lists.findOneAndDelete(req.params.id)
             .then(function (lists) {
                 res.json(lists);
             })

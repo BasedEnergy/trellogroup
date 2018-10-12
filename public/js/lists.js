@@ -1,7 +1,7 @@
 $(function () {
 
     const renderList = function () {
-        // $('.content').empty();
+        // $('.lists').empty();
 
 
         $.get("/api/lists")
