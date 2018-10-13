@@ -5,13 +5,23 @@ const userSchema = new Schema ({
         type: String,
         required: [true, "Username required"],
         unique: [true, 'Username taken'],
-        trim: true
+        trim: true,
+        min: 4,
+        max: 16
     },
     password: {
         type: String,
         required: [true, "Password required"],
-        trim: true
-    }
+        trim: true,
+        min: 4,
+        max: 16
+    },
+    list: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Lists"
+        }
+      ]
 });
 const User = mongoose.model('User', userSchema);
 module.exports = User;

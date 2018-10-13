@@ -13,7 +13,7 @@ $('form').on('submit', function(event){
       }
     })
     .then(function(){
-        window.location.href = "./index.html";
+        window.location.href = "./login.html";
     })
 })
         
