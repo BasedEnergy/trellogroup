@@ -215,3 +215,7 @@ body {
 #add-btn {
     font-family: 'Helvetica Neue,Arial,Helvetica,sans-serif';
 }
+
+a.login {
+    margin-left: 10px;
+}
