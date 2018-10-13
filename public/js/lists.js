@@ -5,6 +5,7 @@ $(function () {
 
 
 
+
         $.ajax({url:"/api/lists",method:"GET"})
             .then(function (dataList) {
                 let contentHtml = $('.lists');
