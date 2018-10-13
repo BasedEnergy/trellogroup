@@ -1,10 +1,12 @@
 $(function () {
 
     const renderList = function () {
-        // $('.lists').empty();
+        $('.lists').empty();
 
 
-        $.get("/api/lists")
+
+
+        $.ajax({url:"/api/lists",method:"GET"})
             .then(function (dataList) {
                 let contentHtml = $('.lists');
                 dataList.forEach(e => {
@@ -47,7 +49,7 @@ $(function () {
                 )
                 $(`.lists`).append(contentHtml);
                 $('#add-btn').on('click', addList);
-                $('.delete-btn').on('click', deleteList);
+                
 
             })
     }
@@ -66,17 +68,19 @@ $(function () {
             })
     }
 
-    const deleteList = function () {
-        const deleteID = $(event.target).attr('data-id');
+    $(document).on('click','.delete-btn',function(){
+        const deleteID = $(this).data('id');
+        console.log(deleteID)
         $.ajax({
-                url: `/api/lists/${deleteID}`,
-                method: "DELETE"
+                url: `/api/lists`,
+                method: "DELETE",
+                data: deleteID
+        })
             })
-            .then(function () {
+            .then(function(){
                 $(`#${deleteID}`).remove();
-                // renderList();
             })
+    });
 
-    }
     renderList();
 });
