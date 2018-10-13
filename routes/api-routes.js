@@ -83,7 +83,7 @@ module.exports = function (app) {
     });
 
     app.put('/api/notes', function (req, res) {
-        db.Notes.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.list } })
+        db.Notes.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.note } })
             .then(function (notes) {
                 res.json(notes);
             })
