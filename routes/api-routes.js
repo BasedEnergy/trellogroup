@@ -58,6 +58,27 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+    app.get('/api/users', function(req, res){
+        db.User.find({})
+            .then(function(dbUser){
+                res.json(dbUser);
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+    })
+
+    app.post('/api/users', function(req, res) {
+        db.User.create(req.body)
+            .then(function(dbUser){
+                res.json(dbUser);
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+        })
+
     app.post('/api/lists/:id', function (req, res) {
         db.Cards.create(req.body)
             .then(function (dbcards) {
