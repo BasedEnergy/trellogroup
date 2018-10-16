@@ -137,9 +137,8 @@ body {
 
 }
 
-#notes-render {
-    display: flex;
-    justify-content: center;
+#delete {
+    margin: 5px;
 }
 
 .button-save {
@@ -284,4 +283,13 @@ body {
     padding-top: 5px;
 }
 
+.board-header{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.board h1{
+    cursor: pointer;
+}
 
