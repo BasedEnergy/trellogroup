@@ -9,7 +9,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-rows: 40px 50px 1fr;
-    background-color: #0079bf;
+    background-color: #117ab6;
     color: #eee;
 }
 
@@ -20,8 +20,11 @@ body {
 }
 
 .navbar.app {
-    background-color: #0067a3;
-    font-size: 1.5rem;
+    background-color: #126ca0;
+    background-image: url("../assets/trello-logo-white.png");
+    background-size: 78px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .navbar.board {
@@ -35,7 +38,7 @@ body {
 
 .lists>* {
     flex: 0 0 auto;
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 .lists::after {
@@ -61,7 +64,7 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 200px 85px;
     word-wrap: break-word;
 }
 
@@ -106,12 +109,15 @@ body {
     height: 100px;
     width: 300px;
     color: #333;
+    border-radius: 3px;
 }
 
 .modal-content {
     display: none;
     border-radius: 5px;
     margin: 1px;
+    padding-bottom: 7px;
+
 }
 
 .add header {
@@ -127,6 +133,8 @@ body {
 .far {
     font-weight: 400;
     padding-left: 140px;
+    cursor: pointer;
+
 }
 
 #notes-render {
@@ -137,7 +145,6 @@ body {
 .button-save {
     display: none;
     background-color: #4CAF50;
-    /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
@@ -145,6 +152,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .note-input {
@@ -155,13 +163,18 @@ body {
     border: none;
 }
 
+.closeBtn {
+    cursor: pointer;
+
+}
+
 .add form {
     background-color: #e2e4e6;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: grid;
-    text-align: center;
-    justify-content: center;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 8px;
+    border-radius: 3px;
+    height: auto;
 }
 
 .add form button {
@@ -171,6 +184,11 @@ body {
     color: #fff;
     margin-top: 5px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 3px;
+    height: 30px;
+    width: 80px;
 }
 
 .add form input {
@@ -180,9 +198,12 @@ body {
     display: block;
     margin: 0;
     width: 100%;
+    border-radius: 3px;
+    height: 30px;
 }
 
 .fa-window-close {
     cursor: pointer;
     padding-top: 5px;
 }
+

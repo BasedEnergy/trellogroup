@@ -31,8 +31,6 @@ $(function () {
                 })
                 contentHtml.append(
                     $('<div>').addClass('add').append(
-                        $('<header>')
-                        .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
                                 .addClass('list-input')
@@ -41,7 +39,7 @@ $(function () {
                                 .attr('placeholder', "enter list title"),
                             $('<button>')
                             .attr('id', 'add-btn')
-                            .text('Add a List')
+                            .text('Add List')
                         )
                     )
                 )
