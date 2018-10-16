@@ -1,4 +1,3 @@
-
 const db = require('../models/index');
 
 
@@ -24,6 +23,16 @@ module.exports = function (app) {
             });
     });
 
+    app.get('/api/notes', function (req, res) {
+        db.Notes.find({})
+        .then(function(notes) {
+            res.json(notes);
+        })
+        .catch(function(err) {
+            res.json(err);
+        })
+    });
+
     app.post('/api/cards', function (req, res) {
         db.Cards.create(req.body)
             .then(function (cards) {
@@ -43,6 +52,16 @@ module.exports = function (app) {
             });
     });
 
+    app.post('/api/notes', function (req, res) {
+        db.Note.create(req.body)
+            .then(function(notes){
+                res.json(notes) 
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+    });
+
     app.put('/api/cards', function (req, res) {
         db.Cards.findOneAndUpdate({ _id: req.body._id }, { set: { card: req.body.card } })
             .then(function (cards) {
@@ -52,10 +71,21 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
     app.put('/api/lists', function (req, res) {
         db.Lists.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.list } })
             .then(function (lists) {
                 res.json(lists);
+            })
+            .catch(function(err){
+                res.json(err);
+            });
+    });
+
+    app.put('/api/notes', function (req, res) {
+        db.Notes.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.note } })
+            .then(function (notes) {
+                res.json(notes);
             })
             .catch(function(err){
                 res.json(err);
@@ -73,9 +103,19 @@ module.exports = function (app) {
     });
 
     app.delete('/api/lists/:id', function (req, res) {
-        db.Lists.deleteOne({_id: req.params.id})
+        db.Lists.findOneAndDelete(req.params.id)
             .then(function (lists) {
                 res.json(lists);
+            })
+            .catch(function(err){
+                res.json(err);
+            });
+    });
+
+    app.delete('/api/notes', function (req, res) {
+        db.Notes.findOneAndDelete(req.body)
+            .then(function (notes) {
+                res.json(notes);
             })
             .catch(function(err){
                 res.json(err);
