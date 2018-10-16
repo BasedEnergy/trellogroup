@@ -1,19 +1,19 @@
-$('form').on('submit', function(event){
+$('form').on('submit', function (event) {
     event.preventDefault();
-    const username = $('.username-input').val().trim();
-    const password = $('.password-input').val().trim();
-    console.log(username);
-    console.log(password);
+    const user = $('.username-input').val().trim();
+    const pass = $('.password-input').val().trim();
     $.ajax({
-    url: '/api/users',
-    method: 'POST',
-    data: {
-        username: username,
-        password: password
-      }
+        url: '/api/users',
+        method: 'POST',
+        data: {
+            username: user,
+            password: pass
+        }
     })
-    .then(function(){
-        window.location.href = "./login.html";
-    })
+        .then(function () {
+            window.location.href = "login.html";
+        })
 })
-        
+$('.login').on('click', function () {
+    window.location.href = "login.html";
+})        

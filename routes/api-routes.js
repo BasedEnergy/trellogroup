@@ -39,7 +39,6 @@ module.exports = function (app) {
         db.Cards.find({ _id: req.params.id })
             .populate('note')
             .then(function (list) {
-                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
@@ -59,30 +58,29 @@ module.exports = function (app) {
             });
     });
 
-    app.get('/api/users', function(req, res){
+    app.get('/api/users', function (req, res) {
         db.User.find({})
-            .then(function(dbUser){
+            .then(function (dbUser) {
                 res.json(dbUser);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             })
     })
 
-    app.post('/api/users', function(req, res) {
+    app.post('/api/users', function (req, res) {
         db.User.create(req.body)
-            .then(function(dbUser){
+            .then(function (dbUser) {
                 res.json(dbUser);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             })
-        })
+    })
 
     app.post('/api/lists/:id', function (req, res) {
         db.Cards.create(req.body)
             .then(function (dbcards) {
-                // console.log(dbcards);
                 db.Lists.findOneAndUpdate({ _id: req.params.id }, { $push: { cards: dbcards._id } }, { new: true })
                     .then(newListInfo => {
                         res.json({ list: newListInfo, newCardInfo: dbcards });
@@ -108,6 +106,31 @@ module.exports = function (app) {
                     })
             })
     })
+    //post route for finding a specific user
+    app.post('/api/login', function (req, res) {
+        console.log(req.body);
+        db.User.find({})
+            .then(function (data) {
+                console.log(data);
+                res.json(data)
+            })
+            .catch(function (err) {
+                res.json(err)
+            })
+    })
+    //post route for adding lists to a specific user
+    // app.post("/submit", function (req, res) {
+    //     db.User.create(req.body)
+    //         .then(function (dbUser) {
+    //             return db.User.findOneAndUpdate({}, { $push: { list: dbUser._id } }, { new: true });
+    //         })
+    //         .then(function (dbUser) {
+    //             res.json(dbUser);
+    //         })
+    //         .catch(function (err) {
+    //             res.json(err);
+    //         });
+    // });
     app.put('/api/notes', function (req, res) {
         db.Notes.findOneAndUpdate({ _id: req.body._id }, { $set: { note: req.body.card } })
             .populate('noteincard')

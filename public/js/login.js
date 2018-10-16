@@ -1,5 +1,13 @@
-$('form').on('submit', function(){
-    const username = $('.username-input').val().trim();
-    const password = $('.password-input').val().trim();
-    
+$('form').on('submit', function (event) {
+    event.preventDefault();
+    const user = $('.username-input').val().trim();
+    const pass = $('.password-input').val().trim();
+    $.post('/api/login', { username: user, password: pass })
+        .then(function (data) {
+            localStorage.setItem('user_id', data[0]._id);
+            window.location.href = "index.html";
+        })
+})
+$('.create').on('click', function () {
+    window.location.href = "createacc.html";
 })
