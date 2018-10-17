@@ -23,7 +23,7 @@ const saveNote = function () {
     console.log('working');
     let noteInput = $(".note-input").val().trim();
     $(".note-input").empty();
-    $("#notes-render").append("<div>" + noteInput + "<button id = 'delete'> x </button>  </div>");
+    $("#notes-render").append("<div id='note-content'>" + noteInput + `<button id = 'delete'><i class="fas fa-times"></i></button>  </div>`);
 
     $.ajax({
         url: '/api/notes',
@@ -42,7 +42,7 @@ const renderNotes = function () {
         console.log(data[0].note);
         for (var i in data) {
             console.log(data[i].note);
-            $("#notes-render").append("<div>" + data[i].note + "<button id = 'delete'> x </button>  </div>");
+            $("#notes-render").append("<div id='note-content'>" + data[i].note + `<button id = 'delete'><i class="fas fa-times"></i> </button>  </div>`);
         }
     })
 };
