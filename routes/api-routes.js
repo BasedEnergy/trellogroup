@@ -110,7 +110,7 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/cards', function (req, res) {
+    app.delete('/api/cards/:id', function (req, res) {
         db.Cards.findOneAndDelete(req.body)
             .then(function (cards) {
                 res.json(cards);

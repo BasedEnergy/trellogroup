@@ -133,7 +133,6 @@ body {
 
 .far {
     font-weight: 400;
-    padding-left: 140px;
     cursor: pointer;
 
 }
@@ -227,23 +226,56 @@ textarea {
     height: 25px;
 }
 
-.card {
-    width: 100%;
+li {
     display: flex;
-    align-items: center;
+}
+
+.card {
+    width: 70%;
+    word-wrap: break-word;
 }
 
 .cardEdit {
-    width: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
     height: 24px;
     width: 24px;
+    cursor: pointer;
 }
 
 .cardEdit:hover {
+    background-color: silver;
+    opacity: 1;
+}
+
+.cardDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.cardDelete:hover {
+    background-color: silver;
+    opacity: 1;
+}
+
+.cardComment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.cardComment:hover {
     background-color: silver;
     opacity: 1;
 }
@@ -280,21 +312,6 @@ textarea {
 .addCardField {
     display: flex;
     align-items: center;
-}
-
-.cardDelete {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    height: 24px;
-    width: 24px;
-}
-
-.cardDelete:hover {
-    background-color: silver;
-    opacity: 1;
 }
 
 .fa-trash-alt {
