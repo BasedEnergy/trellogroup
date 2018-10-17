@@ -11,9 +11,9 @@ $('form').on('submit', function (event) {
         }
     })
         .then(function () {
-            window.location.href = "login.html";
+            window.location.href = "/login";
         })
 })
 $('.login').on('click', function () {
-    window.location.href = "login.html";
+    window.location.href = "/login";
 })        

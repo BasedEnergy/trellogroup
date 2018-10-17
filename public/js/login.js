@@ -5,9 +5,9 @@ $('form').on('submit', function (event) {
     $.post('/api/login', { username: user, password: pass })
         .then(function (data) {
             localStorage.setItem('user_id', data[0]._id);
-            window.location.href = "index.html";
+            window.location.href = "*";
         })
 })
 $('.create').on('click', function () {
-    window.location.href = "createacc.html";
+    window.location.href = "/createacc";
 })
