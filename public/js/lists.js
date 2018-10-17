@@ -1,7 +1,7 @@
 $(function () {
 
     const renderList = function () {
-        // $('.lists').empty();
+        // $('.content').empty();
 
 
         $.get("/api/lists")
@@ -10,38 +10,36 @@ $(function () {
                 dataList.forEach(e => {
                     contentHtml.append(
                         $(`<div>`)
-                        .attr('id', `${e._id}`)
-                        .addClass(`list`).append(
-                            $('<header>')
-                            .text(e.list).append(
-                                $('<i>')
-                                .addClass('far fa-window-close')
-                                .attr('data-id', `${e._id}`)
-                                .addClass('delete-btn'),
-                            ),
-                            $('<ul>')
-                            .addClass('locateCard'),
-                            // create a footer add a card /button
-                            $('<footer>')
-                            .text('Add a card...')
-                            .attr('id', 'clickAddList'),
+                            .attr('id', `${e._id}`)
+                            .addClass(`list`).append(
+                                $('<header>')
+                                    .text(e.list).append(
+                                        $('<i>')
+                                            .addClass('far fa-window-close')
+                                            .attr('data-id', `${e._id}`)
+                                            .addClass('delete-btn'),
+                                    ),
+                                $('<ul>')
+                                    .addClass('locateCard'),
+                                // create a footer add a card /button
+                                $('<footer>')
+                                    .text('Add a card...')
+                                    .attr('id', 'clickAddList'),
 
-                        )
+                            )
                     )
                 })
                 contentHtml.append(
                     $('<div>').addClass('add').append(
-                        $('<header>')
-                        .text('Make a new list!'),
                         $('<form>').append(
                             $('<input>')
-                            .addClass('list-input')
-                            .attr('type', "text")
-
-                            .attr('placeholder', "enter list title"),
+                                .addClass('list-input')
+                                .attr('type', "text")
+                                
+                                .attr('placeholder', "enter list title"),
                             $('<button>')
                             .attr('id', 'add-btn')
-                            .text('Add a List')
+                            .text('Add List')
                         )
                     )
                 )
