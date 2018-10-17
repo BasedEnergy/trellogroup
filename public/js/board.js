@@ -1,5 +1,5 @@
-//plugin to make any element text editable
-//http://stackoverflow.com/a/13866517/2343
+/*  Function that allows text items to be edited when double clicked    */
+
 $.fn.extend({
     editable: function() {
         var that = this,
@@ -32,6 +32,8 @@ $.fn.extend({
         return that;
     }
 });
+
+/*  This is where you activate the function for specific classes  */
 
 $('.board-header').editable().on('editsubmit', function (event, val) {
     console.log('text changed to ' + val);

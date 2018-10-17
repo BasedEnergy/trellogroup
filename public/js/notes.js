@@ -10,8 +10,6 @@ modal.addEventListener('click', openModal);
 
 close.addEventListener('click', closeModal);
 
-
-
 function openModal() {
     modalContent.style.display = 'inline-block';
 
@@ -21,14 +19,7 @@ function closeModal() {
     modalContent.style.display = 'none';
 }
 
-// const saveNotes = function () {
-//     $("#button-save").on("click", saveNote);
-// };
-
-
-
 const saveNote = function () {
-    // e.preventDefault();
     console.log('working');
     let noteInput = $(".note-input").val().trim();
     $(".note-input").empty();
@@ -52,24 +43,9 @@ const renderNotes = function () {
         for (var i in data) {
             console.log(data[i].note);
             $("#notes-render").append("<div>" + data[i].note + "<button id = 'delete'> x </button>  </div>");
-            // $("#notes-render").append("<button id='delete'> x </button>");
-
         }
-
     })
 };
-
-// const deleteNote = function () {
-//     $('p').on('click', function () {
-//         let thisID = $(this).attr('noteID')
-// $().on('click', function)
-
-// $.ajax({
-//     url: '/api/notes',
-//     method: 'DELETE'
-// })
-//     })
-// };
 
 $(document).on('click', '#delete', function () {
     let thisID = $(this).attr('noteID');
