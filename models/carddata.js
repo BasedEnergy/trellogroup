@@ -6,6 +6,9 @@ const CardSchema = new Schema({
     card:{
         type:String
     },
+    id:{
+        type:String
+    },
     noteincard:[
         {
             type: Schema.Types.ObjectId,
