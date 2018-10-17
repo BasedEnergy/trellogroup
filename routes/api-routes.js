@@ -8,7 +8,7 @@ module.exports = function (app) {
             .then(function (cards) {
                 res.json(cards);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
@@ -18,19 +18,19 @@ module.exports = function (app) {
             .then(function (lists) {
                 res.json(lists);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
 
     app.get('/api/notes', function (req, res) {
         db.Notes.find({})
-        .then(function(notes) {
-            res.json(notes);
-        })
-        .catch(function(err) {
-            res.json(err);
-        })
+            .then(function (notes) {
+                res.json(notes);
+            })
+            .catch(function (err) {
+                res.json(err);
+            })
     });
 
     app.post('/api/cards', function (req, res) {
@@ -38,7 +38,7 @@ module.exports = function (app) {
             .then(function (cards) {
                 res.json(cards);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
@@ -47,47 +47,65 @@ module.exports = function (app) {
             .then(function (lists) {
                 res.json(lists);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
 
     app.post('/api/notes', function (req, res) {
-        db.Note.create(req.body)
-            .then(function(notes){
-                res.json(notes) 
+        db.Notes.create(req.body)
+            .then(function (notes) {
+                res.json(notes)
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             })
     });
 
     app.put('/api/cards', function (req, res) {
-        db.Cards.findOneAndUpdate({ _id: req.body._id }, { set: { card: req.body.card } })
+        db.Cards.findOneAndUpdate({
+                _id: req.body._id
+            }, {
+                set: {
+                    card: req.body.card
+                }
+            })
             .then(function (cards) {
                 res.json(cards);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
 
     app.put('/api/lists', function (req, res) {
-        db.Lists.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.list } })
+        db.Lists.findOneAndUpdate({
+                _id: req.body._id
+            }, {
+                set: {
+                    list: req.body.list
+                }
+            })
             .then(function (lists) {
                 res.json(lists);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
 
     app.put('/api/notes', function (req, res) {
-        db.Notes.findOneAndUpdate({ _id: req.body._id }, { set: { list: req.body.note } })
+        db.Notes.findOneAndUpdate({
+                _id: req.body._id
+            }, {
+                set: {
+                    list: req.body.note
+                }
+            })
             .then(function (notes) {
                 res.json(notes);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
@@ -97,7 +115,7 @@ module.exports = function (app) {
             .then(function (cards) {
                 res.json(cards);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
@@ -107,7 +125,7 @@ module.exports = function (app) {
             .then(function (lists) {
                 res.json(lists);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });
@@ -117,7 +135,7 @@ module.exports = function (app) {
             .then(function (notes) {
                 res.json(notes);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 res.json(err);
             });
     });

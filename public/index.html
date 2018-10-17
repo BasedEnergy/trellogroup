@@ -12,18 +12,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="./js/lists.js"></script>
-    <script src="js/notes.js"></script>
-    <script src="js/cards.js"></script>
 </head>
 
 <body>
     <div class="ui">
         <nav class="navbar app"></nav>
-        <nav class="navbar board">Board bar</nav>
+        <nav class="navbar board"><h1 class="board-header">Untitled Board</h1></nav>
         <div class="lists">
             <div class="list">
-                <header>Starter List</header>
+                <header >Starter List</header>
                 <ul>
                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing eliti <i id="modal" class="far fa-comment"></i></li>
 
@@ -31,22 +28,19 @@
                 </ul>
                 <footer>Add a card...</footer>
                 <div class="modal-content">
-                    <span class="closeBtn"> &times; </span>
+                    <span class="closeBtn"> <i class="fas fa-times"></i> </span>
                     <textarea class="note-input"></textarea>
-                    <p id="note-placement">Activities</p>
-                    <p id="notes-render"></p>
+                    <div id="note-placement"></div>
+                    <div id="notes-render"></div>
                     <button class="button-save">Save</button>
                 </div>
             </div>
-            <!-- <div class="add">
-                <header>Make a new list!</header>
-                <form>
-                    <input class = 'inputList' type="text" placeholder="enter list title" autocomplete="off">
-                    <button id = 'addList'>Add a List</button>
-                </form>
-            </div> -->
         </div>
     </div>
+    <script src="js/lists.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/board.js"></script>
 </body>
 
 </html>
