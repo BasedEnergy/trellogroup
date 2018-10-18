@@ -148,7 +148,12 @@ body {
 .far {
     font-weight: 400;
     cursor: pointer;
+    padding-left: 70px;
+}
 
+.fa-comment{
+    padding-left: 100px;
+    padding-right: 10px;
 }
 
 #delete {
@@ -248,9 +253,10 @@ li {
 .cardEdit {
     width: 10%;
     display: inline-block;
-    justify-content: right;
+    align-content: right;
     align-items: right;
     border-radius: 1px;
+    padding-left: 50px;
 }
 
 .card {
