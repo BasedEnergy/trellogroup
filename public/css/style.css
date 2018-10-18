@@ -147,7 +147,7 @@ body {
 .far {
     font-weight: 400;
     cursor: pointer;
-
+    padding-left: 60px;
 }
 
 #delete {
@@ -247,9 +247,10 @@ li {
 .cardEdit {
     width: 10%;
     display: inline-block;
-    justify-content: right;
+    align-content: right;
     align-items: right;
     border-radius: 1px;
+    padding-left: 50px;
 }
 
 .card {
