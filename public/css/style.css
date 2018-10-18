@@ -19,6 +19,19 @@ body {
     align-items: center;
 }
 
+.colorSel {
+    opacity: 0.5;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    border-radius: 4px;
+    float: right;
+}
+
+.colorSel:hover {
+    opacity: 0.8;
+}
+
 .navbar.app {
     background-color: #126ca0;
     background-image: url("../assets/trello-logo-white.png");
@@ -302,4 +315,16 @@ li {
 
 .board h1{
     cursor: pointer;
+
+.rainbow {
+    background-color: none;
+    background: linear-gradient(#ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3, #ff2400, #e81d1d);
+    background-size: 1800% 1800%;
+    animation: rainbow 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow { 
+    0%{background-position:0% 100%}
+    100%{background-position:100% 0%}
 }
