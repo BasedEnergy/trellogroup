@@ -315,7 +315,6 @@ li {
 
 .board h1{
     cursor: pointer;
-}
 
 .rainbow {
     background-color: none;
@@ -329,4 +328,3 @@ li {
     0%{background-position:0% 100%}
     100%{background-position:100% 0%}
 }
-
