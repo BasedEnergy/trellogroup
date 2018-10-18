@@ -235,10 +235,10 @@ textarea {
 
 .cardEdit {
     width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
+    display: inline-block;
+    justify-content: right;
+    align-items: right;
+    border-radius: 1px;
     height: 24px;
     width: 24px;
 }
@@ -284,10 +284,10 @@ textarea {
 
 .cardDelete {
     width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
+    display: inline-block;
+    justify-content: right;
+    align-items: right;
+    border-radius: 1px;
     height: 24px;
     width: 24px;
 }

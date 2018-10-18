@@ -27,7 +27,7 @@ module.exports = function (app) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                console.log(list);
+                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
@@ -98,7 +98,7 @@ module.exports = function (app) {
             });
     });
     app.put('/api/cards', function (req, res) {
-        db.Cards.findOneAndUpdate({ _id: req.body._id }, { $set: { card: req.body.card } })
+        db.Cards.findOneAndUpdate({ _id : req.params.id }, { $set: { card: req.body.card } })
             .populate('cards')
             .then(function (cards) {
                 res.json(cards);
@@ -134,7 +134,7 @@ module.exports = function (app) {
         db.Cards.findOneAndDelete(req.body)
             // .populate('cards')
             .then(function (deleteCard) {
-                db.Lists.findOneAndUpdate({_id: req.params.id}, {$pull: {'cards' : {_id :deleteCard._id}}});
+                db.Lists.findOneAndUpdate({_id: req.params.id}, {$pull: {'list.cards' : {body :deleteCard}}});
                 
                 res.json(deleteCard);
             })
@@ -144,7 +144,7 @@ module.exports = function (app) {
     });
 
     app.delete('/api/lists', function (req, res) {
-        db.Lists.findOneAndDelete(req._id)
+        db.Lists.findOneAndDelete(req.body)
             .then(function (lists) {
                 res.json(lists);
             })
