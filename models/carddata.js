@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 
 const CardSchema = new Schema({
     card:{
-        type:String
+        type: String,
+        required: true
+    },
+    listid:{
+        type: String
     },
     noteincard:[
         {

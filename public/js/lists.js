@@ -28,7 +28,6 @@ $(function () {
                                     .text('Add a card...')
                                     .addClass('clickAddList')
                                     .attr('data-addCardId',`${e._id}`),
-
                         )
                         
                     )

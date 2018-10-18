@@ -129,6 +129,7 @@ module.exports = function (app) {
             });
     });
 
+
     app.delete('/api/lists/:id', function (req, res) {
         // const deleteid = req._id;
         db.Cards.findOneAndDelete(req.body)
