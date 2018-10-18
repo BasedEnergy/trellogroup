@@ -32,6 +32,7 @@ $(function () {
                         )
                         
                     )
+
                     renderCard(`${e._id}`,`${e.list}`);
                     
                     //this is the add a card button event
@@ -101,7 +102,9 @@ $(document).on('click', '.delete-btn', function () {
 function renderCard(listId,className){
     $.ajax({ url: `/api/lists/${listId}`, method: 'GET' })
         .then(function (dataList) {
+            console.log('server response to get list by id', dataList[0].cards)
             let cardList = $(`.${className}`).addClass('listOfCards')
+            console.log('cardList', cardList)
             cardList.empty();
             dataList[0].cards.forEach(eachCard =>
                 cardList.append(
