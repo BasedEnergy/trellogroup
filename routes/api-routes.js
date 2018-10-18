@@ -110,8 +110,8 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/cards', function (req, res) {
-        db.Cards.findOneAndDelete(req.body)
+    app.delete('/api/cards/:id', function (req, res) {
+        db.Cards.findOneAndDelete(req.params.id)
             .then(function (cards) {
                 res.json(cards);
             })
@@ -120,8 +120,8 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/lists', function (req, res) {
-        db.Lists.findOneAndDelete(req.body)
+    app.delete('/api/lists/:id', function (req, res) {
+        db.Lists.findOneAndDelete(req.params.id)
             .then(function (lists) {
                 res.json(lists);
             })

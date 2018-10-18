@@ -24,7 +24,7 @@ $(function () {
                                 // create a footer add a card /button
                                 $('<footer>')
                                     .text('Add a card...')
-                                    .attr('id', 'clickAddList'),
+                                    .attr('id', 'clickAddCard'),
 
                             )
                     )
