@@ -235,7 +235,7 @@ li {
     word-wrap: break-word;
 }
 
-.cardEdit {
+.butt {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,42 +245,12 @@ li {
     cursor: pointer;
 }
 
-.cardEdit:hover {
+.butt:hover {
     background-color: silver;
     opacity: 1;
 }
 
-.cardDelete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    height: 24px;
-    width: 24px;
-    cursor: pointer;
-}
-
-.cardDelete:hover {
-    background-color: silver;
-    opacity: 1;
-}
-
-.cardComment {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    height: 24px;
-    width: 24px;
-    cursor: pointer;
-}
-
-.cardComment:hover {
-    background-color: silver;
-    opacity: 1;
-}
-
-.fa-pen {
+.icon {
     opacity: 0.5;
 }
 
@@ -309,15 +279,13 @@ li {
     float: right;
 }
 
+.editCardInput {
+    width: 100%;
+}
+
 .addCardField {
     display: flex;
     align-items: center;
-}
-
-.fa-trash-alt {
-    opacity: 0.5;
-    border-radius: 3px;
-    height: 30px;
 }
 
 .fa-window-close {
