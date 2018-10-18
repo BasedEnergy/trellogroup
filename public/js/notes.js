@@ -6,8 +6,8 @@ let saveButton = document.getElementsByClassName('button-save')[0];
 
 let close = document.getElementsByClassName('closeBtn')[0];
 
-modal.addEventListener('click', openModal);
-
+// modal.addEventListener('click', openModal);
+$(document).on('click','#modal',openModal);
 close.addEventListener('click', closeModal);
 
 function openModal() {
