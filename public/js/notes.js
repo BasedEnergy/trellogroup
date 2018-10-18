@@ -39,7 +39,7 @@ const renderNotes = function () {
         url: '/api/notes',
         method: 'GET',
     }).done(function (data) {
-        console.log(data[0].note);
+        // console.log(data[0].note);
         for (var i in data) {
             console.log(data[i].note);
             $("#notes-render").append("<div id='note-content'>" + data[i].note + `<button id = 'delete'><i class="fas fa-times"></i> </button>  </div>`);
