@@ -12,7 +12,7 @@ $(function () {
                             .attr('data-id', `${e._id}`)
                             .addClass(`list`).append(
                                 $('<header>')
-                                    .text(e.list).append(
+                                    .text(`${e.list}`).append(
                                         $('<i>')
                                             .addClass('far fa-window-close')
                                             .attr('data-id', `${e._id}`)
@@ -114,8 +114,8 @@ function renderCard(listId,className){
                         .addClass(`${eachCard.card}`)
                         .append(
                             $('<div>')
-                                .addClass('cardEdit')
-                                .addClass('fas fa-pen')
+                                .addClass('fas fa-comment')
+                                .attr('id','modal')
                                 .attr('data-id', `${eachCard._id}`)
                                 .attr('data-name', `${eachCard.card}`),
                             
@@ -208,13 +208,7 @@ function dragNDrop(){
     })
 
     $(document).on('dragend',`.dragCard`,function() { 
-        let newData = {
-            card: cardId
-        }
-        $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
-        $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
-        $('.lists').empty();
-        renderList();
+        
     })
 
     $(document).on('dragover',`.containers`,function(ev) { 
@@ -227,6 +221,13 @@ function dragNDrop(){
 
     $(document).on('drop',`.containers`,function() { 
         moveList = $(this).attr("data-idd");
+        let newData = {
+            card: cardId
+        }
+        $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
+        $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
+        $('.lists').empty();
+        renderList();
     })
 }
     dragNDrop();
