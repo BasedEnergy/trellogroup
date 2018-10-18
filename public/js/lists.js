@@ -27,7 +27,11 @@ $(function () {
                                 $('<footer>')
                                     .text('Add a card...')
                                     .addClass('clickAddList')
+                                    .addClass('containers')
+                                    .attr('data-idd', `${e._id}`)
                                     .attr('data-addCardId',`${e._id}`),
+                                $("<div>")
+                                    .addClass('notes-box')
                         )
                         
                     )
@@ -114,7 +118,7 @@ function renderCard(listId,className){
                         .append(
                             $('<div>')
                                 .addClass('fas fa-comment')
-                                .attr('id','modal')
+                                .addClass('modal')
                                 .attr('data-id', `${eachCard._id}`)
                                 .attr('data-name', `${eachCard.card}`),
                             
