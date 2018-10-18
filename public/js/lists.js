@@ -32,28 +32,21 @@ $(function () {
                     )
                     renderCard(`${e._id}`,`${e.list}`);
                     
-                    })
-                    
-                        $('.clickAddList').on('click', function (e) {
-                            $(".clickAddList").off("click")
-                            $(this)
-                                .text('')
-                                .append(
-                                    $('<input>')
-                                        .addClass('addCard')
-                                        .attr('placeholder','name of the card')
-                                        .attr('type',"text"),
-                                    $('<button>')
-                                        .addClass('addCardButton')
-                                        .text('Click to add card')
-                                )
-
-                        $(document).on('click','.addCardButton', function(){
-                            
-                            renderList();
-                                console.log(this);
-                            })
+                    $('.clickAddList').on('click', function (e) {
+                        $(".clickAddList").off("click")
+                        $(this)
+                            .text('')
+                            .append(
+                                $('<input>')
+                                    .addClass('addCard')
+                                    .attr('placeholder','name of the card')
+                                    .attr('type',"text"),
+                                $('<button>')
+                                    .addClass('addCardButton')
+                                    .text('Click to add card')
+                            )
                         })
+                        $(document).on('click','.addCardButton',addCardList(`${e._id}`));
                     
                     
                     contentHtml.append(
@@ -62,7 +55,6 @@ $(function () {
                                 $('<input>')
                                     .addClass('list-input')
                                     .attr('type', "text")
-
                                     .attr('placeholder', "enter list title"),
                                 $('<button>')
                                     .attr('id', 'add-btn')
@@ -73,7 +65,9 @@ $(function () {
                     $(`.lists`).append(contentHtml);
                     $('#add-btn').on('click', addList);
                 })
+            })
         }
+
         const addList = function () {
             let newData = {
                 list: $('.list-input').val().trim()
@@ -121,6 +115,17 @@ $(function () {
                     drag();
                 })
             }
+
+            function addCardList(listId){
+                
+            let newData = {
+                card: $('.addCard').val()
+            }
+            
+            $.ajax({ url: `/api/lists/${listId}`, method: 'POST',data:newData })
+            renderList();
+            }
+
 
         function drag() {
             const fills = document.querySelectorAll('.dragCard');
