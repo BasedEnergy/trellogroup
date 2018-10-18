@@ -114,8 +114,8 @@ function renderCard(listId,className){
                         .addClass(`${eachCard.card}`)
                         .append(
                             $('<div>')
-                                .addClass('cardEdit')
-                                .addClass('fas fa-pen')
+                                .addClass('fas fa-comment')
+                                .attr('id','modal')
                                 .attr('data-id', `${eachCard._id}`)
                                 .attr('data-name', `${eachCard.card}`),
                             
