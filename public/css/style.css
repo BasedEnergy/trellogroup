@@ -147,7 +147,12 @@ body {
 .far {
     font-weight: 400;
     cursor: pointer;
-    padding-left: 60px;
+    padding-left: 70px;
+}
+
+.fa-comment{
+    padding-left: 100px;
+    padding-right: 10px;
 }
 
 #delete {
