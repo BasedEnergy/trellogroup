@@ -7,7 +7,7 @@ const cardFunctions = {
                 cardList.empty();
                 dataList[0].cards.forEach(eachCard =>
                     cardList.append(
-                        $('<li>').attr('draggable', 'true').attr('cardid', `${eachCard._id}`).attr('data-cardName', `${eachCard.card}`).addClass('dragCard').addClass(`${eachCard.card}`).append(
+                        $('<li>').attr('draggable', 'true').attr('cardid', `${eachCard._id}`).attr('data-cardName', `${eachCard.card}`).addClass('dragCard').attr('id', `${eachCard.card}`).append(
                             $('<div>').addClass('card').append(
                                 $('<p>').append(eachCard.card)
                             ),
@@ -46,19 +46,17 @@ $(document).ready(function () {
         $(document).bind('cardEdit', function () {
             $(document).off('click', '.cardEdit');
         });
-        const cardData = $(this).parent().children('.card').children('p').val()
-        const id = $(this).parent().attr('cardid')
+        const cardid = $(this).parent().attr('cardid')
         const card = $(this).parent($(this).parent($(this).children('li')));
-        const fromList = $(this).attr('listid');
         card.replaceWith(
-            $('<li>').attr('cardid', `${id}`).attr('data-cardName', `${cardData}`).addClass('dragCard').addClass(`${cardData}`).append(
+            $('<li>').attr('cardid', `${cardid}`).addClass('dragCard').addClass(`${cardData}`).append(
                 $('<div>').addClass('editInput').append(
                     $('<input>').attr('placeholder', "Type in your card..").addClass('cardEditInput'),
                 ),
-                $('<div>').attr('cardid', `${id}`).addClass('cardEditCheck butt').append(
+                $('<div>').attr('cardid', `${cardid}`).addClass('cardEditCheck butt').append(
                     $('<i>').addClass('fas fa-check icon editCheck')
                 ),
-                $('<div>').attr('cardid', `${id}`).addClass('cardEditCancel butt').append(
+                $('<div>').attr('cardid', `${cardid}`).addClass('cardEditCancel butt').append(
                     $('<i>').addClass('fas fa-times icon editCancel')
                 ),
             )
