@@ -1,122 +1,111 @@
-$(function () {
+const cardFunctions = {
 
-    $('.locateCard').html('');
-    
-    const renderCards = function () {
-        $('.locateCard').html('');
-        $.get('/api/cards')
+    renderCard: function (listid) {
+        $.ajax({ url: `/api/lists/${listid}`, method: 'GET' })
             .then(function (dataList) {
-                console.log(dataList)
-                dataList.forEach(e => {
-                    $('.lists').children(`.list[ id=${e.listid} ]`).children('.locateCard').append(
-                        $('<li>').attr('listid', `${e.listid}`).attr('id', `${e._id}`).append(
+                let cardList = $(`ul[ listid=${listid} ]`).addClass('listOfCards')
+                cardList.empty();
+                dataList[0].cards.forEach(eachCard =>
+                    cardList.append(
+                        $('<li>').attr('draggable', 'true').attr('cardid', `${eachCard._id}`).attr('data-cardName', `${eachCard.card}`).addClass('dragCard').addClass(`${eachCard.card}`).append(
                             $('<div>').addClass('card').append(
-                                $('<p>').append(e.card)
+                                $('<p>').append(eachCard.card)
                             ),
                             $('<div>').addClass('cardEdit butt').append(
                                 $('<i>').addClass('fas fa-pen icon')
                             ),
-                            $('<div>').addClass('cardComment butt').append(
+                            $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${eachCard._id}`).attr('data-name', `${eachCard.card}`).append(
                                 $('<i>').addClass('far fa-comment icon')
                             ),
-                            $('<div>').addClass('cardDelete butt').attr('data-id', `${e._id}`).append(
+                            $('<div>').addClass('cardDelete butt').attr('cardid', `${eachCard._id}`).append(
                                 $('<i>').addClass('fas fa-trash-alt icon')
                             )
                         )
                     )
-                })
+                )
             })
-    }
+    },
 
-    const addCard = function (id) {
-        let newCard = {
-            card: $('#addCardInput').val().trim(),
-            listid: id
-        }
-        $.ajax({ url: '/api/cards', method: 'POST', data: newCard });
-        renderCards();
-    }
+}
 
-    const editCard = function () {
+$(document).ready(function () {
 
-    }
+    $(document).on('click', '#clickAddCard', function () {
+        $('footer').html('').text('Add a card...').attr('id', 'addingcard...')
+        let listid = $(this).parent().attr('listid');
+        $(this).html(
+            $('<input>').attr('id', 'addCardInput')).append(
+                $('<div>').addClass('addCardField').append(
+                    $('<button>').attr('id', 'addCardButton').attr('listid', `${listid}`).text('add card'),
+                    $('<i>').addClass('fas fa-times fa-2x').attr('id', 'cancelButton')
+                )
+            );
+    })
 
-    const deleteCard = function (deleteID) {
-        $.ajax({ url: '/api/cards/' + `${deleteID}`, method: 'DELETE' })
-            .then(
-                $(`#${deleteID}`).remove()
+    $(document).on('click', '.cardEdit', function () {
+        $(document).bind('cardEdit', function () {
+            $(document).off('click', '.cardEdit');
+        });
+        const cardData = $(this).parent().children('.card').children('p').val()
+        const id = $(this).parent().attr('cardid')
+        const card = $(this).parent($(this).parent($(this).children('li')));
+        const fromList = $(this).attr('listid');
+        card.replaceWith(
+            $('<li>').attr('cardid', `${id}`).attr('data-cardName', `${cardData}`).addClass('dragCard').addClass(`${cardData}`).append(
+                $('<div>').addClass('editInput').append(
+                    $('<input>').attr('placeholder', "Type in your card..").addClass('cardEditInput'),
+                ),
+                $('<div>').attr('cardid', `${id}`).addClass('cardEditCheck butt').append(
+                    $('<i>').addClass('fas fa-check icon editCheck')
+                ),
+                $('<div>').attr('cardid', `${id}`).addClass('cardEditCancel butt').append(
+                    $('<i>').addClass('fas fa-times icon editCancel')
+                ),
             )
-    }
+        );
+    })
 
-    /*
-    =======FUNCTIONS=======
-    =======================
-    ====EVENT LISTENERS====
-    */
+    $(document).on('click', '.cardEditCheck', function () {
+        const newCard = $('.cardEditInput').val().trim()
+        const id = $(this).attr('cardid')
+        const listid = $(this).parent().parent().attr('listid')
+        const newData = {
+            card: newCard,
+            listid: listid,
+            _id: id
+        }
+
+        $.ajax({ url: `/api/cards`, method: 'PUT', data: newData })
+            .then(function () { listFunctions.renderList() })
+    });
 
     $(document).on('click', '.editCancel', function () {
-        renderCards();
-    });
-
-    $(document).on('click', '.editCheck', function () {
-        editCard();
-    });
-
-    $(document).on('click', '.fa-pen', function () {
-        let card = $(this).parent().parent()
-        card.html('')
-        card.append(
-            $('<div>').addClass('editInput').append(
-                $('<input>').addClass('editCardInput')
-            ),
-            $('<div>').addClass('editCheck butt').append(
-                $('<i>').addClass('fas fa-check icon editCheck')
-            ),
-            $('<div>').addClass('editCancel butt').append(
-                $('<i>').addClass('fas fa-times icon editCancel')
-            ),
-        );
+        listId = $(this).parent().parent().parent().attr('listid')
+        cardFunctions.renderCard(listId);
     });
 
     $(document).on('click', '.cardDelete', function () {
-        let deleteID = $(this).attr('data-id');
-        deleteCard(deleteID)
+        const whichCard = $(this).attr('cardid');
+        const fromList = $(this).parent().parent().parent().attr('listid');
+        const newData = {
+            _id: whichCard
+        }
+        $.ajax({ url: `/api/lists/${fromList}`, method: 'DELETE', data: newData })
+            .then(function () {
+                listFunctions.renderList();
+            })
     });
 
     $(document).on('click', '#addCardButton', function () {
-        let id = $(this).parent().parent().parent().attr('id');
-        addCard(id);
-        $(this).parent().parent().replaceWith(
-            $('<footer>').text('Add a card...').attr('id', 'clickAddCard'),
-        );
+        let listid = $(this).attr('listid');
+        let newData = {
+            card: $('#addCardInput').val().trim(),
+            listid: listid
+        }
+        $.ajax({ url: `/api/lists/${listid}`, method: 'POST', data: newData })
+            .then(function () {
+                listFunctions.renderList();
+            })
     });
 
-    $(document).on('click', '#cancelButton', function () {
-        $(this).parent().parent().replaceWith(
-            $('<footer>').addClass('footer').text('Add a card...').attr('id', 'clickAddCard'),
-        );
-    });
-
-    $(document).on('click', '#clickAddCard', function () {
-        $('footer').html('').text('Add a card...').attr('id', 'clickAddCard')
-        $(this).replaceWith(
-            $('<footer>').append(
-                $('<input>').attr('id', 'addCardInput')).append(
-                    $('<div>').addClass('addCardField').append(
-                        $('<button>').attr('id', 'addCardButton').text('add card'),
-                        $('<i>').addClass('fas fa-times fa-2x').attr('id', 'cancelButton')
-                    )
-                )
-
-        );
-    });
-
-    /*
-    ====EVENT LISTENERS====
-    =======================
-    =======================
-    */
-
-    renderCards()
 })
-
