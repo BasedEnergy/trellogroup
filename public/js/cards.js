@@ -30,17 +30,28 @@ const cardFunctions = {
 
 $(document).ready(function () {
 
+    $(document).on('click', '#cancelButton', function () {
+        let listid = $(this).parent().parent().attr('listid')
+        $(this).parent().parent().replaceWith(
+            $('<footer>').text('Add a card...').addClass('containers').attr('id', 'clickAddCard').attr('listid', `${listid}`)
+        )
+    });
+
     $(document).on('click', '#clickAddCard', function () {
-        $('footer').html('').text('Add a card...').attr('id', 'addingcard...')
+        $('footer').text('Add a card...').addClass('containers').attr('id', 'clickAddCard')
+        $(this).empty();
         let listid = $(this).parent().attr('listid');
-        $(this).html(
-            $('<input>').attr('id', 'addCardInput')).append(
-                $('<div>').addClass('addCardField').append(
-                    $('<button>').attr('id', 'addCardButton').attr('listid', `${listid}`).text('add card'),
-                    $('<i>').addClass('fas fa-times fa-2x').attr('id', 'cancelButton')
+        $(this).attr('id', '..adding card..').append(
+            $('<div>').addClass('addCardField').append(
+                $('<textarea>').attr('id', 'addCardInput')),
+            $('<div>').addClass('flex').append(
+                $('<button>').attr('id', 'addCardButton').attr('listid', `${listid}`).text('Add Card'),
+                $('<div>').attr('id', 'cancelButton').addClass('butt flex').append(
+                    $('<i>').addClass('fas fa-times')
                 )
-            );
-    })
+            )
+        )
+    });
 
     $(document).on('click', '.cardEdit', function () {
         $(document).bind('cardEdit', function () {
@@ -81,6 +92,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.cardDelete', function () {
+        let card = $(this).parent()
         const whichCard = $(this).attr('cardid');
         const fromList = $(this).parent().parent().parent().attr('listid');
         const newData = {
@@ -88,7 +100,7 @@ $(document).ready(function () {
         }
         $.ajax({ url: `/api/lists/${fromList}`, method: 'DELETE', data: newData })
             .then(function () {
-                listFunctions.renderList();
+                card.remove()   
             })
     });
 
@@ -100,7 +112,7 @@ $(document).ready(function () {
         }
         $.ajax({ url: `/api/lists/${listid}`, method: 'POST', data: newData })
             .then(function () {
-                listFunctions.renderList();
+                listFunctions.renderList(listid)
             })
     });
 

@@ -39,14 +39,15 @@ $(document).ready(function () {
             ]
         }
         $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
-            .then(function (dataList) {
-                console.log(dataList)
-                dataList[0].notes.forEach(eachNote => {
-                    let newNote = eachNote.note
-                    $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newNote })
-                })
-            });
+        // attempt of moving notes data into the "new" card
+        // $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
+        //     .then(function (dataList) {
+        //         console.log(dataList)
+        //         dataList.notes.forEach(eachNote => {
+        //             let newNote = eachNote.note
+        //             $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newNote })
+        //         })
+        //     });
         $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
         $(`#${card}`).remove();
         $(`ul[ listid=${moveList} ]`).append(
