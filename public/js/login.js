@@ -12,6 +12,3 @@ $('form').on('submit', function (event) {
             }
         })
 })
-$('.create').on('click', function () {
-    window.location.href = "/createacc";
-})

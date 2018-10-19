@@ -19,6 +19,4 @@ $('form').on('submit', function (event) {
             }
         })
 })
-$('.login').on('click', function () {
-    window.location.href = "/login";
-})        
+  
