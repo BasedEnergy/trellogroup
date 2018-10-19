@@ -38,7 +38,7 @@ module.exports = function (app) {
 
     app.get('/api/cards/:id', function (req, res) {
         db.Cards.find({ _id: req.params.id })
-            .populate('note')
+            // .populate('note')
             .then(function (list) {
                 res.json(list);
             })
@@ -175,7 +175,7 @@ module.exports = function (app) {
 
     app.delete('/api/cards/:id', function(req,res) {
         db.Notes.findOneAndDelete(req.body)
-            // .populate('notes')
+            .populate('notes')
             .then(function (deleteNote) {
                 db.Cards.findOneAndDelete({_id: req.params.id}, {$pull: {'card.notes' : {body:deleteNote}}})
                 res.json(deleteNote);

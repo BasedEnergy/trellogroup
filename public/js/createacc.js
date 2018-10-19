@@ -10,8 +10,13 @@ $('form').on('submit', function (event) {
             password: pass
         }
     })
-        .then(function () {
-            window.location.href = "/login";
+        .then(function (data) {
+            console.log(data);
+            if(data.name === "ValidationError"){
+                alert('Invalid entry');
+            } else {
+                window.location.href = "/login";
+            }
         })
 })
 $('.login').on('click', function () {

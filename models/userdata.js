@@ -6,15 +6,15 @@ const userSchema = new Schema ({
         required: [true, "Username required"],
         unique: [true, 'Username taken'],
         trim: true,
-        min: 4,
-        max: 16
+        minlength: [4, 'Username must be at least 4 characters'],
+        maxlength: [16, 'Username must be less than 16 characters']
     },
     password: {
         type: String,
         required: [true, "Password required"],
         trim: true,
-        min: 4,
-        max: 16
+        minlength: [8, 'Password must be at least 8 characters'],
+        maxlength: [32, 'Password must be less than 32 characters']
     },
     list: [
         {
