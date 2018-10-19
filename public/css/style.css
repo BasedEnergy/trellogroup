@@ -26,6 +26,7 @@ body {
     margin: 5px;
     border-radius: 4px;
     float: right;
+    cursor: pointer;
 }
 
 .colorSel:hover {

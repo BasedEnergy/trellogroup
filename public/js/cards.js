@@ -37,8 +37,12 @@ $(function () {
         renderCards();
     }
 
-    const editCard = function () {
-
+    const editCard = function (card, cardid) {
+        let newCard = {
+            card: card,
+            _id: cardid
+        }
+        $.ajax({ url: '/api/cards', method: 'PUT', data: newCard })
     }
 
     const deleteCard = function (deleteID) {
@@ -59,7 +63,10 @@ $(function () {
     });
 
     $(document).on('click', '.editCheck', function () {
-        editCard();
+        let card = $('#editCardInput').val().trim();
+        let cardid = $(this).parent().parent().attr('id')
+        editCard(card, cardid);
+        renderCards();
     });
 
     $(document).on('click', '.fa-pen', function () {
@@ -67,7 +74,7 @@ $(function () {
         card.html('')
         card.append(
             $('<div>').addClass('editInput').append(
-                $('<input>').addClass('editCardInput')
+                $('<input>').attr('id', 'editCardInput')
             ),
             $('<div>').addClass('editCheck butt').append(
                 $('<i>').addClass('fas fa-check icon editCheck')
@@ -119,4 +126,3 @@ $(function () {
 
     renderCards()
 })
-
