@@ -107,6 +107,9 @@ body {
     color: #333;
     border-radius: 3px;
 }
+.delete-btn{
+    padding-left: 60px;
+}
 .modal-content {
     display: inline-block;
     border-radius: 5px;
