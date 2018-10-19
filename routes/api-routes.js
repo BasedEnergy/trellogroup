@@ -69,7 +69,7 @@ module.exports = function (app) {
     app.post('/api/cards/:id', function (req, res) {
         db.Notes.create(req.body)
             .then(function (dbnotes) {
-                db.Cards.findByIdAndUpdate({ _id: req.params.id }, { $push: { notes: dbnotes._id } }, { new: true })
+                db.Cards.findOneAndUpdate({ _id: req.params.id }, { $push: { notes: dbnotes._id } }, { new: true })
                     .then(newCardInfo => {
                         res.json({ list: newCardInfo, newNoteInfo: dbnotes });
                     })

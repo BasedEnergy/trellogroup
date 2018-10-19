@@ -66,10 +66,8 @@ $(document).ready(function () {
     $(document).on('click', '.cardEditCheck', function () {
         const newCard = $('.cardEditInput').val().trim()
         const id = $(this).attr('cardid')
-        const listid = $(this).parent().parent().attr('listid')
         const newData = {
             card: newCard,
-            listid: listid,
             _id: id
         }
 
