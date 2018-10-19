@@ -236,9 +236,11 @@ li {
     opacity: 0.5;
 }
 #addCardInput {
-    width: 96%;
-    margin: 2px;
-    line-height: 2em;
+    margin: 6px;
+    width: 273px;
+    height: 65px;
+    border-radius: 5px;
+    border: none;
 }
 #addCardButton {
     background-color: #5aac44;
@@ -255,7 +257,11 @@ li {
     margin: 2px;
 }
 #cancelButton {
-    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 60%;
 }
 .editCardInput {
     width: 100%;
@@ -275,6 +281,13 @@ li {
 }
 .board h1{
     cursor: pointer;
+}
+.container {
+    z-index: 2;
+}
+.flex {
+    display: flex;
+    align-items: center; 
 }
 .rainbow {
     background-color: none;
