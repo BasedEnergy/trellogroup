@@ -12,8 +12,9 @@ $(document).ready(function () {
     $(document).on('click', '.add-btn', listFunctions.addList);
 
     $(document).on('dragstart', `.dragCard`, function () {
-        card = $(this).attr('id')
-        firstBox = $(this).parent().attr("listid")
+        card = $(this).attr('id');
+        firstBox = $(this).parent().attr("listid");
+        cardid = $(this).attr('cardid');
     })
 
     $(document).on('dragend', `.dragCard`, function () {
@@ -31,13 +32,29 @@ $(document).ready(function () {
 
     $(document).on('drop', `.containers`, function () {
         moveList = $(this).attr("listid");
+        console.log(moveList)
         let newData = {
             card: card
         }
         $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
         $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
-        $('.lists').empty();
-        listFunctions.renderList();
+        $(`#${card}`).remove();
+        $(`ul[ listid=${moveList} ]`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard').attr('id', `${card}`).append(
+                $('<div>').addClass('card').append(
+                    $('<p>').append(card)
+                ),
+                $('<div>').addClass('cardEdit butt').append(
+                    $('<i>').addClass('fas fa-pen icon')
+                ),
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
+                    $('<i>').addClass('far fa-comment icon')
+                ),
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
+                    $('<i>').addClass('fas fa-trash-alt icon')
+                )
+            )
+        )
     })
     dragNDropFunctions.dragNDrop();
 

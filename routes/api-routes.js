@@ -99,9 +99,10 @@ module.exports = function (app) {
 
     app.delete('/api/cards/:id', function(req,res) {
         db.Notes.findOneAndDelete(req.body)
-            .populate('notes')
-            .then(function (notes) {
-                res.json(notes);
+            // .populate('notes')
+            .then(function (deleteNote) {
+                db.Cards.findOneAndDelete({_id: req.params.id}, {$pull: {'card.notes' : {body:deleteNote}}})
+                res.json(deleteNote);
             })
             .catch(function (err) {
                 res.json(err)
