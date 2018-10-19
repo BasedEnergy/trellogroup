@@ -10,9 +10,11 @@ let modalContent = document.querySelector('.modal-content')
 $(document).on('click','.modal',openModal);
 // close.addEventListener('click', closeModal);
 $(document).on('click','.closeBtn',closeModal);
-
+let listStoreId;
 function openModal() {
-    console.log('hi');
+    
+    listStoreId = $(this).parent().attr('data-cardId');
+    console.log(listStoreId);
     $(document).off('click','.modal');
     let noteBox = $('<div>').addClass('modal-content');
 
@@ -34,10 +36,13 @@ function openModal() {
     $('.notes-box').append(noteBox);
     console.log($(this));
     console.log(noteBox);
+
+    
 }
 
 function closeModal() {
    $('.notes-box').empty();
+   $(document).on('click','.modal',openModal);
 }
 
 const saveNote = function () {
@@ -46,8 +51,9 @@ const saveNote = function () {
     $(".note-input").empty();
     $("#notes-render").append("<div id='note-content'>" + noteInput + `<button id = 'delete'><i class="fas fa-times"></i></button>  </div>`);
 
+    console.log($(this).parent().parent().parent());
     $.ajax({
-        url: '/api/notes',
+        url: `/api/cards/${listStoreId}`,
         method: 'POST',
         data: {
             note: noteInput
