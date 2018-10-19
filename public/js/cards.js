@@ -7,7 +7,7 @@ const cardFunctions = {
                 cardList.empty();
                 dataList[0].cards.forEach(eachCard =>
                     cardList.append(
-                        $('<li>').attr('draggable', 'true').attr('cardid', `${eachCard._id}`).attr('data-cardName', `${eachCard.card}`).addClass('dragCard').attr('id', `${eachCard.card}`).append(
+                        $('<li>').attr('draggable', 'true').attr('listid', `${listid}`).attr('cardid', `${eachCard._id}`).addClass('dragCard').attr('id', `${eachCard.card}`).append(
                             $('<div>').addClass('card').append(
                                 $('<p>').append(eachCard.card)
                             ),

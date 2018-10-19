@@ -24,7 +24,7 @@ const noteFunctions = {
                     noteList.append(
                         $('<div>').attr('id', 'note-content').append(
                             $('<p>').text(eachNote.note).attr('id', 'note'),
-                            $('<button>').attr('id', 'delete').append(
+                            $('<button>').attr('noteid', `${eachNote._id}`).attr('id', 'delete').append(
                                 $('<i>').addClass('fas fa-times')
                             )
                         )
@@ -67,10 +67,14 @@ $(document).ready(function () {
 
     $(document).on('click', '#delete', function () {
         let cardid = $(this).attr('cardid');
-        let thisID = $(this).attr('noteID');
+        let noteid = $(this).attr('noteid');
+        let note = {
+            _id: noteid
+        }
+        console.log(noteid)
         $(this).parent().remove();
 
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'DELETE', data: thisID })
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'DELETE', data: note })
     });
 
     $(document).on('click', '.button-save', function () {
