@@ -6,7 +6,6 @@ module.exports = function (app) {
         db.Cards.find({})
             .populate('notes')
             .then(function (lists) {
-
                 res.json(lists);
             })
             .catch(function (err) {
