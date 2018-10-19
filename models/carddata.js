@@ -4,9 +4,13 @@ const Schema = mongoose.Schema;
 
 const CardSchema = new Schema({
     card:{
-        type:String
+        type: String,
+        required: true
     },
-    noteincard:[
+    listid:{
+        type: String
+    },
+    notes:[
         {
             type: Schema.Types.ObjectId,
             ref: "Notes"
