@@ -33,13 +33,24 @@ $(document).ready(function () {
     $(document).on('drop', `.containers`, function () {
         moveList = $(this).attr("listid");
         let newData = {
-            card: card
+            card: card,
+            notes: [
+
+            ]
         }
         $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
+            .then(function (dataList) {
+                console.log(dataList)
+                dataList[0].notes.forEach(eachNote => {
+                    let newNote = eachNote.note
+                    $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newNote })
+                })
+            });
         $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
         $(`#${card}`).remove();
         $(`ul[ listid=${moveList} ]`).append(
-            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard').attr('id', `${card}`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').attr('id', `${card}`).append(
                 $('<div>').addClass('card').append(
                     $('<p>').append(card)
                 ),

@@ -7,9 +7,6 @@ const NoteSchema = new Schema({
         type: String,
         required: true
     },
-    cardid:{
-        type: String
-    }
 });
 
 var Notes = mongoose.model('Notes', NoteSchema);

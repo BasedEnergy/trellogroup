@@ -46,13 +46,15 @@ $(document).ready(function () {
     listFunctions.renderList();
 
     $(document).on('click', '.delete-btn', function () {
-        const deletedID = $(this).data('listid');
+        const deletedID = $(this).attr('listid');
+        const target = $(this)
         const deleteID = {
             _id: deletedID
         }
+        console.log(deletedID)
         $.ajax({ url: `/api/lists`, method: "DELETE", data: deleteID })
             .then(function () {
-                listFunctions.renderList();
+                $(target).parent().parent().remove()
             })
     });
 

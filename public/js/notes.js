@@ -20,7 +20,7 @@ const noteFunctions = {
         $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
             .then(function (dataList) {
                 let noteList = $(`#notes-render[ cardid=${cardid} ]`).addClass('listOfNotes')
-                dataList[0].notes.forEach(eachNote =>
+                dataList[0].notes.forEach(eachNote => {
                     noteList.append(
                         $('<div>').attr('id', 'note-content').append(
                             $('<p>').text(eachNote.note).attr('id', 'note'),
@@ -29,7 +29,7 @@ const noteFunctions = {
                             )
                         )
                     )
-                )
+                })
             })
     },
 
@@ -37,20 +37,18 @@ const noteFunctions = {
         let newNote = $(".note-input").val().trim();
         let newData = {
             note: newNote,
-            cardid: cardid
         }
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newData });
         $(".note-input").empty();
         $("#notes-render").append(
-            $('<div>').attr('id', 'note-content').append(
+            $('<div>').attr('id', 'note-content').attr('note', `${newNote}`).append(
                 $('<p>').text(newNote).attr('id', 'note'),
                 $('<button>').attr('cardid', `${cardid}`).attr('id', 'delete').append(
                     $('<i>').addClass('fas fa-times')
                 )
             )
         )
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newData });
     },
-
 }
 
 $(document).ready(function () {
