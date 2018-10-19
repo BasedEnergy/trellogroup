@@ -4,7 +4,6 @@ body {
     font-size: 14px;
     line-height: 1.3em;
 }
-
 .ui {
     height: 100vh;
     display: grid;
@@ -12,13 +11,11 @@ body {
     background-color: #117ab6;
     color: #eee;
 }
-
 .navbar {
     padding-left: 10px;
     display: flex;
     align-items: center;
 }
-
 .colorSel {
     opacity: 0.5;
     height: 30px;
@@ -26,12 +23,11 @@ body {
     margin: 5px;
     border-radius: 4px;
     float: right;
+    cursor: pointer;
 }
-
 .colorSel:hover {
     opacity: 0.8;
 }
-
 .navbar.app {
     background-color: #126ca0;
     background-image: url("../assets/trello-logo-white.png");
@@ -39,37 +35,30 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
-
 .navbar.board {
     font-size: 1.1rem;
 }
-
 .lists {
     display: flex;
     overflow-x: auto;
 }
-
 .lists>* {
     flex: 0 0 auto;
     margin-left: 8px;
 }
-
 .lists::after {
     content: '';
     flex: 0 0 10px;
 }
-
 .list {
     width: 300px;
     height: calc(100% - 10px - 17px);
 }
-
 .list>* {
     background-color: #e2e4e6;
     color: #333;
     padding: 0 10px;
 }
-
 .list header {
     line-height: 36px;
     font-size: 16px;
@@ -80,7 +69,6 @@ body {
     grid-template-columns: 200px 85px;
     word-wrap: break-word;
 }
-
 .list footer {
     line-height: 36px;
     border-bottom-left-radius: 5px;
@@ -88,25 +76,21 @@ body {
     color: #888;
     cursor: pointer;
 }
-
 .list ul {
     list-style: none;
     margin: 0;
     max-height: calc(100% - 36px - 36px);
     overflow-y: auto;
 }
-
 .list ul li {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-
 .list ul li:not(:last-child) {
     margin-bottom: 10px;
 }
-
 .list ul li img {
     display: block;
     width: calc(100% + 2 * 10px);
@@ -114,7 +98,6 @@ body {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-
 .add {
     display: block;
     border-radius: 5px;
@@ -124,7 +107,6 @@ body {
     color: #333;
     border-radius: 3px;
 }
-
 .modal-content {
     display: inline-block;
     border-radius: 5px;
@@ -134,7 +116,6 @@ body {
     margin-top: 8px;
     max-width: 300px;
 }
-
 .add header {
     padding-left: 10px;
     text-align: left;
@@ -144,13 +125,6 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-
-.far {
-    font-weight: 400;
-    cursor: pointer;
-
-}
-
 #delete {
     margin: 5px;
     border: none;
@@ -159,11 +133,9 @@ body {
     font-size: 15px;
     cursor: pointer;
 }
-
 textarea {
     resize: none;
 }
-
 .button-save {
     background-color: #5aac44;
     box-shadow: 0 1px 0 0 #3f6f21;
@@ -177,12 +149,10 @@ textarea {
     height: 30px;
     width: 80px;
 }
-
 #notes-render {
     max-width: 280px;
     overflow: hidden;
 }
-
 #note-content {
     width: 270px;
     overflow: hidden;
@@ -191,7 +161,6 @@ textarea {
     border-radius: 3px;
     margin-top: 5px;
 }
-
 .note-input {
     margin: 0px;
     width: 273px;
@@ -199,13 +168,11 @@ textarea {
     border-radius: 5px;
     border: none;
 }
-
 .closeBtn {
     cursor: pointer;
     padding-left: 265px;
     font-size: 15px;
 }
-
 .add form {
     background-color: #e2e4e6;
     padding-top: 5px;
@@ -214,7 +181,6 @@ textarea {
     border-radius: 3px;
     height: auto;
 }
-
 .add form button {
     background-color: #5aac44;
     box-shadow: 0 1px 0 0 #3f6f21;
@@ -228,7 +194,6 @@ textarea {
     height: 30px;
     width: 80px;
 }
-
 .add form input {
     background: #fff;
     border: 1px solid #5ba4cf;
@@ -239,50 +204,34 @@ textarea {
     border-radius: 3px;
     height: 25px;
 }
-
 li {
     display: flex;
 }
-
-
-.cardEdit {
-    width: 10%;
-    display: inline-block;
-    justify-content: right;
-    align-items: right;
-    border-radius: 1px;
-
 .card {
     width: 70%;
     word-wrap: break-word;
 }
-
 .butt {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-
     height: 24px;
     width: 24px;
     cursor: pointer;
 }
-
 .butt:hover {
     background-color: silver;
     opacity: 1;
 }
-
 .icon {
     opacity: 0.5;
 }
-
 #addCardInput {
     width: 96%;
     margin: 2px;
     line-height: 2em;
 }
-
 #addCardButton {
     background-color: #5aac44;
     box-shadow: 0 1px 0 0 #3f6f21;
@@ -297,56 +246,28 @@ li {
     width: 80px;
     margin: 2px;
 }
-
 #cancelButton {
     float: right;
 }
-
 .editCardInput {
     width: 100%;
 }
-
-
-.cardDelete {
-    width: 10%;
-    display: inline-block;
-    justify-content: right;
-    align-items: right;
-    border-radius: 1px;
-    height: 24px;
-    width: 24px;
-}
-
-.cardDelete:hover {
-    background-color: silver;
-    opacity: 1;
-}
-
-.fa-trash-alt {
-    opacity: 0.5;
-    border-radius: 3px;
-    height: 30px;
-
 .addCardField {
     display: flex;
     align-items: center;
-
 }
-
 .fa-window-close {
     cursor: pointer;
     padding-top: 5px;
 }
-
 .board-header{
     font-size: 18px;
     font-weight: 700;
     line-height: 32px;
 }
-
 .board h1{
     cursor: pointer;
-
+}
 .rainbow {
     background-color: none;
     background: linear-gradient(#ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3, #ff2400, #e81d1d);
@@ -354,7 +275,6 @@ li {
     animation: rainbow 5s;
     animation-iteration-count: infinite;
 }
-
 @keyframes rainbow { 
     0%{background-position:0% 100%}
     100%{background-position:100% 0%}
