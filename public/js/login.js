@@ -4,8 +4,9 @@ $('form').on('submit', function (event) {
     const pass = $('.password-input').val().trim();
     $.post('/api/login', { username: user, password: pass })
         .then(function (data) {
-            localStorage.setItem('user_id', data[0]._id);
-            window.location.href = "*";
+            console.log(data)
+            localStorage.setItem('user_id', data._id);
+            // window.location.href = "*";
         })
 })
 $('.create').on('click', function () {

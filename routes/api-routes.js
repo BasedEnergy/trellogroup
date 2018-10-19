@@ -63,6 +63,7 @@ module.exports = function (app) {
     });
 
     app.get('/api/users', function (req, res) {
+        console.log(req.body);
         db.User.find({})
             .then(function (dbUser) {
                 res.json(dbUser);
@@ -113,11 +114,17 @@ module.exports = function (app) {
     })
     //post route for finding a specific user
     app.post('/api/login', function (req, res) {
-        console.log(req.body);
-        db.User.find({})
-            .then(function (data) {
-                console.log(data);
-                res.json(data)
+        db.User.findOne(req.body).where('password').equals(req.body.password)
+        .then(function (user) {
+            if(!user){
+                console.log('not user');
+                
+    res.send("create account");
+                // res.redirect('/createacc');
+            } else{
+                console.log('success');
+                res.json(user)
+                }
             })
             .catch(function (err) {
                 res.json(err)
