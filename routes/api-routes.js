@@ -41,7 +41,7 @@ module.exports = function (app) {
             .then(function (list) {
                 res.json(list);
             })
-        })
+    })
     app.get('/api/notes', function (req, res) {
         db.Notes.find({})
             .then(function (notes) {
@@ -115,15 +115,11 @@ module.exports = function (app) {
     //post route for finding a specific user
     app.post('/api/login', function (req, res) {
         db.User.findOne(req.body).where('password').equals(req.body.password)
-        .then(function (user) {
-            if(!user){
-                console.log('not user');
-                
-    res.send("create account");
-                // res.redirect('/createacc');
-            } else{
-                console.log('success');
-                res.json(user)
+            .then(function (user) {
+                if (!user) {
+                    res.json(user);
+                } else {
+                    res.json(user);
                 }
             })
             .catch(function (err) {
@@ -156,8 +152,8 @@ module.exports = function (app) {
 
     app.put('/api/cards', function (req, res) {
         db.Cards.findOneAndUpdate({
-                _id: req.body._id
-            }, {
+            _id: req.body._id
+        }, {
                 set: {
                     card: req.body.card
                 }
@@ -172,8 +168,8 @@ module.exports = function (app) {
 
     app.put('/api/lists', function (req, res) {
         db.Lists.findOneAndUpdate({
-                _id: req.body._id
-            }, {
+            _id: req.body._id
+        }, {
                 set: {
                     list: req.body.list
                 }
@@ -188,8 +184,8 @@ module.exports = function (app) {
 
     app.put('/api/notes', function (req, res) {
         db.Notes.findOneAndUpdate({
-                _id: req.body._id
-            }, {
+            _id: req.body._id
+        }, {
                 set: {
                     list: req.body.note
                 }

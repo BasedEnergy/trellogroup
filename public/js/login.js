@@ -4,9 +4,12 @@ $('form').on('submit', function (event) {
     const pass = $('.password-input').val().trim();
     $.post('/api/login', { username: user, password: pass })
         .then(function (data) {
-            console.log(data)
+            if(data === null){
+                alert('Invalid Login');
+            } else {
             localStorage.setItem('user_id', data._id);
-            // window.location.href = "*";
+            window.location.href = '/';
+            }
         })
 })
 $('.create').on('click', function () {
