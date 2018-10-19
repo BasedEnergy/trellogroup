@@ -1,22 +1,43 @@
-let modal = document.getElementById('modal');
+let modal = document.querySelectorAll('modal');
 
 let modalContent = document.querySelector('.modal-content')
 
-let saveButton = document.getElementsByClassName('button-save')[0];
+// let saveButton = document.getElementsByClassName('button-save')[0];
 
-let close = document.getElementsByClassName('closeBtn')[0];
+// let close = document.getElementsByClassName('closeBtn')[0];
 
-modal.addEventListener('click', openModal);
-
-close.addEventListener('click', closeModal);
+// modal.addEventListener('click', openModal);
+$(document).on('click','.modal',openModal);
+// close.addEventListener('click', closeModal);
+$(document).on('click','.closeBtn',closeModal);
 
 function openModal() {
-    modalContent.style.display = 'inline-block';
+    console.log('hi');
+    $(document).off('click','.modal');
+    let noteBox = $('<div>').addClass('modal-content');
 
+    noteBox.append(
+        $('<span>')
+            .addClass('closeBtn')
+            .addClass('fas fa-times'),
+        $('<textarea>')
+            .addClass('note-input'),
+        $('<div>')
+        .attr('id','note-placement'),
+        $('<div>')
+            .attr('id','notes-render'),
+        $('<button>')
+            .addClass('button-save')
+            .text('Save')
+    )
+
+    $('.notes-box').append(noteBox);
+    console.log($(this));
+    console.log(noteBox);
 }
 
 function closeModal() {
-    modalContent.style.display = 'none';
+   $('.notes-box').empty();
 }
 
 const saveNote = function () {
@@ -39,7 +60,7 @@ const renderNotes = function () {
         url: '/api/notes',
         method: 'GET',
     }).done(function (data) {
-        console.log(data[0].note);
+        // console.log(data[0].note);
         for (var i in data) {
             console.log(data[i].note);
             $("#notes-render").append("<div id='note-content'>" + data[i].note + `<button id = 'delete'><i class="fas fa-times"></i> </button>  </div>`);
@@ -67,4 +88,5 @@ $(document).ready(function () {
     renderNotes();
 })
 
-saveButton.addEventListener('click', saveNote);
+// saveButton.addEventListener('click', saveNote);
+$(document).on('click','.button-save',saveNote);

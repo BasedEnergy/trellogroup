@@ -17,7 +17,7 @@ $(function () {
                                             .addClass('far fa-window-close')
                                             .attr('data-id', `${e._id}`)
                                             .addClass('delete-btn'),
-                                    ),
+                                ),
                                 $('<ul>')
                                     .attr('id', `${e._id}`)
                                     .addClass('locateCard')
@@ -52,7 +52,6 @@ $(function () {
 
 
                     $(`.lists`).append(contentHtml);
-
                 })
                 contentHtml.append(
                     $('<div>').addClass('add').append(
@@ -68,7 +67,22 @@ $(function () {
                     ),
                 )
             })
+        }
+
+const addList = function () {
+    let newData = {
+        list: $('.list-input').val().trim()
     }
+    $.ajax({
+        url: '/api/lists',
+        method: 'POST',
+        data: newData
+    })
+        .then(function () {
+            renderList();
+        })
+}
+
 
     const addList = function () {
         let newData = {
@@ -217,6 +231,7 @@ $(function () {
         $(document).on('dragenter', `.containers`, function (ev) {
             ev.preventDefault();
         })
+
 
     $(document).on('drop',`.containers`,function() { 
         moveList = $(this).attr("data-idd");
