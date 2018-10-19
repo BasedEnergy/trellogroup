@@ -1,92 +1,81 @@
-let modal = document.querySelectorAll('modal');
+const noteFunctions = {
 
-let modalContent = document.querySelector('.modal-content')
+    openModal: function (listLocation, cardid) {
+        $('#modal-content').remove();
+        let noteBox = $('<div>').attr('id', 'modal-content');
+        listLocation.append(
+            noteBox.append(
+                $('<span>').attr('id', 'closeBtn').addClass('fas fa-times'),
+                $('<textarea>').addClass('note-input'),
+                $('<div>').attr('id', 'note-placement'),
+                $('<div>').attr('id', 'notes-render').attr('cardid', `${cardid}`),
+                $('<button>').attr('cardid', `${cardid}`).addClass('button-save').text('Save')
+            )
+        )
+        $('.notes-box').append(noteBox);
+        noteFunctions.renderNotes(cardid);
+    },
 
-// let saveButton = document.getElementsByClassName('button-save')[0];
+    renderNotes: function (cardid) {
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
+            .then(function (dataList) {
+                let noteList = $(`#notes-render[ cardid=${cardid} ]`).addClass('listOfNotes')
+                dataList[0].notes.forEach(eachNote =>
+                    noteList.append(
+                        $('<div>').attr('id', 'note-content').append(
+                            $('<p>').text(eachNote.note).attr('id', 'note'),
+                            $('<button>').attr('id', 'delete').append(
+                                $('<i>').addClass('fas fa-times')
+                            )
+                        )
+                    )
+                )
+            })
+    },
 
-// let close = document.getElementsByClassName('closeBtn')[0];
-
-// modal.addEventListener('click', openModal);
-$(document).on('click','.modal',openModal);
-// close.addEventListener('click', closeModal);
-$(document).on('click','.closeBtn',closeModal);
-
-function openModal() {
-    console.log('hi');
-    $(document).off('click','.modal');
-    let noteBox = $('<div>').addClass('modal-content');
-
-    noteBox.append(
-        $('<span>')
-            .addClass('closeBtn')
-            .addClass('fas fa-times'),
-        $('<textarea>')
-            .addClass('note-input'),
-        $('<div>')
-        .attr('id','note-placement'),
-        $('<div>')
-            .attr('id','notes-render'),
-        $('<button>')
-            .addClass('button-save')
-            .text('Save')
-    )
-
-    $('.notes-box').append(noteBox);
-    console.log($(this));
-    console.log(noteBox);
-}
-
-function closeModal() {
-   $('.notes-box').empty();
-}
-
-const saveNote = function () {
-    console.log('working');
-    let noteInput = $(".note-input").val().trim();
-    $(".note-input").empty();
-    $("#notes-render").append("<div id='note-content'>" + noteInput + `<button id = 'delete'><i class="fas fa-times"></i></button>  </div>`);
-
-    $.ajax({
-        url: '/api/notes',
-        method: 'POST',
-        data: {
-            note: noteInput
+    saveNote: function (cardid) {
+        let newNote = $(".note-input").val().trim();
+        let newData = {
+            note: newNote,
+            cardid: cardid
         }
-    });
+        $(".note-input").empty();
+        $("#notes-render").append(
+            $('<div>').attr('id', 'note-content').append(
+                $('<p>').text(newNote).attr('id', 'note'),
+                $('<button>').attr('cardid', `${cardid}`).attr('id', 'delete').append(
+                    $('<i>').addClass('fas fa-times')
+                )
+            )
+        )
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newData });
+    },
+
 }
-
-const renderNotes = function () {
-    $.ajax({
-        url: '/api/notes',
-        method: 'GET',
-    }).done(function (data) {
-        // console.log(data[0].note);
-        for (var i in data) {
-            console.log(data[i].note);
-            $("#notes-render").append("<div id='note-content'>" + data[i].note + `<button id = 'delete'><i class="fas fa-times"></i> </button>  </div>`);
-        }
-    })
-};
-
-$(document).on('click', '#delete', function () {
-    let thisID = $(this).attr('noteID');
-    $(this).parent().remove();
-
-    $.ajax({
-        url: '/api/notes',
-        type: 'DELETE',
-        data: thisID
-
-
-    }).then(function () {
-        console.log('delete')
-    })
-
-});
 
 $(document).ready(function () {
-    renderNotes();
-})
 
-// saveButton.addEventListener('click', saveNote);
-$(document).on('click','.button-save',saveNote);
+    $(document).on('click', '#modal', function () {
+        let listLocation = $(this).parent().parent().parent();
+        let cardid = $(this).parent().attr('cardid')
+        noteFunctions.openModal(listLocation, cardid)
+    });
+
+    $(document).on('click', '#closeBtn', function () {
+        $('#modal-content').remove();
+    });
+
+    $(document).on('click', '#delete', function () {
+        let cardid = $(this).attr('cardid');
+        let thisID = $(this).attr('noteID');
+        $(this).parent().remove();
+
+        $.ajax({ url: `/api/cards/${cardid}`, method: 'DELETE', data: thisID })
+    });
+
+    $(document).on('click', '.button-save', function () {
+        let cardid = $(this).attr('cardid')
+        noteFunctions.saveNote(cardid);
+    });
+
+})

@@ -10,7 +10,7 @@ const CardSchema = new Schema({
     listid:{
         type: String
     },
-    noteincard:[
+    notes:[
         {
             type: Schema.Types.ObjectId,
             ref: "Notes"
