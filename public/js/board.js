@@ -1,4 +1,4 @@
-/*  Function that allows text items to be edited when double clicked    */
+/*  Function that allows text items to be edited when double clicked  */
 
 $.fn.extend({
     editable: function() {
