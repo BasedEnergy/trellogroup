@@ -27,10 +27,10 @@ $(function () {
                                 $('<footer>')
                                     .text('Add a card...')
                                     .addClass('clickAddCard')
+                                    .addClass('containers')
+                                    .attr('data-idd', `${e._id}`)
                                     .attr('data-id', `${e._id}`),
-
                             )
-
                     )
                     renderCard(`${e._id}`);
 
