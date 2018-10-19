@@ -15,6 +15,7 @@ module.exports = function (app) {
 
     app.get('/api/notes', function (req, res) {
         db.Cards.find({})
+            .populate('note')
             .then(function (notes) {
                 res.json(notes);
             })
@@ -62,7 +63,7 @@ module.exports = function (app) {
         db.Cards.create(req.body)
             .then(function (dbcards) {
                 // console.log(dbcards);
-                db.Lists.findOneAndUpdate({ _id: req.params.id }, { $push: { cards: dbcards } }, { new: true })
+                db.Lists.findOneAndUpdate({ _id: req.params.id }, { $push: { cards: dbcards._id } }, { new: true })
                     .then(newListInfo => {
                         res.json({ list: newListInfo, newCardInfo: dbcards });
 
