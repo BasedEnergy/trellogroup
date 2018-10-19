@@ -7,7 +7,7 @@ const cardFunctions = {
                 cardList.empty();
                 dataList[0].cards.forEach(eachCard =>
                     cardList.append(
-                        $('<li>').attr('draggable', 'true').attr('listid', `${listid}`).attr('cardid', `${eachCard._id}`).addClass('dragCard').attr('id', `${eachCard.card}`).append(
+                        $('<li>').attr('draggable', 'true').attr('listid', `${listid}`).attr('cardid', `${eachCard._id}`).addClass('dragCard containers').attr('id', `${eachCard.card}`).append(
                             $('<div>').addClass('card').append(
                                 $('<p>').append(eachCard.card)
                             ),
@@ -49,7 +49,7 @@ $(document).ready(function () {
         const cardid = $(this).parent().attr('cardid')
         const card = $(this).parent($(this).parent($(this).children('li')));
         card.replaceWith(
-            $('<li>').attr('cardid', `${cardid}`).addClass('dragCard').addClass(`${cardData}`).append(
+            $('<li>').attr('cardid', `${cardid}`).addClass('dragCard').append(
                 $('<div>').addClass('editInput').append(
                     $('<input>').attr('placeholder', "Type in your card..").addClass('cardEditInput'),
                 ),

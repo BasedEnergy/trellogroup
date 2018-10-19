@@ -32,7 +32,6 @@ $(document).ready(function () {
 
     $(document).on('drop', `.containers`, function () {
         moveList = $(this).attr("listid");
-        console.log(moveList)
         let newData = {
             card: card
         }
