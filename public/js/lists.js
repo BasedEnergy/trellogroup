@@ -121,8 +121,6 @@ $(function () {
                         )
                     )
                 )
-
-
             })
     }
 
@@ -132,17 +130,17 @@ $(function () {
         });
         const cardData = $(this).parent().children('.card').children('p').val()
         const id = $(this).parent().attr('data-cardId')
-        const card = $(this).parent().parent();
+        const card = $(this).parent($(this).parent($(this).children('li')));
         const fromList = $(this).attr('data-id');
         card.replaceWith(
-            $('<li>').attr('draggable', 'true').attr('data-cardId', `${id}`).attr('data-cardName', `${cardData}`).addClass('dragCard').addClass(`${cardData}`).append(
-                $('<div>').addClass('editInput butt').append(
+            $('<li>').attr('data-cardId', `${id}`).attr('data-cardName', `${cardData}`).addClass('dragCard').addClass(`${cardData}`).append(
+                $('<div>').addClass('editInput').append(
                     $('<input>').attr('placeholder', "Type in your card..").addClass('cardEditInput'),
                 ),
-                $('<div>').addClass('cardEditCheck butt').append(
+                $('<div>').attr('data-id', id).addClass('cardEditCheck butt').append(
                     $('<i>').addClass('fas fa-check icon editCheck')
                 ),
-                $('<div>').addClass('cardEditCancel butt').append(
+                $('<div>').attr('data-id', id).addClass('cardEditCancel butt').append(
                     $('<i>').addClass('fas fa-times icon editCancel')
                 ),
             )
@@ -150,20 +148,22 @@ $(function () {
 
         $(document).on('click', '.cardEditCheck', function () {
             const newCard = $('.cardEditInput').val().trim()
+            const id = $(this).attr('data-id')
+            const listid = $(this).parent().parent().attr('id')
+            console.log(id)
             const newData = {
-                _id: fromList,
-                card: newCard
+                card: newCard,
+                listid: listid,
+                _id: id
             }
 
             $.ajax({ url: `/api/cards`, method: 'PUT', data: newData })
-                .then(function () {
-
-                    renderList();
-                })
+                .then(function () {renderList()})
         });
 
-        $(document).on('click', '.cardEditCancel', function () {
-            renderCard();
+        $(document).on('click', '.editCancel', function () {
+            listId = $(this).parent().parent().parent().attr('id')
+            renderCard(listId);
         });
 
     })
