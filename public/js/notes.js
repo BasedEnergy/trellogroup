@@ -63,8 +63,16 @@ const renderNotes = function () {
         // console.log(data[0].note);
         for (var i in data) {
             console.log(data[i].note);
-            $("#notes-render").append("<div id='note-content'>" + data[i].note + `<button id = 'delete'><i class="fas fa-times"></i> </button>  </div>`);
-        }
+            $("#notes-render").append(
+                $('<div>')
+                    .attr('id','note-content')
+                    .text(data.note)
+                    .append(
+                        $('<button>')
+                            .attr('id','delete')
+                            .addClass('fas fa-times')
+                    ))
+                }
     })
 };
 
