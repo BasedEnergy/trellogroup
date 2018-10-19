@@ -17,7 +17,7 @@ $(function () {
                                             .addClass('far fa-window-close')
                                             .attr('data-id', `${e._id}`)
                                             .addClass('delete-btn'),
-                                ),
+                                    ),
                                 $('<ul>')
                                     .attr('id', `${e._id}`)
                                     .addClass('locateCard')
@@ -67,22 +67,7 @@ $(function () {
                     ),
                 )
             })
-        }
-
-const addList = function () {
-    let newData = {
-        list: $('.list-input').val().trim()
     }
-    $.ajax({
-        url: '/api/lists',
-        method: 'POST',
-        data: newData
-    })
-        .then(function () {
-            renderList();
-        })
-}
-
 
     const addList = function () {
         let newData = {
