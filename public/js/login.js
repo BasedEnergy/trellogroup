@@ -4,11 +4,12 @@ $('form').on('submit', function (event) {
     const pass = $('.password-input').val().trim();
     $.post('/api/login', { username: user, password: pass })
         .then(function (data) {
-            if(data === null){
+            if (data === null) {
                 alert('Invalid Login');
             } else {
-            localStorage.setItem('user_id', data._id);
-            window.location.href = '/';
+                localStorage.clear();
+                localStorage.setItem('user_id', data._id);
+                window.location.href = '/';
             }
         })
 })
