@@ -12,23 +12,23 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
-    app.get('/api/lists/:id', function (req, res) {
-        db.Lists.find({ _id: req.params.id })
-            .populate('cards')
-            .then(function (list) {
-                // console.log(list);
-                res.json(list);
-            })
-            .catch(function (err) {
-                res.json(err);
-            })
-    });
+    // app.get('/api/lists/:id', function (req, res) {
+    //     db.Lists.find({ _id: req.params.id })
+    //         .populate('cards')
+    //         .then(function (list) {
+    //             // console.log(list);
+    //             res.json(list);
+    //         })
+    //         .catch(function (err) {
+    //             res.json(err);
+    //         })
+    // });
 
     app.get('/api/lists/:id', function (req, res) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                console.log(list);
+                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
@@ -53,16 +53,27 @@ module.exports = function (app) {
             })
     });
 
-    app.get('/api/lists', function (req, res) {
-        db.Lists.find({})
-            .populate('cards')
-            .then(function (lists) {
-
-                res.json(lists);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
+    app.get('/api/userLists/:userId', function (req, res) {
+        console.log("route hit")
+        console.log(req.params.userId);
+        db.User.find({_id: req.params.userId})
+        .populate('list')
+        .then(function(result){
+            console.log("Result");
+            console.log(result);
+            res.json(result);
+            // db.Lists.find({})
+            //     .populate('cards')
+            //     .then(function (lists) {
+    
+            //         res.json(lists);
+            //     })
+            //     .catch(function (err) {
+            //         res.json(err);
+            //     });
+        }).catch(function(err){
+            console.log(err)
+        })
     });
 
     app.get('/api/users', function (req, res) {
@@ -97,9 +108,12 @@ module.exports = function (app) {
             })
     });
     app.post('/api/lists', function (req, res) {
-        db.Lists.create(req.body)
-            .then(function (lists) {
-                res.json(lists);
+        console.log(req.body.list);
+        db.Lists.create({list: req.body.list})
+            .then(function (dbList) {
+                console.log('USER:')
+                console.log(dbList);
+                return db.User.findOneAndUpdate({ _id: req.body._id}, { $push: { list: dbList._id } }, { new: true });
             })
             .catch(function (err) {
                 res.json(err);

@@ -3,10 +3,14 @@ const listFunctions = {
     renderList: function () {
 
         $('.lists').empty();
-        $.ajax({ url: "/api/lists", method: "GET" })
+        let userID = localStorage.getItem('user_id');
+        console.log("calling this")
+        $.ajax({ url: "/api/userLists/" + userID, method: "GET" })
             .then(function (dataList) {
+                console.log("DATA LIST")
+                console.log(dataList)
                 let contentHtml = $('.lists');
-                dataList.forEach(e => {
+                dataList[0].list.forEach(e => {
                     contentHtml.append(
                         $(`<div>`).attr('listid', `${e._id}`).addClass(`list`).append(
                             $('<header>').text(`${e.list}`).append(
@@ -31,8 +35,10 @@ const listFunctions = {
     },
 
     addList: function () {
+        let userID = localStorage.getItem('user_id');
         let newData = {
-            list: $('.list-input').val().trim()
+            list: $('.list-input').val().trim(),
+            _id: userID
         }
         $.ajax({ url: '/api/lists', method: 'POST', data: newData })
             .then(function () {
