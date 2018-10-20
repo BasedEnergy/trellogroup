@@ -72,4 +72,19 @@ const logout = function () {
     }
 }
 
+const getData = function () {
+    const userID = localStorage.getItem('user_id');
+    console.log(userID);
+    if(userID) {
+        $.ajax({url: '/api/users', method: 'GET', data: { _id: userID}})
+            .then(function(data){
+                console.log(data);
+                
+                // listFunctions.renderList();
+            })
+    }
+}
+
+getData();
+
 logout();
