@@ -59,3 +59,17 @@ $(document).ready(function () {
     });
 
 })
+
+
+
+const logout = function () {
+    const userID = localStorage.getItem('user_id');
+    if(userID) {
+        $('.login').text('Logout').addClass('logout');
+        $('.logout').on('click', function(){
+            localStorage.clear('user_id');
+        })
+    }
+}
+
+logout();

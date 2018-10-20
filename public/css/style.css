@@ -285,6 +285,9 @@ a.login {
     margin-right: 10px;
     color: white;
 }
+a.login:hover {
+    color: blue;
+}
 .board-header{
     font-size: 18px;
     font-weight: 700;
