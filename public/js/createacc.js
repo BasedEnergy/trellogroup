@@ -11,8 +11,9 @@ $('form').on('submit', function (event) {
         }
     })
         .then(function (data) {
-            if(data.name === "ValidationError"){
-                alert(data.message);
+            console.log(data);
+            if(data.errmsg){
+                alert(data.errmsg);
             } else {
                 window.location.href = "/login";
             }
