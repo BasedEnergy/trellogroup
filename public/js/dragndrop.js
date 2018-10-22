@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     $(document).on('dragstart', `.dragCard`, function () {
         card = $(this).attr('id');
-        firstBox = $(this).parent().attr("listid");
+        firstBox = $(this).attr("listid");
         cardid = $(this).attr('cardid');
     })
 
