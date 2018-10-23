@@ -32,13 +32,16 @@ $(document).ready(function () {
 
     $(document).on('drop', `.containers`, function () {
         moveList = $(this).attr("listid");
+        console.log(moveList)
         let newData = {
             card: card,
-            notes: [
-
-            ]
+            cardid: cardid
         }
-        $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
+        $.ajax({ url: `/api/lists/${moveList}`, method: 'PUT', data: newData })
+            .then(function(result){
+                console.log(result);
+            })
+            
         // attempt of moving notes data into the "new" card
         // $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
         //     .then(function (dataList) {
@@ -48,7 +51,8 @@ $(document).ready(function () {
         //             $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newNote })
         //         })
         //     });
-        $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
+        // $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
+        //     .then(function(result)
         $(`#${card}`).remove();
         $(`ul[ listid=${moveList} ]`).append(
             $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').attr('id', `${card}`).append(
@@ -67,6 +71,7 @@ $(document).ready(function () {
             )
         )
     })
+
     dragNDropFunctions.dragNDrop();
 
 })

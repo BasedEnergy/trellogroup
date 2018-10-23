@@ -20,6 +20,7 @@ const noteFunctions = {
         $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
             .then(function (dataList) {
                 let noteList = $(`#notes-render[ cardid=${cardid} ]`).addClass('listOfNotes')
+                console.log(dataList);
                 dataList[0].notes.forEach(eachNote => {
                     noteList.append(
                         $('<div>').attr('id', 'note-content').append(
@@ -54,8 +55,11 @@ const noteFunctions = {
 $(document).ready(function () {
 
     $(document).on('click', '#modal', function () {
+        console.log(this);
         let listLocation = $(this).parent().parent().parent();
+        console.log(listLocation);
         let cardid = $(this).parent().attr('cardid')
+        console.log(cardid);
         noteFunctions.openModal(listLocation, cardid)
     });
 

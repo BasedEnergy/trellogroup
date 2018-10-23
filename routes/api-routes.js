@@ -38,7 +38,7 @@ module.exports = function (app) {
 
     app.get('/api/cards/:id', function (req, res) {
         db.Cards.find({ _id: req.params.id })
-            // .populate('note')
+            .populate('notes')
             .then(function (list) {
                 res.json(list);
             })
@@ -54,13 +54,9 @@ module.exports = function (app) {
     });
 
     app.get('/api/userLists/:userId', function (req, res) {
-        console.log("route hit")
-        console.log(req.params.userId);
         db.User.find({_id: req.params.userId})
         .populate('list')
         .then(function(result){
-            console.log("Result");
-            console.log(result);
             res.json(result);
             // db.Lists.find({})
             //     .populate('cards')
@@ -72,12 +68,10 @@ module.exports = function (app) {
             //         res.json(err);
             //     });
         }).catch(function(err){
-            console.log(err)
         })
     });
 
     app.get('/api/users', function (req, res) {
-        console.log(req.query);
         db.User.find(req.query)
             .then(function (dbUser) {
                 res.json(dbUser);
@@ -108,11 +102,8 @@ module.exports = function (app) {
             })
     });
     app.post('/api/lists', function (req, res) {
-        console.log(req.body.list);
         db.Lists.create({list: req.body.list})
             .then(function (dbList) {
-                console.log('USER:')
-                console.log(dbList);
                 return db.User.findOneAndUpdate({ _id: req.body._id}, { $push: { list: dbList._id } }, { new: true });
             })
             .catch(function (err) {
@@ -177,8 +168,9 @@ module.exports = function (app) {
             });
     });
 
-    app.put('/api/lists', function (req, res) {
-        db.Lists.findOneAndUpdate({ _id: req.body._id }, { $set: { list: req.body.list } })
+    app.put('/api/lists/:id', function (req, res) {
+        console.log(req.params.id);
+        db.Cards.findOneAndUpdate({ _id: req.body.cardid }, { $set: { listid: req.params.id } })
             .then(function (lists) {
                 res.json(lists);
             })
