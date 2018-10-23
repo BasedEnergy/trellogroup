@@ -2,8 +2,25 @@ const menuFunctions = {
 
     renderNavButtons: function () {
         $('.navbar.app').append(
-            $('<div>').attr('id', 'createBoard').addClass('TBA').append(
-                $('<div>').addClass('fas fa-plus')
+            $('<div>').attr('id', 'goHome').addClass('navbarLeft').append(
+                $('<i>').addClass('fas fa-home')
+            ),
+            $('<div>').attr('id', 'Boards').addClass('navbarBoards').append(
+                $('<i>').addClass('fab fa-windows'),
+                $('<p>').text('Boards')
+            ),
+            $('<div>').addClass('navbarSearch').append(
+                $('<input>').attr('id', 'boardSearch'),
+                $('<i>').addClass('fas fa-search')
+            ),
+            $('<div>').attr('id', 'createBoard').addClass('navbarRight').append(
+                $('<i>').addClass('fas fa-plus')
+            ),
+            $('<div>').attr('id', 'info').addClass('navbarRight').append(
+                $('<i>').addClass('fas fa-info-circle')
+            ),
+            $('<div>').attr('id', 'notifications').addClass('navbarRight').append(
+                $('<i>').addClass('far fa-bell')
             ),
         ),
             $('.navbar.board').append(
@@ -13,13 +30,13 @@ const menuFunctions = {
                     ),
                     $('<div>').attr('id', 'openMenu').append(
                         $('<p>').text('Show Menu').css('font-size', '14px').css('margin-left', '8px')
-                    )
+                    ),
                 ),
             )
     },
 
     renderMenu: function () {
-        let currentBG = $('.navbar.app').css('background-color')
+        let currentBG = $('body').css('background-color')
         $('.lists').addClass('listsShorten')
         $('.lists').append(
             $('<section>').addClass('menu').append(
@@ -48,11 +65,39 @@ const menuFunctions = {
         )
     },
 
+    menuBack: function () {
+        let currentBG = $('body').css('background-color')
+        $('.menu').html('')
+        $('.menu').append(
+            $('<div>').addClass('menuTitle').append(
+                $('<div>').append(
+                    $('<p>').text('Menu')
+                ),
+                $('<div>').attr('id', 'closeMenu').append(
+                    $('<i>').addClass('fas fa-times')
+                )
+            ),
+            $('<div>').addClass('changeBackground menuButton').attr('id', 'backgroundButton').append(
+                $('<div>').addClass('menuIcon').css('background', currentBG),
+                $('<div>').addClass('changeBackground').text('Change Background')
+            ),
+            $('<div>').addClass('filterCards').append(
+
+            ),
+            $('<div>').addClass('powerUps').append(
+
+            ),
+            $('<div>').addClass('moreMenu').append(
+
+            ),
+        )
+    },
+
     renderMenuBackgrounds: function () {
         $('.menu').html('')
         $('.menu').append(
             $('<div>').addClass('menuTitle').append(
-                $('<div>').attr('id', 'openMenu').addClass('menuBack').append(
+                $('<div>').attr('id', 'menuBack').addClass('menuBack').append(
                     $('<i>').addClass('fas fa-arrow-left')
                 ),
                 $('<div>').append(
@@ -110,9 +155,13 @@ const menuFunctions = {
 
 $(document).ready(function () {
 
+    $(document).on('click', '#menuBack', function() {
+        menuFunctions.menuBack();
+    });
+
     $(document).on('click', '#colorSelector', function() {
         menuFunctions.renderColorSelectors();
-    })
+    });
 
     $(document).on('click', '#closeMenu', function () {
         $('.menu').addClass('closeMenuAnimation');
@@ -130,26 +179,22 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#colorMeRed', function () {
-        $('.navbar.app').css('background-color', '#cc0000');
-        $('.ui').css('background-color', '#e60000');
-        $('.ui').removeClass('rainbow');
+        $('body').css('background-color', '#e60000');
+        $('body').removeClass('rainbow');
     });
 
     $(document).on('click', '#colorMeBlue', function () {
-        $('.navbar.app').css('background-color', '#126ca0');
-        $('.ui').css('background-color', '#117ab6');
-        $('.ui').removeClass('rainbow');
+        $('body').css('background-color', '#117ab6');
+        $('body').removeClass('rainbow');
     });
 
     $(document).on('click', '#colorMeGreen', function () {
-        $('.navbar.app').css('background-color', '#408000');
-        $('.ui').css('background-color', '#4d9900');
-        $('.ui').removeClass('rainbow');
+        $('body').css('background-color', '#4d9900');
+        $('body').removeClass('rainbow');
     });
 
     $(document).on('click', '#colorMeAll', function () {
-        $('.ui').addClass('rainbow');
-        $('.navbar.app').css('background-color', 'rgb(0, 0, 0, 0)')
+        $('body').addClass('rainbow');
     });
 
     menuFunctions.renderNavButtons()
