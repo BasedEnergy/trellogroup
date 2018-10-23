@@ -4,11 +4,8 @@ const listFunctions = {
 
         $('.lists').empty();
         let userID = localStorage.getItem('user_id');
-        console.log("calling this")
         $.ajax({ url: "/api/userLists/" + userID, method: "GET" })
             .then(function (dataList) {
-                console.log("DATA LIST")
-                console.log(dataList)
                 let contentHtml = $('.lists');
                 dataList[0].list.forEach(e => {
                     contentHtml.append(
@@ -57,7 +54,6 @@ $(document).ready(function () {
         const deleteID = {
             _id: deletedID
         }
-        console.log(deletedID)
         $.ajax({ url: `/api/lists`, method: "DELETE", data: deleteID })
             .then(function () {
                 $(target).parent().parent().remove()
@@ -80,11 +76,9 @@ const logout = function () {
 
 const getData = function () {
     const userID = localStorage.getItem('user_id');
-    console.log(userID);
     if(userID) {
         $.ajax({url: '/api/users', method: 'GET', data: { _id: userID}})
             .then(function(data){
-                console.log(data);
                 
                 // listFunctions.renderList();
             })
