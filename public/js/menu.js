@@ -48,6 +48,7 @@ const menuFunctions = {
                         $('<i>').addClass('fas fa-times')
                     )
                 ),
+                $('<hr>'),
                 $('<div>').addClass('changeBackground menuButton').attr('id', 'backgroundButton').append(
                     $('<div>').addClass('menuIcon').css('background', currentBG),
                     $('<div>').addClass('changeBackground').text('Change Background')
@@ -77,6 +78,7 @@ const menuFunctions = {
                     $('<i>').addClass('fas fa-times')
                 )
             ),
+            $('<hr>'),
             $('<div>').addClass('changeBackground menuButton').attr('id', 'backgroundButton').append(
                 $('<div>').addClass('menuIcon').css('background', currentBG),
                 $('<div>').addClass('changeBackground').text('Change Background')
@@ -107,6 +109,7 @@ const menuFunctions = {
                     $('<i>').addClass('fas fa-times')
                 )
             ),
+            $('<hr>'),
             $('<div>').addClass('menuContent').append(
                 $('<div>').addClass('menuBGBox').append(
                     $('<div>').attr('id', 'colorSelector').addClass('BGButton'),
@@ -120,7 +123,7 @@ const menuFunctions = {
         )
     },
 
-    renderColorSelectors: function() {
+    renderColorSelectors: function () {
         $('.menu').html('')
         $('.menu').append(
             $('<div>').addClass('menuTitle').append(
@@ -134,9 +137,10 @@ const menuFunctions = {
                     $('<i>').addClass('fas fa-times')
                 )
             ),
+            $('<hr>'),
             $('<div>').addClass('menuContent').append(
                 $('<div>').css('background-color', '#cc0000').addClass('colorSel').attr('id', 'colorMeRed'),
-                $('<div>').css('background-color', '#126ca0').addClass('colorSel colorSelRight').attr('id', 'colorMeBlue'),
+                $('<div>').css('background-color', 'rgb(0, 121, 191)').addClass('colorSel colorSelRight').attr('id', 'colorMeBlue'),
             ),
             $('<div>').addClass('menuContent').append(
                 $('<div>').css('background-color', '#408000').addClass('colorSel').attr('id', 'colorMeGreen'),
@@ -145,7 +149,7 @@ const menuFunctions = {
         )
     },
 
-    closeMenu: function() {
+    closeMenu: function () {
         $('.menu').removeClass('closeMenuAnimation')
         $('.menu').remove()
         $('.lists').removeClass('listsReturn')
@@ -155,11 +159,33 @@ const menuFunctions = {
 
 $(document).ready(function () {
 
-    $(document).on('click', '#menuBack', function() {
+    var curDown = false,
+        curYPos = 0,
+        curXPos = 0;
+    $('.lists').mousemove(function (m) {
+        if (curDown === true) {
+            console.log(m)
+            console.log(curDown)
+            $(window).scrollTop($(window).scrollTop() + (curYPos - m.pageY));
+            $('.lists').scrollLeft($('.lists').scrollLeft() + (curXPos - m.pageX));
+        }
+    });
+
+    $('.lists').mousedown(function (m) {
+        curDown = true;
+        curYPos = m.pageY;
+        curXPos = m.pageX;
+    });
+
+    $('.lists').mouseup(function () {
+        curDown = false;
+    });
+
+    $(document).on('click', '#menuBack', function () {
         menuFunctions.menuBack();
     });
 
-    $(document).on('click', '#colorSelector', function() {
+    $(document).on('click', '#colorSelector', function () {
         menuFunctions.renderColorSelectors();
     });
 

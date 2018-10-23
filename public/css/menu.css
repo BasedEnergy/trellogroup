@@ -55,11 +55,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 48px;
-    border-bottom: 1px solid rgb(0,0,0, 0.2);
-    margin-left: 14px;
-    margin-right: 14px;
+    margin: 16px;
     font-size: 16px;
+    line-height: 20px;
     font-weight: bold;
 }
 .menuButton {
@@ -167,8 +165,8 @@
     justify-content: center;
     align-items: center;
     height: 32px;
-    width: 82px;
     font-size: 14px;
+    padding: 0 8px;
     font-weight: bold;
     border-radius: 3px;
     margin-left: 4px;
@@ -211,7 +209,7 @@
     background-color: hsla(0,0%,100%,.2);
 }
 .fa-windows {
-    margin-right: 6px;
+    margin-right: 13px;
 }
 .navbarSearch {
     color: #fff;
@@ -235,4 +233,12 @@
     width: 156px;
     height: 32px;
     border-radius: 3px;
+}
+hr {
+    background-color: rgba(9,45,66,.13);
+    border: 0;
+    height: 1px;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding: 0;
 }
