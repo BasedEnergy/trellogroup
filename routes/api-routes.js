@@ -12,23 +12,11 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
-    // app.get('/api/lists/:id', function (req, res) {
-    //     db.Lists.find({ _id: req.params.id })
-    //         .populate('cards')
-    //         .then(function (list) {
-    //             // console.log(list);
-    //             res.json(list);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         })
-    // });
 
     app.get('/api/lists/:id', function (req, res) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
@@ -54,21 +42,14 @@ module.exports = function (app) {
     });
 
     app.get('/api/userLists/:userId', function (req, res) {
-        db.User.find({_id: req.params.userId})
-        .populate('list')
-        .then(function(result){
-            res.json(result);
-            // db.Lists.find({})
-            //     .populate('cards')
-            //     .then(function (lists) {
-    
-            //         res.json(lists);
-            //     })
-            //     .catch(function (err) {
-            //         res.json(err);
-            //     });
-        }).catch(function(err){
-        })
+        db.User.find({ _id: req.params.userId })
+            .populate('list')
+            .then(function (result) {
+                res.json(result);
+            })
+            .catch(function (err) {
+                res.json(err);
+            })
     });
 
     app.get('/api/users', function (req, res) {
@@ -102,9 +83,9 @@ module.exports = function (app) {
             })
     });
     app.post('/api/lists', function (req, res) {
-        db.Lists.create({list: req.body.list})
+        db.Lists.create({ list: req.body.list })
             .then(function (dbList) {
-                return db.User.findOneAndUpdate({ _id: req.body._id}, { $push: { list: dbList._id } }, { new: true });
+                return db.User.findOneAndUpdate({ _id: req.body._id }, { $push: { list: dbList._id } }, { new: true });
             })
             .catch(function (err) {
                 res.json(err);
@@ -133,19 +114,7 @@ module.exports = function (app) {
                 res.json(err)
             })
     })
-    //post route for adding lists to a specific user
-    // app.post("/submit", function (req, res) {
-    //     db.User.create(req.body)
-    //         .then(function (dbUser) {
-    //             return db.User.findOneAndUpdate({}, { $push: { list: dbUser._id } }, { new: true });
-    //         })
-    //         .then(function (dbUser) {
-    //             res.json(dbUser);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+
     app.put('/api/notes', function (req, res) {
         db.Notes.findOneAndUpdate({ _id: req.body._id }, { $set: { note: req.body.card } })
             .populate('noteincard')
@@ -158,7 +127,7 @@ module.exports = function (app) {
     })
 
     app.put('/api/cards', function (req, res) {
-        db.Cards.findOneAndUpdate({ _id : req.body._id }, { $set: { card: req.body.card } })
+        db.Cards.findOneAndUpdate({ _id: req.body._id }, { $set: { card: req.body.card } })
             .populate('cards')
             .then(function (cards) {
                 res.json(cards);
@@ -179,11 +148,11 @@ module.exports = function (app) {
             });
     });
 
-    app.delete('/api/cards/:id', function(req,res) {
+    app.delete('/api/cards/:id', function (req, res) {
         db.Notes.findOneAndDelete(req.body)
             .populate('notes')
             .then(function (deleteNote) {
-                db.Cards.findOneAndDelete({_id: req.params.id}, {$pull: {'card.notes' : {body:deleteNote}}})
+                db.Cards.findOneAndDelete({ _id: req.params.id }, { $pull: { 'card.notes': { body: deleteNote } } })
                 res.json(deleteNote);
             })
             .catch(function (err) {
@@ -192,12 +161,9 @@ module.exports = function (app) {
     })
 
     app.delete('/api/lists/:id', function (req, res) {
-        // const deleteid = req._id;
         db.Cards.findOneAndDelete(req.body)
-            // .populate('cards')
             .then(function (deleteCard) {
-                db.Lists.findOneAndUpdate({_id: req.params.id}, {$pull: {'list.cards' : {body :deleteCard}}});
-                
+                db.Lists.findOneAndUpdate({ _id: req.params.id }, { $pull: { 'list.cards': { body: deleteCard } } });
                 res.json(deleteCard);
             })
             .catch(function (err) {

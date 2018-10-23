@@ -12,11 +12,10 @@ $('form').on('submit', function (event) {
     })
         .then(function (data) {
             console.log(data);
-            if(data.errmsg){
+            if (data.errmsg) {
                 alert(data.errmsg);
             } else {
                 window.location.href = "/login";
             }
         })
 })
-  

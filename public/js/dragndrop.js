@@ -38,10 +38,10 @@ $(document).ready(function () {
             cardid: cardid
         }
         $.ajax({ url: `/api/lists/${moveList}`, method: 'PUT', data: newData })
-            .then(function(result){
+            .then(function (result) {
                 console.log(result);
             })
-            
+
         // attempt of moving notes data into the "new" card
         // $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
         //     .then(function (dataList) {

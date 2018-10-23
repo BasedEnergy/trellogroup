@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CardSchema = new Schema({
-    card:{
+    card: {
         type: String,
         required: true
     },
-    listid:{
+    listid: {
         type: String
     },
-    notes:[
+    notes: [
         {
             type: Schema.Types.ObjectId,
             ref: "Notes"

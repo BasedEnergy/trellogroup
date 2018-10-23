@@ -1,10 +1,10 @@
 /*  Function that allows text items to be edited when double clicked  */
 
 $.fn.extend({
-    editable: function() {
+    editable: function () {
         var that = this,
             $edittextbox = $('<input type="text"></input>').css('min-width', that.width()),
-            submitChanges = function() {
+            submitChanges = function () {
                 that.html($edittextbox.val());
                 that.show();
                 that.trigger('editsubmit', [that.html()]);
@@ -12,13 +12,13 @@ $.fn.extend({
                 $edittextbox.detach();
             },
             tempVal;
-        $edittextbox.click(function(event) {
+        $edittextbox.click(function (event) {
             event.stopPropagation();
         });
 
-        that.dblclick(function(e) {
+        that.dblclick(function (e) {
             tempVal = that.html();
-            $edittextbox.val(tempVal).insertBefore(that).bind('keypress', function(e) {
+            $edittextbox.val(tempVal).insertBefore(that).bind('keypress', function (e) {
                 if ($(this).val() !== '') {
                     var code = (e.keyCode ? e.keyCode : e.which);
                     if (code == 13) {

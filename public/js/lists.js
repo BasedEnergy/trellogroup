@@ -66,9 +66,9 @@ $(document).ready(function () {
 
 const logout = function () {
     const userID = localStorage.getItem('user_id');
-    if(userID) {
+    if (userID) {
         $('.login').text('Logout').addClass('logout');
-        $('.logout').on('click', function(){
+        $('.logout').on('click', function () {
             localStorage.clear('user_id');
         })
     }
@@ -76,10 +76,10 @@ const logout = function () {
 
 const getData = function () {
     const userID = localStorage.getItem('user_id');
-    if(userID) {
-        $.ajax({url: '/api/users', method: 'GET', data: { _id: userID}})
-            .then(function(data){
-                
+    if (userID) {
+        $.ajax({ url: '/api/users', method: 'GET', data: { _id: userID } })
+            .then(function (data) {
+
                 // listFunctions.renderList();
             })
     }
