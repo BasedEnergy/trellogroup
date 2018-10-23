@@ -16,18 +16,6 @@ body {
     display: flex;
     align-items: center;
 }
-.colorSel {
-    opacity: 0.5;
-    height: 30px;
-    width: 30px;
-    margin: 5px;
-    border-radius: 4px;
-    float: right;
-    cursor: pointer;
-}
-.colorSel:hover {
-    opacity: 0.8;
-}
 .navbar.app {
     background-color: #126ca0;
     background-image: url("../assets/trello-logo-white.png");
@@ -41,6 +29,7 @@ body {
 .lists {
     display: flex;
     overflow-x: auto;
+    margin-bottom: 8px;
 }
 .lists>* {
     flex: 0 0 auto;
@@ -227,14 +216,26 @@ textarea {
     display: flex;
     align-items: center; 
 }
-.rainbow {
-    background-color: none;
-    background: linear-gradient(#ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3, #ff2400, #e81d1d);
-    background-size: 1800% 1800%;
-    animation: rainbow 5s;
-    animation-iteration-count: infinite;
+.lists::-webkit-scrollbar {
+    overflow: auto;
+    margin: 0 auto;
+    margin-bottom: 5%;
 }
-@keyframes rainbow { 
-    0%{background-position:0% 100%}
-    100%{background-position:100% 0%}
+.lists::-webkit-scrollbar-track {
+    background: rgb(0,0,0,0.1);
+    border-radius: 4px;
+    margin: 10px;
+}
+.lists::-webkit-scrollbar-thumb {
+    margin: 10px;
+    border-radius: 4px;
+    height: 20px;
+    width: 8px;
+    background: rgb(255,255,255,0.4);
+}
+.scrollbarMenuShort {
+    margin-right: 340px;
+}
+body::-webkit-scrollbar { 
+    display: none; 
 }

@@ -1,35 +1,49 @@
-#openMenu {
+.openMenuButton {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    margin-left: calc(100% - 150px);
+    margin-left: calc(100% - 136px);
     margin-right: 10px;
     height: 30px;
     width: 120px;
     border-radius: 3px;
+    text-decoration: underline;
 }
-#openMenu:hover{
+.openMenuButton:hover{
     background-color: rgb(0,0,0,0.1)
-}
-.openMenu{
-    margin-left: 5px;
 }
 .menu {
     position: absolute;
     top: 40px;
     right: 0;
-    width: 300px;
+    width: 340px;
     height: calc(100% - 40px);
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(242, 247, 255);
     color: black;
+    box-shadow: 0px 3px 10px rgb(0,0,0, 0.1);
+    animation: openMenu ease 0.2s;
+}
+.menuBack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    color: rgb(0,0,0,0.5);
+    height: 20px;
+    width: 20px;
+}
+.menuBack:hover {
+    color: rgb(0,0,0,0.8);
 }
 #closeMenu {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    margin-left: 120px;
+    margin-left: 140px;
     color: rgb(0,0,0,0.5);
     height: 20px;
     width: 20px;
@@ -41,32 +55,74 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
-    border-bottom: 2px solid rgb(0,0,0, 0.3);
+    height: 48px;
+    border-bottom: 1px solid rgb(0,0,0, 0.2);
     margin-left: 14px;
     margin-right: 14px;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 .menuButton {
-    margin-top: 10px;
-    height: 40px;
+    margin-top: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bolder;
+    height: 30px;
+    border-radius: 4px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
+    cursor: pointer;
+}
+.menuButton:hover {
+    background-color: silver;
+}
+.menuIcon {
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    float: left;
+    margin: 12px;
 }
 .colorSel {
     opacity: 0.5;
-    height: 30px;
-    width: 30px;
-    margin: 5px;
-    border-radius: 4px;
-    float: right;
+    height: 96px;
+    width: 160px;
+    border-radius: 8px;
     cursor: pointer;
 }
 .colorSel:hover {
     opacity: 0.8;
+}
+.colorSelRight {
+    margin-left: 8px;
+}
+.BGButton {
+    background-color: #dfe3e6;
+    background-size: cover;
+    margin-bottom: 8px;
+    height: 96px;
+    width: 140px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.menuContent {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 12px 6px 12px 12px;
+    margin-left: 14px;
+    margin-right: 14px;
+}
+#colorSelector {
+    background-image: url(https://a.trellocdn.com/prgb/dist/images/colors@2x.864f4df15d825e89e199.jpg);
+}
+#imageSelector {
+    background-image: url(https://a.trellocdn.com/prgb/dist/images/photos-thumbnail@3x.48948499e309aef794d7.jpg);
+    margin-left: 8px;
 }
 .rainbow {
     background-color: none;
@@ -75,7 +131,33 @@
     animation: rainbow 5s;
     animation-iteration-count: infinite;
 }
+.closeMenuAnimation {
+    animation: closeMenu ease 0.2s
+}
+@keyframes closeMenu {
+    0%{margin-right: 0px}
+    100%{margin-right: -340px}
+}
 @keyframes rainbow { 
     0%{background-position:0% 100%}
     100%{background-position:100% 0%}
+}
+.listsShorten {
+    animation: listsShorten ease 0.2s;
+    margin-right: 340px;
+}
+.listsReturn {
+    animation: listsReturn ease 0.2s
+}
+@keyframes listsReturn {
+    0%{margin-right: 340px}
+    100%{margin-right: 0px}
+}
+@keyframes listsShorten {
+    0%{margin-right: 0px}
+    100%{margin-right: 340px}
+}
+@keyframes openMenu {
+    0%{right: -340px}
+    100%{right: 0px;}
 }
