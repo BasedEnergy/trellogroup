@@ -1,7 +1,7 @@
 const menuFunctions = {
 
     renderHomePage: function () {
-        $('.ui').append(
+        $('.navbar.board').append(
             $('<div>').addClass('homePage').append(
                 $('<div>').addClass('homeLeft').append(
 
@@ -13,6 +13,23 @@ const menuFunctions = {
 
                 )
             )
+        )
+    },
+
+    renderBoardSearch: function () {
+        $('.navbar.board').append(
+            $('<div>').addClass('boardSearch').append(
+                $('<div>').addClass('boardSearchBar').append(
+                    $('<input>').attr('id', 'boardSearchInput')
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+            )
+
         )
     },
 
@@ -32,8 +49,10 @@ const menuFunctions = {
                 $('<div>').addClass('infoContent').append(
                     $('<div>').addClass('replaceTip').append(
                         $('<div>').addClass('infoTip').append(
-                            $('<img>').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
-                            $('<p>').text('New to Trello? Check Out This Guide')
+                            $('<img>').addClass('infoTipImg').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
+                            $('<div>').addClass('infoTipTextBox').append(
+                                $('<p>').text('New to Trello? Check Out This Guide').css('font-size', '16px').css('padding', '8px').css('color', '#092d42').css('font-weight', 'bold')
+                            )
                         )
                     ),
                     $('<div>').addClass('newTip').append(
@@ -255,6 +274,15 @@ $(document).ready(function () {
 
     $('.lists').mouseup(function () {
         curDown = false;
+    });
+
+    $(document).on('click', '#Boards', function () {
+        let ifBoardSearch = $('.boardSearch').val();
+        if (ifBoardSearch === undefined) {
+            menuFunctions.renderBoardSearch();
+        } else {
+            $('.boardSearch').remove();
+        }
     });
 
     $(document).on('click', '#goHome', function () {

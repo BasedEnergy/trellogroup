@@ -23,7 +23,7 @@ module.exports = function (app) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                console.log(list);
+                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
@@ -132,7 +132,7 @@ module.exports = function (app) {
     });
 
     app.put('/api/lists/:id', function (req, res) {
-        console.log(req.params.id);
+        // console.log(req.params.id);
         db.Cards.findOneAndUpdate({ _id: req.body.cardid }, { $set: { listid: req.params.id } })
             .then(function (lists) {
                 res.json(lists);
