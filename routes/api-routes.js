@@ -23,7 +23,7 @@ module.exports = function (app) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                console.log(list);
+                // console.log(list);
                 res.json(list);
             })
             .catch(function (err) {

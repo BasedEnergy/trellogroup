@@ -16,6 +16,12 @@ const menuFunctions = {
         )
     },
 
+    renderBoardSearch () {
+        $('.navbar.board').append(
+            $('<div>')
+        )
+    },
+
     renderInfo: function () {
         $('.createBoardBox').remove();
         $('.infoBox').remove();
@@ -235,6 +241,10 @@ const menuFunctions = {
 
 $(document).ready(function () {
 
+/*
+============='.lists' Drag and Scroll=============
+*/
+
     var curDown = false,
         curYPos = 0,
         curXPos = 0;
@@ -255,6 +265,24 @@ $(document).ready(function () {
 
     $('.lists').mouseup(function () {
         curDown = false;
+    });
+
+/*
+============='.lists' Drag and Scroll=============
+*/
+
+/*
+=============Nav and Menu  Event Listners=============
+*/
+
+    $(document).on('click', '.lists', function () {
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
+    });
+
+    $(document).on('click', '.homePage', function () {
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
     });
 
     $(document).on('click', '#goHome', function () {
@@ -316,6 +344,14 @@ $(document).ready(function () {
         $('#menuAnimations').addClass('deeperMenu')
     });
 
+/*
+=============Nav and Menu  Event Listners=============
+*/
+
+/*
+============Color Selector Event Listeners============
+*/
+
     $(document).on('click', '#colorMeRed', function () {
         $('body').css('background-color', 'rgb(176, 70, 50)');
         $('body').removeClass('rainbow');
@@ -364,6 +400,10 @@ $(document).ready(function () {
     $(document).on('click', '#colorMeAll', function () {
         $('body').addClass('rainbow');
     });
+
+/*
+============Color Selector Event Listeners============
+*/
 
     menuFunctions.renderNavButtons()
 })
