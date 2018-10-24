@@ -1,7 +1,7 @@
 const menuFunctions = {
 
     renderHomePage: function () {
-        $('.ui').append(
+        $('.navbar.board').append(
             $('<div>').addClass('homePage').append(
                 $('<div>').addClass('homeLeft').append(
 
@@ -16,9 +16,20 @@ const menuFunctions = {
         )
     },
 
-    renderBoardSearch () {
+    renderBoardSearch: function () {
         $('.navbar.board').append(
-            $('<div>')
+            $('<div>').addClass('boardSearch').append(
+                $('<div>').addClass('boardSearchBar').append(
+                    $('<input>').attr('id', 'boardSearchInput')
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+            )
+
         )
     },
 
@@ -38,8 +49,10 @@ const menuFunctions = {
                 $('<div>').addClass('infoContent').append(
                     $('<div>').addClass('replaceTip').append(
                         $('<div>').addClass('infoTip').append(
-                            $('<img>').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
-                            $('<p>').text('New to Trello? Check Out This Guide')
+                            $('<img>').addClass('infoTipImg').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
+                            $('<div>').addClass('infoTipTextBox').append(
+                                $('<p>').text('New to Trello? Check Out This Guide').css('font-size', '16px').css('padding', '8px').css('color', '#092d42').css('font-weight', 'bold')
+                            )
                         )
                     ),
                     $('<div>').addClass('newTip').append(
@@ -241,48 +254,50 @@ const menuFunctions = {
 
 $(document).ready(function () {
 
-/*
-============='.lists' Drag and Scroll=============
-*/
+/*Click Drag and Scroll*/
 
     var curDown = false,
         curYPos = 0,
         curXPos = 0;
-    $('.lists').mousemove(function (m) {
+
+    $(window).mousemove(function (m) {
         if (curDown === true) {
-            console.log(m)
-            console.log(curDown)
-            $(window).scrollTop($(window).scrollTop() + (curYPos - m.pageY));
-            $('.lists').scrollLeft($('.lists').scrollLeft() + (curXPos - m.pageX));
+            $(window).scrollLeft($(window).scrollLeft() + (curXPos - m.pageX));
         }
     });
 
-    $('.lists').mousedown(function (m) {
+    $(window).mousedown(function (m) {
         curDown = true;
         curYPos = m.pageY;
         curXPos = m.pageX;
     });
 
-    $('.lists').mouseup(function () {
+    $(window).mouseup(function () {
         curDown = false;
     });
 
-/*
-============='.lists' Drag and Scroll=============
-*/
-
-/*
-=============Nav and Menu  Event Listners=============
-*/
+/*Click Drag and Scroll*/
+/*Nav and Menu Event Listeners*/
 
     $(document).on('click', '.lists', function () {
         $('.infoBox').remove();
         $('.createBoardBox').remove();
+        $('.boardSearch').remove();
     });
 
     $(document).on('click', '.homePage', function () {
         $('.infoBox').remove();
         $('.createBoardBox').remove();
+        $('.boardSearch').remove();
+    });
+
+    $(document).on('click', '#Boards', function () {
+        let ifBoardSearch = $('.boardSearch').val();
+        if (ifBoardSearch === undefined) {
+            menuFunctions.renderBoardSearch();
+        } else {
+            $('.boardSearch').remove();
+        }
     });
 
     $(document).on('click', '#goHome', function () {
@@ -344,13 +359,8 @@ $(document).ready(function () {
         $('#menuAnimations').addClass('deeperMenu')
     });
 
-/*
-=============Nav and Menu  Event Listners=============
-*/
-
-/*
-============Color Selector Event Listeners============
-*/
+/*Nav and Menu Event Listeners*/
+/*Color Selector Event Listners*/
 
     $(document).on('click', '#colorMeRed', function () {
         $('body').css('background-color', 'rgb(176, 70, 50)');
@@ -401,9 +411,7 @@ $(document).ready(function () {
         $('body').addClass('rainbow');
     });
 
-/*
-============Color Selector Event Listeners============
-*/
+/*Color Selector Event Listners*/
 
     menuFunctions.renderNavButtons()
 })

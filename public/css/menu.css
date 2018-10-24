@@ -171,17 +171,30 @@
                 margin-left: 8px;
             }
 
-.homePage {
-    z-index: 2;
-    position: absolute;
-    top: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 40px);
-    width: 100%;
-    background-color: white;
-}
+    .boardSearch {
+        z-index: 4;
+        position: absolute;
+        top: 44px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: white;
+        width: 280px;
+        height: 200px;
+        border-radius: 0px 4px 4px 0px;
+    }
+
+        .boardSearchBar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            width: 260px;
+        }
+
+        #boardSeachInput {
+            width: 260px;
+        }
 
 .contentHR {
     width: 100%;
