@@ -1,44 +1,107 @@
 const menuFunctions = {
 
+    // Renders Info Box
+    renderInfo: function () {
+        $('.createBoardBox').remove();
+        $('.infoBox').remove();
+        $('.navbar.board').append(
+            $('<div>').addClass('infoBox').append(
+                $('<div>').addClass('infoTitleBox').append(
+                    $('<div>').addClass('infoTitle').append(
+                        $('<p>').text('Information'),
+                    ),
+                    $('<div>').attr('id', 'closeInfoIcon').append(
+                        $('<i>').addClass('fas fa-times')
+                    ),
+                ),
+                $('<div>').addClass('infoContent').append(
+                    $('<div>').addClass('replaceTip').append(
+                        $('<div>').addClass('infoTip').append(
+                            $('<img>').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
+                            $('<p>').text('New to Trello? Check Out This Guide')
+                        )
+                    )
+                )
+            )
+        );
+    },
+
+    // Renders Create Board Box
+    createBoard: function () {
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
+        $('.navbar.board').append(
+            $('<div>').addClass('createBoardBox').append(
+                $('<div>').addClass('createBoardTitle').append(
+                    $('<div>').append(
+                        $('<p>').text('Create'),
+                    ),
+                    $('<div>').attr('id', 'closeBoard').append(
+                        $('<i>').addClass('fas fa-times'),
+                    ),
+                ),
+                $('<div>').attr('id', 'boardCreate').addClass('createBoardLink').append(
+                    $('<p>').addClass('boardCreateCreateBoard').text('Create Board...'),
+                    $('<p>').css('font-size', '12px').text('A board is made up of cards ordered on lists. Use it to manage projects, track information, or organize anything.')
+                ),
+                $('<div>').attr('id', 'teamCreate').addClass('createBoardLink').append(
+                    $('<p>').addClass('boardCreateCreateBoard').text('Create Team...'),
+                    $('<p>').css('font-size', '12px').text('A team is a group of boards and people. Use it to organize your company, side hustle, family, or friends.')
+                ),
+            )
+        );
+    },
+
+    // Renders all Navigation Buttons to the page
     renderNavButtons: function () {
         $('.navbar.app').append(
-            $('<div>').attr('id', 'goHome').addClass('navbarLeft').append(
-                $('<i>').addClass('fas fa-home')
-            ),
-            $('<div>').attr('id', 'Boards').addClass('navbarBoards').append(
-                $('<i>').addClass('fab fa-windows'),
-                $('<p>').text('Boards')
-            ),
-            $('<div>').addClass('navbarSearch').append(
-                $('<input>').attr('id', 'boardSearch'),
-                $('<i>').addClass('fas fa-search')
-            ),
-            $('<div>').attr('id', 'createBoard').addClass('navbarRight').append(
-                $('<i>').addClass('fas fa-plus')
-            ),
-            $('<div>').attr('id', 'info').addClass('navbarRight').append(
-                $('<i>').addClass('fas fa-info-circle')
-            ),
-            $('<div>').attr('id', 'notifications').addClass('navbarRight').append(
-                $('<i>').addClass('far fa-bell')
-            ),
+            $('<div>').addClass('navFull').append(
+                $('<div>').attr('id', 'goHome').addClass('navbarLeft').append(
+                    $('<i>').addClass('fas fa-home')
+                ),
+                $('<div>').attr('id', 'Boards').addClass('navbarBoards').append(
+                    $('<i>').addClass('fab fa-windows'),
+                    $('<p>').text('Boards')
+                ),
+                $('<div>').addClass('navbarSearch').append(
+                    $('<input>').attr('id', 'boardSearch'),
+                    $('<i>').addClass('fas fa-search')
+                ),
+                $('<div>').addClass('navbarLogo').append(
+                    $('<img>').attr('id', 'logo').attr('src', '../assets/trello-logo-white.png')
+                ),
+                $('<div>').addClass('rightIcons').append(
+                    $('<div>').attr('id', 'createBoard').addClass('navbarRight').append(
+                        $('<i>').addClass('fas fa-plus')
+                    ),
+                    $('<div>').attr('id', 'info').addClass('navbarRight').append(
+                        $('<i>').addClass('fas fa-info-circle')
+                    ),
+                    $('<div>').attr('id', 'notifications').addClass('navbarRight').append(
+                        $('<i>').addClass('far fa-bell')
+                    ),
+                    $('<div>').attr('id', 'navUserIcon').addClass('userIcon')
+                )
+            )
         ),
             $('.navbar.board').append(
                 $('<div>').attr('id', 'openMenu').addClass('openMenuButton').append(
                     $('<div>').append(
                         $('<i>').addClass('fas fa-ellipsis-h')
                     ),
-                    $('<div>').attr('id', 'openMenu').append(
+                    $('<div>').append(
                         $('<p>').text('Show Menu').css('font-size', '14px').css('margin-left', '8px')
                     ),
                 ),
             )
     },
 
+    // Renders Menu
     renderMenu: function () {
-        let currentBG = $('body').css('background-color')
-        $('.lists').addClass('listsShorten')
-        $('.lists').append(
+        $('.menu').html('');
+        let currentBG = $('body').css('background-color');
+        $('.lists').addClass('listsShorten');
+        $('.ui').append(
             $('<section>').addClass('menu').append(
                 $('<div>').addClass('menuTitle').append(
                     $('<div>').append(
@@ -66,44 +129,16 @@ const menuFunctions = {
         )
     },
 
-    menuBack: function () {
-        let currentBG = $('body').css('background-color')
-        $('.menu').html('')
-        $('.menu').append(
-            $('<div>').addClass('menuTitle').append(
-                $('<div>').append(
-                    $('<p>').text('Menu')
-                ),
-                $('<div>').attr('id', 'closeMenu').append(
-                    $('<i>').addClass('fas fa-times')
-                )
-            ),
-            $('<hr>'),
-            $('<div>').addClass('changeBackground menuButton').attr('id', 'backgroundButton').append(
-                $('<div>').addClass('menuIcon').css('background', currentBG),
-                $('<div>').addClass('changeBackground').text('Change Background')
-            ),
-            $('<div>').addClass('filterCards').append(
-
-            ),
-            $('<div>').addClass('powerUps').append(
-
-            ),
-            $('<div>').addClass('moreMenu').append(
-
-            ),
-        )
-    },
-
+    // Renders Change Background in menu
     renderMenuBackgrounds: function () {
-        $('.menu').html('')
+        $('.menu').html('');
         $('.menu').append(
             $('<div>').addClass('menuTitle').append(
                 $('<div>').attr('id', 'menuBack').addClass('menuBack').append(
                     $('<i>').addClass('fas fa-arrow-left')
                 ),
                 $('<div>').append(
-                    $('<p>').text('Colors')
+                    $('<p>').text('Change Background')
                 ),
                 $('<div>').attr('id', 'closeMenu').append(
                     $('<i>').addClass('fas fa-times')
@@ -111,15 +146,24 @@ const menuFunctions = {
             ),
             $('<hr>'),
             $('<div>').addClass('menuContent').append(
-                $('<div>').addClass('menuBGBox').append(
-                    $('<div>').attr('id', 'colorSelector').addClass('BGButton'),
-                    $('<p>').text('Colors').css('text-align', 'center')
+                $('<div>').addClass('rowBG').append(
+                    $('<div>').addClass('menuBGBox').append(
+                        $('<div>').attr('id', 'colorSelector').addClass('BGButton'),
+                        $('<p>').text('Colors').css('text-align', 'center')
+                    ),
+                    $('<div>').addClass('menuBGBox').append(
+                        $('<div>').attr('id', 'imageSelector').addClass('BGButton'),
+                        $('<p>').text('Photos').css('text-align', 'center')
+                    ),
                 ),
-                $('<div>').addClass('menuBGBox').append(
-                    $('<div>').attr('id', 'imageSelector').addClass('BGButton'),
-                    $('<p>').text('Photos').css('text-align', 'center')
-                )
-            ),
+                $('<hr>').addClass('contentHR'),
+                $('<div>').addClass('rowBG').append(
+                    $('<div>').addClass('menuBGBox').append(
+                        $('<div>').attr('id', 'customSelector').addClass('BGButton'),
+                        $('<p>').text('Custom').css('text-align', 'center')
+                    )
+                ),
+            )
         )
     },
 
@@ -139,13 +183,27 @@ const menuFunctions = {
             ),
             $('<hr>'),
             $('<div>').addClass('menuContent').append(
-                $('<div>').css('background-color', '#cc0000').addClass('colorSel').attr('id', 'colorMeRed'),
-                $('<div>').css('background-color', 'rgb(0, 121, 191)').addClass('colorSel colorSelRight').attr('id', 'colorMeBlue'),
-            ),
-            $('<div>').addClass('menuContent').append(
-                $('<div>').css('background-color', '#408000').addClass('colorSel').attr('id', 'colorMeGreen'),
-                $('<div>').css('background-color', '#999999').addClass('colorSel colorSelRight rainbow').attr('id', 'colorMeAll')
-            ),
+                $('<div>').addClass('row').append(
+                    $('<div>').css('background-color', 'rgb(0, 121, 191)').addClass('colorSel').attr('id', 'colorMeBlue'),
+                    $('<div>').css('background-color', 'rgb(210, 144, 52)').addClass('colorSel colorSelRight').attr('id', 'colorMeOrange'),
+                ),
+                $('<div>').addClass('row').append(
+                    $('<div>').css('background-color', 'rgb(81, 152, 57)').addClass('colorSel').attr('id', 'colorMeGreen'),
+                    $('<div>').css('background-color', 'rgb(176, 70, 50)').addClass('colorSel colorSelRight').attr('id', 'colorMeRed')
+                ),
+                $('<div>').addClass('row').append(
+                    $('<div>').css('background-color', 'rgb(137, 96, 158)').addClass('colorSel').attr('id', 'colorMePurple'),
+                    $('<div>').css('background-color', 'rgb(205, 90, 145)').addClass('colorSel colorSelRight').attr('id', 'colorMePink')
+                ),
+                $('<div>').addClass('row').append(
+                    $('<div>').css('background-color', 'rgb(75, 191, 107)').addClass('colorSel').attr('id', 'colorMeLime'),
+                    $('<div>').css('background-color', 'rgb(0, 174, 204)').addClass('colorSel colorSelRight').attr('id', 'colorMeCyan')
+                ),
+                $('<div>').addClass('row').append(
+                    $('<div>').css('background-color', 'rgb(131, 140, 145)').addClass('colorSel').attr('id', 'colorMeGrey'),
+                    $('<div>').css('background-color', '#999999').addClass('colorSel colorSelRight rainbow').attr('id', 'colorMeAll')
+                ),
+            )
         )
     },
 
@@ -181,8 +239,24 @@ $(document).ready(function () {
         curDown = false;
     });
 
+    $(document).on('click', '#closeInfoIcon', function () {
+        $('.infoBox').remove();
+    })
+
+    $(document).on('click', '#closeBoard', function () {
+        $('.createBoardBox').remove();
+    })
+
+    $(document).on('click', '#info', function () {
+        menuFunctions.renderInfo();
+    });
+
+    $(document).on('click', '#createBoard', function () {
+        menuFunctions.createBoard();
+    });
+
     $(document).on('click', '#menuBack', function () {
-        menuFunctions.menuBack();
+        menuFunctions.renderMenu()
     });
 
     $(document).on('click', '#colorSelector', function () {
@@ -202,21 +276,52 @@ $(document).ready(function () {
 
     $(document).on('click', '#backgroundButton', function () {
         menuFunctions.renderMenuBackgrounds()
+        $('#menuAnimations').addClass('deeperMenu')
     });
 
     $(document).on('click', '#colorMeRed', function () {
-        $('body').css('background-color', '#e60000');
+        $('body').css('background-color', 'rgb(176, 70, 50)');
         $('body').removeClass('rainbow');
     });
 
     $(document).on('click', '#colorMeBlue', function () {
-        $('body').css('background-color', '#117ab6');
+        $('body').css('background-color', 'rgb(0, 121, 191)');
+        $('body').removeClass('rainbow');
+    });
+
+    $(document).on('click', '#colorMeOrange', function () {
+        $('body').css('background-color', 'rgb(210, 144, 52)');
         $('body').removeClass('rainbow');
     });
 
     $(document).on('click', '#colorMeGreen', function () {
-        $('body').css('background-color', '#4d9900');
+        $('body').css('background-color', 'rgb(81, 152, 57)');
         $('body').removeClass('rainbow');
+    });
+
+
+    $(document).on('click', '#colorMePurple', function () {
+        $('body').css('background-color', 'rgb(137, 96, 158)');
+        $('body').removeClass('rainbow')
+    });
+
+    $(document).on('click', '#colorMePink', function () {
+        $('body').css('background-color', 'rgb(205, 90, 145)');
+        $('body').removeClass('rainbow')
+    });
+
+    $(document).on('click', '#colorMeLime', function () {
+        $('body').css('background-color', 'rgb(75, 191, 107)');
+        $('body').removeClass('rainbow')
+    });
+
+    $(document).on('click', '#colorMeCyan', function () {
+        $('body').css('background-color', 'rgb(0, 174, 204)');
+        $('body').removeClass('rainbow')
+    });
+
+    $(document).on('click', '#colorMeGrey', function () {
+        $('body').css('background-color', 'rgb(131, 140, 145)')
     });
 
     $(document).on('click', '#colorMeAll', function () {

@@ -39,7 +39,7 @@ const noteFunctions = {
             note: newNote,
         }
         $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newData });
-        $(".note-input").empty();
+        $(".note-input").val('');
         $("#notes-render").append(
             $('<div>').attr('id', 'note-content').attr('note', `${newNote}`).append(
                 $('<p>').text(newNote).attr('id', 'note'),

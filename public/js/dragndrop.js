@@ -31,13 +31,21 @@ $(document).ready(function () {
 
 
     $(document).on('drop', `.containers`, function () {
+        // moveList = $(this).attr("listid");
+        // let newData = {
+        //     card: card,
+        //     notes: [
+
+        //     ]
+        // }
         moveList = $(this).attr("listid");
+        console.log(moveList)
         let newData = {
             card: card,
-            notes: [
-
-            ]
+            listid: moveList
         }
+        console.log(newData)
+        $.ajax({ url: `/api/lists/${moveList}`, method: 'PUT', data: newData })
         $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
         // attempt of moving notes data into the "new" card
         // $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
