@@ -58,3 +58,22 @@
 .delete-btn{
     padding-left: 60px;
 }
+
+.listsShorten {
+    animation: listsShorten ease 0.2s;
+    margin-right: 340px;
+}
+
+.listsReturn {
+    animation: listsReturn ease 0.2s
+}
+
+@keyframes listsReturn {
+    0%{margin-right: 340px}
+    100%{margin-right: 0px}
+}
+
+@keyframes listsShorten {
+    0%{margin-right: 0px}
+    100%{margin-right: 340px}
+}

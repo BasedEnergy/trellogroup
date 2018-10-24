@@ -1,6 +1,21 @@
 const menuFunctions = {
 
-    // Renders Info Box
+    renderHomePage: function () {
+        $('.ui').append(
+            $('<div>').addClass('homePage').append(
+                $('<div>').addClass('homeLeft').append(
+
+                ),
+                $('<div>').addClass('homeCenter').append(
+
+                ),
+                $('<div>').addClass('homeRight').append(
+
+                )
+            )
+        )
+    },
+
     renderInfo: function () {
         $('.createBoardBox').remove();
         $('.infoBox').remove();
@@ -20,14 +35,20 @@ const menuFunctions = {
                             $('<img>').attr('src', 'https://a.trellocdn.com/prgb/dist/images/tips/guide-1@1x.3a63a6244ef2e7ade4d6.png'),
                             $('<p>').text('New to Trello? Check Out This Guide')
                         )
+                    ),
+                    $('<div>').addClass('newTip').append(
+
+                    ),
+                    $('<hr>'),
+                    $('<div>').addClass('infoLinks').append(
+
                     )
                 )
             )
         );
     },
 
-    // Renders Create Board Box
-    createBoard: function () {
+    createBoardBox: function () {
         $('.infoBox').remove();
         $('.createBoardBox').remove();
         $('.navbar.board').append(
@@ -52,7 +73,6 @@ const menuFunctions = {
         );
     },
 
-    // Renders all Navigation Buttons to the page
     renderNavButtons: function () {
         $('.navbar.app').append(
             $('<div>').addClass('navFull').append(
@@ -96,7 +116,6 @@ const menuFunctions = {
             )
     },
 
-    // Renders Menu
     renderMenu: function () {
         $('.menu').html('');
         let currentBG = $('body').css('background-color');
@@ -129,7 +148,6 @@ const menuFunctions = {
         )
     },
 
-    // Renders Change Background in menu
     renderMenuBackgrounds: function () {
         $('.menu').html('');
         $('.menu').append(
@@ -239,20 +257,39 @@ $(document).ready(function () {
         curDown = false;
     });
 
+    $(document).on('click', '#goHome', function () {
+        let ifHome = $('.homePage').val();
+        if (ifHome === undefined) {
+            menuFunctions.renderHomePage();
+        } else {
+            $('.homePage').remove();
+        }
+    });
+
     $(document).on('click', '#closeInfoIcon', function () {
         $('.infoBox').remove();
-    })
+    });
 
     $(document).on('click', '#closeBoard', function () {
         $('.createBoardBox').remove();
-    })
+    });
 
     $(document).on('click', '#info', function () {
-        menuFunctions.renderInfo();
+        let ifInfo = $('.infoBox').val();
+        if (ifInfo === undefined) {
+            menuFunctions.renderInfo();
+        } else {
+            $('.infoBox').remove();
+        }
     });
 
     $(document).on('click', '#createBoard', function () {
-        menuFunctions.createBoard();
+        let ifBoard = $('.createBoardBox').val();
+        if (ifBoard === undefined) {
+            menuFunctions.createBoardBox();
+        } else {
+            $('.createBoardBox').remove();
+        }
     });
 
     $(document).on('click', '#menuBack', function () {

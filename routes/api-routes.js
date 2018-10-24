@@ -1,10 +1,16 @@
 const db = require('../models/index');
 
-module.exports = function (app) {
+/*
+1-List routes
+2-Card routes
+3-note routes
+*/
 
-    app.get('/api/cards', function (req, res) {
-        db.Cards.find({})
-            .populate('notes')
+module.exports = function (app) {
+/*1*/
+    app.get('/api/lists', function (req, res) {
+        db.Lists.find({})
+            .populate('cards')
             .then(function (lists) {
                 res.json(lists);
             })
@@ -12,18 +18,19 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+/*2*/
     app.get('/api/lists/:id', function (req, res) {
         db.Lists.find({ _id: req.params.id })
             .populate('cards')
             .then(function (list) {
-                // console.log(list);
+                console.log(list);
                 res.json(list);
             })
             .catch(function (err) {
                 res.json(err);
             })
     });
-
+/*3*/
     app.get('/api/cards/:id', function (req, res) {
         db.Cards.find({ _id: req.params.id })
             .populate('notes')
@@ -35,17 +42,16 @@ module.exports = function (app) {
             })
     });
 
-    app.get('/api/lists', function (req, res) {
-        db.Lists.find({})
-            .populate('cards')
+    app.post('/api/lists', function (req, res) {
+        db.Lists.create(req.body)
             .then(function (lists) {
-
                 res.json(lists);
             })
             .catch(function (err) {
                 res.json(err);
             });
     });
+
     app.post('/api/lists/:id', function (req, res) {
         db.Cards.create(req.body)
             .then(function (dbcards) {
@@ -57,15 +63,7 @@ module.exports = function (app) {
                     })
             })
     });
-    app.post('/api/lists', function (req, res) {
-        db.Lists.create(req.body)
-            .then(function (lists) {
-                res.json(lists);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+
     app.post('/api/cards/:id', function (req, res) {
         db.Notes.create(req.body)
             .then(function (dbnotes) {

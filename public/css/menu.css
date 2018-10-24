@@ -1,63 +1,3 @@
-.navFull {
-    display: flex;
-    align-items: center;
-}
-.openMenuButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-left: calc(100% - 136px);
-    margin-right: 10px;
-    height: 30px;
-    width: 120px;
-    border-radius: 3px;
-    text-decoration: underline;
-    cursor: pointer;
-}
-.navFull {
-    width: 100%;
-}
-.navbarLogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-}
-#logo {
-    height: 22px;
-    width: 78px;
-}
-.ui {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 40px 50px 1fr;
-    color: #eee;
-}
-.navbar {
-    display: flex;
-    align-items: center;
-}
-.navbar.app {
-    background-color: rgb(0,0,0,0.15);
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.navbar.board {
-    font-size: 1.1rem;
-}
-.openMenuButton:hover{
-    background-color: rgb(0,0,0,0.1)
-}
-.menuBGBox {
-    display: flex;
-    justify-content: top;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 146px;
-    float: left;
-}
 .menu {
     position: absolute;
     top: 40px;
@@ -70,228 +10,186 @@
     animation: openMenu ease 0.2s;
     overflow-x: hidden;
 }
-.menuBackDrop {
+
+.closeMenuAnimation {
+    animation: closeMenu ease 0.2s
+}
+
+    .menuBack {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        margin-left: 20px;
+        color: rgb(0,0,0,0.5);
+        height: 20px;
+        width: 20px;
+    }
+
+    .menuBack:hover {
+        color: rgb(0,0,0,0.8);
+    }
+
+    .menuTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        font-size: 16px;
+        height: 20px;
+        font-weight: bold;
+    }
+
+    #closeMenu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        margin-left: 140px;
+        color: rgb(0,0,0,0.5);
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+    }
+
+    .closeMenu:hover {
+        color: rgb(0,0,0,0.8);
+    }
+
+    .menuButton {
+        margin-top: 16px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 14px;
+        font-weight: bolder;
+        height: 30px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .menuButton:hover {
+        background-color: silver;
+    }
+
+    .menuIcon {
+        height: 20px;
+        width: 20px;
+        border-radius: 4px;
+        float: left;
+        margin: 12px;
+    }
+
+    .menuContent {
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: calc(100% - 48px);
+        margin-left: 6px;
+        padding-top: 16px;
+    }
+
+    .menuContent::-webkit-scrollbar {
+        overflow: auto;
+        margin: 0 auto;
+        width: 6px;
+        margin: 0px;
+    }
+    
+    .menuContent::-webkit-scrollbar-track {
+        background: rgb(0,0,0,0.1);
+        border-radius: 4px;
+        margin: 10px;
+    }
+    
+    .menuContent::-webkit-scrollbar-thumb {
+        margin: 10px;
+        border-radius: 4px;
+        background: rgb(0,0,0,0.15);
+    }
+    
+        .rowBG {
+            display: flex;
+            height: 140px;
+            margin-left: 14px;
+            margin-right: 14px;
+            margin-bottom: 8px;
+        }
+        
+            .menuBGBox {
+                display: flex;
+                justify-content: top;
+                align-items: center;
+                flex-direction: column;
+                height: 100%;
+                width: 146px;
+                float: left;
+            }
+
+                .BGButton {
+                    background-color: #dfe3e6;
+                    background-size: cover;
+                    border-radius: 8px;
+                    height: 96px;
+                    width: 146px;
+                    cursor: pointer;
+                }
+
+                #colorSelector {
+                    background-image: url(https://a.trellocdn.com/prgb/dist/images/colors@2x.864f4df15d825e89e199.jpg);
+                }
+                
+                #imageSelector {
+                    background-image: url(https://a.trellocdn.com/prgb/dist/images/photos-thumbnail@3x.48948499e309aef794d7.jpg);   
+                    margin-left: 16px;
+                }
+
+        .row {
+            display: flex;
+            height: 96px;
+            margin-left: 14px;
+            margin-right: 14px;
+            margin-bottom: 8px;
+        }
+
+            .colorSel {
+                opacity: 0.5;
+                height: 96px;
+                width: 100%;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+
+            .colorSel:hover {
+                opacity: 1;
+            }
+
+            .colorSelRight {
+                margin-left: 8px;
+            }
+
+.homePage {
+    z-index: 2;
     position: absolute;
     top: 40px;
-    right: 0;
-    width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: calc(100% - 40px);
-    background-color: rgb(242, 247, 255);
-    overflow-x: hidden;
-}
-.deeperMenu {
-    right: 0;
-    animation: deeperMenu ease 0.2s;
-}
-.menuBack {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    margin-left: 20px;
-    color: rgb(0,0,0,0.5);
-    height: 20px;
-    width: 20px;
-}
-.menuBack:hover {
-    color: rgb(0,0,0,0.8);
-}
-#closeMenu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-left: 140px;
-    color: rgb(0,0,0,0.5);
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-}
-.closeMenu:hover {
-    color: rgb(0,0,0,0.8);
-}
-.menuTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    font-size: 16px;
-    height: 20px;
-    font-weight: bold;
-}
-.menuButton {
-    margin-top: 16px;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 14px;
-    font-weight: bolder;
-    height: 30px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    cursor: pointer;
-}
-.menuButton:hover {
-    background-color: silver;
-}
-.menuIcon {
-    height: 20px;
-    width: 20px;
-    border-radius: 4px;
-    float: left;
-    margin: 12px;
-}
-.colorSel {
-    opacity: 0.5;
-    height: 96px;
     width: 100%;
-    border-radius: 8px;
-    cursor: pointer;
+    background-color: white;
 }
-.colorSel:hover {
-    opacity: 1;
-}
-.colorSelRight {
-    margin-left: 8px;
-}
-.BGButton {
-    background-color: #dfe3e6;
-    background-size: cover;
-    border-radius: 8px;
-    height: 96px;
-    width: 146px;
-    cursor: pointer;
-}
-.menuContent {
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: calc(100% - 48px);
-    margin-left: 6px;
-    padding-top: 16px;
-}
+
 .contentHR {
     width: 100%;
     height: 1px;
     margin: 0px;
     margin-bottom: 16px;
 }
-.rowBG {
-    display: flex;
-    height: 140px;
-    margin-left: 14px;
-    margin-right: 14px;
-    margin-bottom: 8px;
-}
-.row {
-    display: flex;
-    height: 96px;
-    margin-left: 14px;
-    margin-right: 14px;
-    margin-bottom: 8px;
-}
-#colorSelector {
-    background-image: url(https://a.trellocdn.com/prgb/dist/images/colors@2x.864f4df15d825e89e199.jpg);
-}
-#imageSelector {
-    background-image: url(https://a.trellocdn.com/prgb/dist/images/photos-thumbnail@3x.48948499e309aef794d7.jpg);   
-    margin-left: 16px;
-}
 
-.linearGradientBoxShadow {
-    background: linear-gradient(to bottom, black, transparent);
-    height: 20px;
-}
-.closeMenuAnimation {
-    animation: closeMenu ease 0.2s
-}
-.listsShorten {
-    animation: listsShorten ease 0.2s;
-    margin-right: 340px;
-}
-.listsReturn {
-    animation: listsReturn ease 0.2s
-}
-.navbarBoards {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    font-size: 14px;
-    padding: 0 8px;
-    font-weight: bold;
-    border-radius: 3px;
-    margin-left: 4px;
-    background-color: hsla(0,0%,100%,.3);
-    transition: .1s ease;
-    cursor: pointer;
-}
-.navbarBoards:hover {
-    background-color: hsla(0,0%,100%,.2);    
-}
-.navbarLeft {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    width: 32px;
-    font-size: 16px;
-    border-radius: 3px;
-    margin-left: 4px;
-    background-color: hsla(0,0%,100%,.3);
-    transition: .1s ease;
-    cursor: pointer;
-}
-.navbarLeft:hover {
-    background-color: hsla(0,0%,100%,.2);
-}
-.navbarRight {
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    width: 32px;
-    font-size: 16px;
-    border-radius: 3px;
-    margin-left: 4px;
-    background-color: hsla(0,0%,100%,.3);
-    transition: .1s ease;
-    cursor: pointer;
-}
-.navbarRight:hover {
-    background-color: hsla(0,0%,100%,.2);
-}
-.fa-windows {
-    margin-right: 13px;
-}
-.navbarSearch {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    height: 32px;
-    width: 180px;
-    font-size: 16px;
-    border-radius: 3px;
-    margin-left: 4px;
-    cursor: pointer;
-    background-color: hsla(0,0%,100%,.3);
-    transition: .1s ease;
-}
-.navbarSearch:hover {
-    background-color: hsla(0,0%,100%,.5);
-}
-#boardSearch {
-    background-color: transparent;
-    border: none;
-    width: 156px;
-    height: 32px;
-    border-radius: 3px;
-}
 hr {
     background-color: rgba(9,45,66,.2);
     border: 0;
@@ -301,150 +199,8 @@ hr {
     padding: 0;
     margin-bottom: 0;
 }
-.userIcon {
-    margin-left: 4px;
-    margin-right: 6px;
-    background-color: #dfe3e6;
-    border-radius: 25em;
-    color: #17394d;
-    cursor: pointer;
-    height: 32px;
-    width: 32px;
-    overflow: visible;
-    position: relative;
-}
-.rightIcons {
-    display: flex;
-    position: absolute;
-    top: 4px;
-    right: 0;
-}
-.createBoardBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 3;
-    color: #6b808c;
-    position: absolute;
-    font-size: 14px;
-    border-radius: 4px;
-    top: 42px;
-    right: 0;
-    margin-right: 6px;
-    max-height: 300px;
-    width: 304px;
-    background-color: white;
-    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
-}
-
-    .createBoardTitle {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 252px;
-        padding: 12px;
-        margin-bottom: 4px;
-        border-bottom: 1px solid rgb(0,0,0,0.3)
-    }
-
-        #closeBoard {
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-            position: absolute;
-            margin-right: 12px;
-            right: 0;
-            height: 20px;
-            width: 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #closeBoard:hover{
-            background-color: rgb(0,0,0,0.3)
-        }
-
-    .createBoardLink {
-        width: calc(100% - 24px);
-        padding-top: 8px;
-        padding-left: 12px;
-        padding-right: 12px;
-        padding-bottom: 4px;
-        cursor: pointer;
-    }
-
-    .boardCreateCreateBoard {
-        color: #17394d;
-        font-weight: bold;
-        margin-bottom: 4px;
-    }
-
-    .createBoardLink:hover {
-        color: white;
-        background-color: rgb(44, 100, 255);
-    }
-
-.infoBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    margin-right: 6px;
-    border-radius: 4px;
-    font-size: 14px;
-    top: 42px;
-    max-height: 400px;
-    z-index: 3;
-    width: 360px;
-    background-color: white;
-    color: #6b808c;
-}
-
-    .infoTitleBox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 308px;
-        padding: 12px;
-        margin-bottom: 4px;
-        border-bottom: 1px solid rgb(0,0,0,0.3)
-    }
-
-    #closeInfoIcon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        right: 0;
-        margin-right: 12px;
-        width: 20px;
-        height: 20px;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-    #closeInfoIcon:hover {
-        background-color: rgb(0,0,0,0.3)
-    }
-
-@keyframes listsReturn {
-    0%{margin-right: 340px}
-    100%{margin-right: 0px}
-}
-
-@keyframes listsShorten {
-    0%{margin-right: 0px}
-    100%{margin-right: 340px}
-}
 
 @keyframes openMenu {
-    0%{right: -340px}
-    100%{right: 0px}
-}
-
-@keyframes deeperMenu {
     0%{right: -340px}
     100%{right: 0px}
 }
@@ -466,23 +222,4 @@ hr {
     animation: rainbow;
     animation-duration: 10s;
     animation-iteration-count: infinite;
-}
-
-.menuContent::-webkit-scrollbar {
-    overflow: auto;
-    margin: 0 auto;
-    width: 6px;
-    margin: 0px;
-}
-
-.menuContent::-webkit-scrollbar-track {
-    background: rgb(0,0,0,0.1);
-    border-radius: 4px;
-    margin: 10px;
-}
-
-.menuContent::-webkit-scrollbar-thumb {
-    margin: 10px;
-    border-radius: 4px;
-    background: rgb(0,0,0,0.15);
 }
