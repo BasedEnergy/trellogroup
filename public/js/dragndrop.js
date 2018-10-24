@@ -1,20 +1,23 @@
 const dragNDropFunctions = {
     dragNDrop: function () {
-        let cardId;
-        let firstBox;
-        let moveList;
-
+        
+        
     },
 }
 
 $(document).ready(function () {
+
+    let cardId;
+    let firstBox;
+    let moveList;
 
     $(document).on('click', '.add-btn', listFunctions.addList);
 
     $(document).on('dragstart', `.dragCard`, function () {
         card = $(this).attr('id');
         firstBox = $(this).parent().attr("listid");
-        cardid = $(this).attr('cardid');
+        cardId = $(this).attr('cardid');
+        console.log(cardId);
     })
 
     $(document).on('dragend', `.dragCard`, function () {
@@ -32,12 +35,15 @@ $(document).ready(function () {
 
     $(document).on('drop', `.containers`, function () {
         moveList = $(this).attr("listid");
+        console.log('id of the card ',cardId);
+        console.log('box list moved from' , firstBox);
         let newData = {
-            card: card,
+            card: cardId,
             notes: [
 
             ]
         }
+        console.log('data added ',newData);
         $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
         // attempt of moving notes data into the "new" card
         // $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
@@ -51,17 +57,17 @@ $(document).ready(function () {
         $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
         $(`#${card}`).remove();
         $(`ul[ listid=${moveList} ]`).append(
-            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').attr('id', `${card}`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardId}`).addClass('dragCard containers').attr('id', `${card}`).append(
                 $('<div>').addClass('card').append(
                     $('<p>').append(card)
                 ),
                 $('<div>').addClass('cardEdit butt').append(
                     $('<i>').addClass('fas fa-pen icon')
                 ),
-                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardId}`).attr('data-name', `${card}`).append(
                     $('<i>').addClass('far fa-comment icon')
                 ),
-                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardId}`).append(
                     $('<i>').addClass('fas fa-trash-alt icon')
                 )
             )
