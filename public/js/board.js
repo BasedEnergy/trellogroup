@@ -106,6 +106,7 @@ $(document).ready(function () {
             $('.lists').attr('boardid', boardid)
         }
         listFunctions.renderList();
+        cardFunctions.renderCard();
         $('.homePage').remove();
     })
 
