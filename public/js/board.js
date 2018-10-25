@@ -94,8 +94,8 @@ const boardFunctions = {
 $(document).ready(function () {
 
     $(document).on('click', '.boardSelect', function () {
-        let list = $('.lists').val();
         $('.lists').remove();
+        let list = $('.lists').val();
         let boardid = $(this).attr('boardid');
         let color = $(this).css('background-color');
         $('body').css('background-color', color);
@@ -105,8 +105,6 @@ $(document).ready(function () {
             $('.ui').append(
                 $('<div>').addClass('lists').attr('boardid', boardid)
             );
-        } else {
-            $('.lists').attr('boardid', boardid)
         }
         listFunctions.renderList();
         cardFunctions.renderCard();
