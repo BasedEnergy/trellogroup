@@ -8,6 +8,10 @@ const dragNDropFunctions = {
 
 $(document).ready(function () {
 
+    let cardId;
+    let firstBox;
+    let moveList;
+
     $(document).on('click', '.add-btn', listFunctions.addList);
 
     $(document).on('dragstart', `.dragCard`, function () {
@@ -51,10 +55,10 @@ $(document).ready(function () {
                 $('<div>').addClass('cardEdit butt').append(
                     $('<i>').addClass('fas fa-pen icon')
                 ),
-                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardId}`).attr('data-name', `${card}`).append(
                     $('<i>').addClass('far fa-comment icon')
                 ),
-                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardId}`).append(
                     $('<i>').addClass('fas fa-trash-alt icon')
                 )
             )
