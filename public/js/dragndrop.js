@@ -36,16 +36,12 @@ $(document).ready(function () {
 
     $(document).on('drop', `.containers`, function () {
         let moveList = $(this).attr("listid");
-        let moveCard = {
+        let changeCard = {
             card: card,
-            listid: moveList
+            listid: moveList,
         }
-        let removeCard = {
-            card: card,
-            listid: firstBox
-        }
-        $.ajax({ url: '/api/cards', method: 'POST', data: moveCard })
-        $.ajax({ url: '/api/cards', method: 'DELETE', data: removeCard })
+        console.log(moveList)
+        $.ajax({ url: '/api/cards', method: 'PUT', data: changeCard })
         $(`li[ cardid=${cardid} ]`).remove();
         $(`ul[ listid=${moveList} ]`).append(
             $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').append(
