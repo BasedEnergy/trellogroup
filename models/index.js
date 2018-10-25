@@ -1,6 +1,7 @@
 module.exports ={
-    Cards: require("./carddata"),
+    Boards: require("./boarddata"),
     Lists: require("./listdata"),
     Notes: require("./notedata"),
-    User: require("./userdata")
+    User: require("./userdata"),
+    Cards: require("./carddata")
 };

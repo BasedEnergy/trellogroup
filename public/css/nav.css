@@ -1,0 +1,383 @@
+.ui {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 40px 50px 1fr;
+    color: #eee;
+}
+
+.homePage {
+    z-index: 3;
+    position: absolute;
+    top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 40px);
+    width: 100%;
+    background-color: white;
+}
+
+    .navFull {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+        #boardSearch {
+            background-color: transparent;
+            border: none;
+            width: 156px;
+            height: 32px;
+            border-radius: 3px;
+        }
+
+        .navbarBoards {
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            font-size: 14px;
+            padding: 0 8px;
+            font-weight: bold;
+            border-radius: 3px;
+            margin-left: 4px;
+            background-color: hsla(0,0%,100%,.3);
+            transition: .1s ease;
+            cursor: pointer;
+        }
+        
+        .navbarBoards:hover {
+            background-color: hsla(0,0%,100%,.2);    
+        }
+
+        .navbarLeft {
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            width: 32px;
+            font-size: 16px;
+            border-radius: 3px;
+            margin-left: 4px;
+            background-color: hsla(0,0%,100%,.3);
+            transition: .1s ease;
+            cursor: pointer;
+        }
+
+        .navbarLeft:hover {
+            background-color: hsla(0,0%,100%,.2);
+        }
+
+        .navbarRight {
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 32px;
+            width: 32px;
+            font-size: 16px;
+            border-radius: 3px;
+            margin-left: 4px;
+            background-color: hsla(0,0%,100%,.3);
+            transition: .1s ease;
+            cursor: pointer;
+        }
+
+        .navbarRight:hover {
+            background-color: hsla(0,0%,100%,.2);
+        }
+
+        .fa-windows {
+            margin-right: 13px;
+        }
+
+        .navbarSearch {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            height: 32px;
+            width: 180px;
+            font-size: 16px;
+            border-radius: 3px;
+            margin-left: 4px;
+            cursor: pointer;
+            background-color: hsla(0,0%,100%,.3);
+            transition: .1s ease;
+        }
+
+        .navbarSearch:hover {
+            background-color: hsla(0,0%,100%,.5);
+        }
+
+        .rightIcons {
+            display: flex;
+            position: absolute;
+            top: 4px;
+            right: 0;
+        }
+
+        .userIcon {
+            margin-left: 4px;
+            margin-right: 6px;
+            background-color: #dfe3e6;
+            border-radius: 25em;
+            color: #17394d;
+            cursor: pointer;
+            height: 32px;
+            width: 32px;
+            overflow: visible;
+            position: relative;
+        }
+
+        .navbarLogo {
+            background-image: url(../assets/trello-logo-white.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.5;
+            height: 40px;
+            width: 76px;
+            margin-left: 48%;
+            margin-right: 48%;
+            position: absolute;
+            transition: .1s ease;
+            cursor: pointer;
+            top: 0;
+        }
+
+        .navbarLogo:hover {
+            opacity: 0.8;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar.app {
+            background-color: rgb(0,0,0,0.15);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+.navbar.board {
+    font-size: 1.1rem;
+}
+
+    .openMenuButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        margin-left: calc(100% - 136px);
+        margin-right: 10px;
+        height: 30px;
+        width: 120px;
+        border-radius: 3px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .openMenuButton:hover{
+        background-color: rgb(0,0,0,0.1)
+    }
+
+.createBoardBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    color: #6b808c;
+    position: absolute;
+    font-size: 14px;
+    border-radius: 4px;
+    top: 42px;
+    right: 0;
+    margin-right: 6px;
+    max-height: 300px;
+    width: 304px;
+    background-color: white;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
+    }
+    
+    .createBoardTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 252px;
+        padding: 12px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
+    }
+    
+        #closeBoard {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            position: absolute;
+            margin-right: 12px;
+            right: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #closeBoard:hover{
+            background-color: rgb(0,0,0,0.3)
+        }
+    
+        .createBoardLink {
+            width: calc(100% - 24px);
+            padding-top: 8px;
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-bottom: 4px;
+            cursor: pointer;
+        }
+    
+        .boardCreateCreateBoard {
+            color: #17394d;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+    
+        .createBoardLink:hover {
+            color: white;
+            background-color: rgb(44, 100, 255);
+        }
+    
+.infoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    margin-right: 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    top: 42px;
+    max-height: 400px;
+    z-index: 3;
+    width: 360px;
+    background-color: white;
+    color: #6b808c;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
+    }
+    
+    .infoTitleBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 308px;
+        padding: 12px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
+    }
+
+    .infoTip {
+        width: 100%;
+    }
+
+    .infoTipImg {
+        height: 164px;
+        width: 328px;
+    }
+
+    .infoTipTextBox {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    #closeInfoIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        margin-right: 12px;
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    #closeInfoIcon:hover {
+        background-color: rgb(0,0,0,0.3);
+    }
+
+.notificationsBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    margin-right: 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    top: 42px;
+    max-height: 400px;
+    z-index: 3;
+    width: 420px;
+    background-color: white;
+    color: #6b808c;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
+}
+
+    .notificationsTitleBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 358px;
+        padding: 12px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
+    }
+
+        #closeNotificationsIcon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #closeNotificationsIcon:hover {
+            background-color: rgb(0,0,0,0.3);
+        }
+
+.boardSearchBox {
+    z-index: 4;
+    position: absolute;
+    top: 44px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width: 280px;
+    height: 200px;
+    border-radius: 0px 4px 4px 0px;
+}
+
+    .boardSearchBar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 260px;
+    }
+
+    #boardSeachInput {
+        width: 260px;
+    }
+    
