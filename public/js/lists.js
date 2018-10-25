@@ -37,6 +37,7 @@ const listFunctions = {
         $.ajax({ url: '/api/lists', method: 'POST', data: newData })
             .then(function (e) {
                 listFunctions.renderList();
+                cardFunctions.renderCard();
             })
     },
 }
