@@ -1,0 +1,219 @@
+#addListBox {
+    height: 40px;
+    width: 272px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: .1s ease;
+    background-color: rgba(0,0,0,.12);
+    cursor: pointer;
+}
+
+#addingListBox {
+    height: 40px;
+    width: 272px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: .1s ease;
+    background-color: rgba(0,0,0,.12);
+    animation: addList;
+    animation-duration: 0.2s;
+    background-color:#fff
+}
+
+#addListBox:hover {
+    background-color: rgba(0,0,0,.3);
+}
+
+    .addListIcon {
+        margin-left: 12px;
+    }
+
+    .addListText {
+        margin-left: 6px;
+    }
+
+    #addListInput {
+        z-index: 2;
+        padding: 6px 8px;
+        margin-left: 4px;
+        height: 20px;
+        width: 246px;
+        border: 1px solid #5ba4cf;
+        box-shadow: 0 0 0 1px #5ba4cf;
+        transition: margin 85ms ease-in,background 85ms ease-in;
+        border-radius: 3px;  
+    }
+
+    .addListBar {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        top: 126px;
+        width: 272px;
+        height: 40px;
+        background-color: #fff;
+        animation: addListDown;
+        animation-duration: 0.2s;
+    }
+
+    .backUpList {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        top: 96px;
+        width: 272px;
+        height: 40px;
+        background-color: rgba(0,0,0,.03);
+        animation: addListUp;
+        animation-duration: 0.2s;
+    }
+
+    #addListButton {
+        margin-left: 4px;
+        background-color: #5aac44;
+        box-shadow: 0 1px 0 0 #3f6f21;
+        border: none;
+        color: #fff;
+        border-radius: 3px;
+        height: 30px;
+        width: 80px;
+        cursor: pointer;
+    }
+
+    #addListCancel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 8px;
+        color: #798d99;
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+        border-radius: 3px;
+    }
+
+    #addListCancel:hover {
+        background-color: silver;
+        color: black;
+    }
+
+.list {
+    width: 300px;
+    height: calc(100% - 10px - 17px);
+}
+.list>* {
+    background-color: #e2e4e6;
+    color: #333;
+    padding: 0 10px;
+}
+.list header {
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: grid;
+    grid-template-columns: 200px 85px;
+    word-wrap: break-word;
+}
+.list footer {
+    line-height: 36px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #888;
+    cursor: pointer;
+}
+.list ul {
+    list-style: none;
+    margin: 0;
+    max-height: calc(100% - 36px - 36px);
+    overflow-y: auto;
+}
+.list ul li {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.list ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+.list ul li img {
+    display: block;
+    width: calc(100% + 2 * 10px);
+    margin: -10px 0 10px -10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.add {
+    display: block;
+    border-radius: 5px;
+    background-color: #e2e4e6;
+    height: 100px;
+    width: 300px;
+    color: #333;
+    border-radius: 3px;
+}
+.delete-btn{
+    padding-left: 60px;
+}
+
+.listsShorten {
+    animation: listsShorten ease 0.2s;
+    margin-right: 340px;
+}
+
+.listsReturn {
+    animation: listsReturn ease 0.2s
+}
+
+ul::-webkit-scrollbar {
+    overflow: auto;
+    margin: 0 auto;
+    height: 12px;
+    width: 6px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: rgb(0,0,0,0.1);
+    border-radius: 4px;
+    margin: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    margin: 10px;
+    border-radius: 4px;
+    height: 20px;
+    background: rgb(0,0,0,0.3);
+}
+
+@keyframes listsReturn {
+    0%{margin-right: 340px}
+    100%{margin-right: 0px}
+}
+
+@keyframes listsShorten {
+    0%{margin-right: 0px}
+    100%{margin-right: 340px}
+}
+
+@keyframes addList { 
+    0%{background-color:rgba(0,0,0,.12)}
+    100%{background-color:#fff}
+}
+
+@keyframes addListDown { 
+    0%{background-color: rgba(0,0,0,.12); top: 106px}
+    100%{background-color: #fff; top: 126px}
+}
+
+@keyframes addListUp { 
+    0%{background-color: #fff; top: 126px}
+    100%{background-color: rgba(0,0,0,.03); top: 106px}
+}

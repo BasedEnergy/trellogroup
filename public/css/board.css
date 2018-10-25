@@ -1,0 +1,71 @@
+.createBoardCenter {
+    position: absolute;
+    top: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.creatingBoardBox {
+    opacity: 1;
+    z-index: 5;
+    height: 144px;
+    width: 404px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .boardBG {
+        width: 296px;
+        height: 96px;
+        border-radius: 3px;
+        background-color: rgb(0, 121, 191);
+        float: left;
+    }
+
+        .boardRow {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 270px;
+            height: 28px;
+            position: relative;
+            top: 4px;
+        }
+
+            .createBoardInput {
+                background-color: transparent;
+                position: relative;
+                height: 24px;
+                width: 236;
+                left: 4px;
+                padding: 2px 8px;
+                border: none;
+            }
+
+            .createBoardInput:hover {
+                background-color: hsla(0,0%,100%,.15);
+            }
+
+            .cancelCreateBoard{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                left: 80px;
+                margin-right: 4px;
+                cursor: pointer;
+            }
+
+            #createBoard {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                border-radius: 3px;
+                height: 32px;
+                width: 112px;
+                cursor: pointer;
+            }
