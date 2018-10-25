@@ -17,14 +17,13 @@ const noteFunctions = {
     },
 
     renderNotes: function (cardid) {
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'GET' })
+        $.ajax({ url: '/api/notes', method: 'GET' })
             .then(function (dataList) {
-                let noteList = $(`#notes-render[ cardid=${cardid} ]`).addClass('listOfNotes')
-                dataList[0].notes.forEach(eachNote => {
-                    noteList.append(
+                dataList.forEach(e => {
+                    $(`#notes-render[ cardid=${e.cardid} ]`).addClass('listOfNotes').append(
                         $('<div>').attr('id', 'note-content').append(
-                            $('<p>').text(eachNote.note).attr('id', 'note'),
-                            $('<button>').attr('noteid', `${eachNote._id}`).attr('id', 'delete').append(
+                            $('<p>').text(e.note).attr('id', 'note'),
+                            $('<button>').attr('noteid', `${e._id}`).attr('id', 'delete').append(
                                 $('<i>').addClass('fas fa-times')
                             )
                         )
@@ -34,20 +33,23 @@ const noteFunctions = {
     },
 
     saveNote: function (cardid) {
-        let newNote = $(".note-input").val().trim();
+        let newNote = $(".note-input").val().trim(); 
         let newData = {
             note: newNote,
+            cardid: cardid
         }
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'POST', data: newData });
-        $(".note-input").val('');
-        $("#notes-render").append(
-            $('<div>').attr('id', 'note-content').attr('note', `${newNote}`).append(
-                $('<p>').text(newNote).attr('id', 'note'),
-                $('<button>').attr('cardid', `${cardid}`).attr('id', 'delete').append(
-                    $('<i>').addClass('fas fa-times')
+        $.ajax({ url: '/api/notes', method: 'POST', data: newData })
+            .then( function (e) {
+                $(".note-input").val('');
+                $("#notes-render").append(
+                    $('<div>').attr('id', 'note-content').attr('note', `${e.note}`).append(
+                        $('<p>').text(e.note).attr('id', 'note'),
+                        $('<button>').attr('cardid', `${e.cardid}`).attr('id', 'delete').append(
+                            $('<i>').addClass('fas fa-times')
+                        )
+                    )
                 )
-            )
-        )
+            })
     },
 }
 
@@ -69,10 +71,8 @@ $(document).ready(function () {
         let note = {
             _id: noteid
         }
-        console.log(noteid)
         $(this).parent().remove();
-
-        $.ajax({ url: `/api/cards/${cardid}`, method: 'DELETE', data: note })
+        $.ajax({ url: '/api/notes', method: 'DELETE', data: note })
     });
 
     $(document).on('click', '.button-save', function () {

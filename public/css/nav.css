@@ -132,15 +132,23 @@
         }
 
         .navbarLogo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 60%;
+            background-image: url(../assets/trello-logo-white.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.5;
+            height: 40px;
+            width: 76px;
+            margin-left: 48%;
+            margin-right: 48%;
+            position: absolute;
+            transition: .1s ease;
+            cursor: pointer;
+            top: 0;
         }
 
-        #logo {
-            height: 22px;
-            width: 78px;
+        .navbarLogo:hover {
+            opacity: 0.8;
         }
 
         .navbar {
@@ -201,7 +209,7 @@
         width: 252px;
         padding: 12px;
         margin-bottom: 4px;
-        border-bottom: 1px solid rgb(0,0,0,0.3)
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
     }
     
         #closeBoard {
@@ -241,50 +249,97 @@
             background-color: rgb(44, 100, 255);
         }
     
-    .infoBox {
+.infoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    margin-right: 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    top: 42px;
+    max-height: 400px;
+    z-index: 3;
+    width: 360px;
+    background-color: white;
+    color: #6b808c;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
+    }
+    
+    .infoTitleBox {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        position: absolute;
-        right: 0;
-        margin-right: 6px;
-        border-radius: 4px;
-        font-size: 14px;
-        top: 42px;
-        max-height: 400px;
-        z-index: 3;
-        width: 360px;
-        background-color: white;
-        color: #6b808c;
+        width: 308px;
+        padding: 12px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
+    }
+
+    .infoTip {
+        width: 100%;
+    }
+
+    .infoTipImg {
+        height: 164px;
+        width: 328px;
+    }
+
+    .infoTipTextBox {
+        display: flex;
+        justify-content: center;
+        align-content: center;
     }
     
-        .infoTitleBox {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 308px;
-            padding: 12px;
-            margin-bottom: 6px;
-            border-bottom: 1px solid rgba(158, 110, 110, 0.15)
-        }
-
-        .infoTip {
-            width: 100%;
-        }
-
-        .infoTipImg {
-            height: 164px;
-            width: 328px;
-        }
-
-        .infoTipTextBox {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+    #closeInfoIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 0;
+        margin-right: 12px;
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
     
-        #closeInfoIcon {
+    #closeInfoIcon:hover {
+        background-color: rgb(0,0,0,0.3);
+    }
+
+.notificationsBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    margin-right: 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    top: 42px;
+    max-height: 400px;
+    z-index: 3;
+    width: 420px;
+    background-color: white;
+    color: #6b808c;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.3);
+}
+
+    .notificationsTitleBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 358px;
+        padding: 12px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid rgba(158, 110, 110, 0.15)
+    }
+
+        #closeNotificationsIcon {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -296,8 +351,33 @@
             border-radius: 3px;
             cursor: pointer;
         }
-    
-        #closeInfoIcon:hover {
-            background-color: rgb(0,0,0,0.3)
+
+        #closeNotificationsIcon:hover {
+            background-color: rgb(0,0,0,0.3);
         }
+
+.boardSearchBox {
+    z-index: 4;
+    position: absolute;
+    top: 44px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width: 280px;
+    height: 200px;
+    border-radius: 0px 4px 4px 0px;
+}
+
+    .boardSearchBar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 260px;
+    }
+
+    #boardSeachInput {
+        width: 260px;
+    }
     

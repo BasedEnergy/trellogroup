@@ -14,11 +14,27 @@ const menuFunctions = {
                 )
             )
         )
+        boardFunctions.renderBoard();
+    },
+
+    renderNotifications: function () {
+        $('.navbar.board').append(
+            $('<div>').addClass('notificationsBox').append(
+                $('<div>').addClass('notificationsTitleBox').append(
+                    $('<div>').addClass('notificationsTitle').append(
+                        $('<p>').text('Notifications'),
+                    ),
+                    $('<div>').attr('id', 'closeNotificationsIcon').append(
+                        $('<i>').addClass('fas fa-times')
+                    ),
+                ),
+            )
+        )
     },
 
     renderBoardSearch: function () {
         $('.navbar.board').append(
-            $('<div>').addClass('boardSearch').append(
+            $('<div>').addClass('boardSearchBox').append(
                 $('<div>').addClass('boardSearchBar').append(
                     $('<input>').attr('id', 'boardSearchInput')
                 ),
@@ -107,10 +123,10 @@ const menuFunctions = {
                     $('<i>').addClass('fas fa-search')
                 ),
                 $('<div>').addClass('navbarLogo').append(
-                    $('<img>').attr('id', 'logo').attr('src', '../assets/trello-logo-white.png')
+                    
                 ),
                 $('<div>').addClass('rightIcons').append(
-                    $('<div>').attr('id', 'createBoard').addClass('navbarRight').append(
+                    $('<div>').attr('id', 'createBoardIcon').addClass('navbarRight').append(
                         $('<i>').addClass('fas fa-plus')
                     ),
                     $('<div>').attr('id', 'info').addClass('navbarRight').append(
@@ -279,34 +295,8 @@ $(document).ready(function () {
 /*Click Drag and Scroll*/
 /*Nav and Menu Event Listeners*/
 
-    $(document).on('click', '.lists', function () {
-        $('.infoBox').remove();
-        $('.createBoardBox').remove();
-        $('.boardSearch').remove();
-    });
-
-    $(document).on('click', '.homePage', function () {
-        $('.infoBox').remove();
-        $('.createBoardBox').remove();
-        $('.boardSearch').remove();
-    });
-
-    $(document).on('click', '#Boards', function () {
-        let ifBoardSearch = $('.boardSearch').val();
-        if (ifBoardSearch === undefined) {
-            menuFunctions.renderBoardSearch();
-        } else {
-            $('.boardSearch').remove();
-        }
-    });
-
-    $(document).on('click', '#goHome', function () {
-        let ifHome = $('.homePage').val();
-        if (ifHome === undefined) {
-            menuFunctions.renderHomePage();
-        } else {
-            $('.homePage').remove();
-        }
+    $(document).on('click', '#closeNotificationsIcon', function () {
+        $('.notificationsBox').remove();
     });
 
     $(document).on('click', '#closeInfoIcon', function () {
@@ -317,19 +307,88 @@ $(document).ready(function () {
         $('.createBoardBox').remove();
     });
 
+    $(document).on('click', '.lists', function () {
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
+        $('.boardSearchBox').remove();
+        $('.notificationsBox').remove();
+        $('.createBoardCenter').remove();
+        $('body').removeClass('lowerOpacity');
+    });
+
+    $(document).on('click', '.homePage', function () {
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
+        $('.boardSearchBox').remove();
+        $('.notificationsBox').remove();
+    });
+
+    $(document).on('click', '#goHome', function () {
+        let ifHome = $('.homePage').val();
+        let iflist = $('.lists').val();
+        if (ifHome === undefined) {
+            menuFunctions.renderHomePage();
+            $('.infoBox').remove();
+            $('.createBoardBox').remove();
+            $('.boardSearchBox').remove();
+            $('.notificationsBox').remove();
+        } else {
+            if (iflist != undefined) {
+                $('.homePage').remove();
+            } 
+        }
+    });
+
+    $(document).on('click', '.navbarLogo', function () {
+        let ifHome = $('.homePage').val();
+        if (ifHome === undefined) {
+            menuFunctions.renderHomePage();
+            $('.infoBox').remove();
+            $('.createBoardBox').remove();
+            $('.boardSearchBox').remove();
+            $('.notificationsBox').remove();
+        } else {
+            $('.homePage').remove();
+        }
+    });
+
+    $(document).on('click', '#Boards', function () {
+        let ifBoardSearch = $('.boardSearchBox').val();
+        if (ifBoardSearch === undefined) {
+            menuFunctions.renderBoardSearch();
+        } else {
+            $('.boardSearchBox').remove();
+        }
+    });
+
+    $(document).on('click', '#notifications', function () {
+        let ifNotificationBox = $('.notificationsBox').val();
+        if (ifNotificationBox === undefined) {
+            menuFunctions.renderNotifications();
+            $('.infoBox').remove();
+            $('.boardSearch').remove();
+        } else {
+            $('.notificationsBox').remove();
+        }
+    });
+
     $(document).on('click', '#info', function () {
         let ifInfo = $('.infoBox').val();
         if (ifInfo === undefined) {
             menuFunctions.renderInfo();
+            $('.createBoardBox').remove();
+            $('.notificationsBox').remove();
         } else {
             $('.infoBox').remove();
         }
     });
 
-    $(document).on('click', '#createBoard', function () {
+    $(document).on('click', '#createBoardIcon', function () {
         let ifBoard = $('.createBoardBox').val();
         if (ifBoard === undefined) {
             menuFunctions.createBoardBox();
+            $('.infoBox').remove();
+            $('.notificationsBox').remove();
         } else {
             $('.createBoardBox').remove();
         }
@@ -413,6 +472,11 @@ $(document).ready(function () {
 
 /*Color Selector Event Listners*/
 
-    menuFunctions.renderNavButtons()
+    menuFunctions.renderNavButtons();
+    let lists = $('.lists').val()
+    if (lists === undefined) {
+        menuFunctions.renderHomePage();
+    }
+    
 })
 
