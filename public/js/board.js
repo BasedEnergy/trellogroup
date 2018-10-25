@@ -95,16 +95,15 @@ $(document).ready(function () {
 
     $(document).on('click', '.boardSelect', function () {
         let list = $('.lists').val();
+        $('.lists').remove();
         let boardid = $(this).attr('boardid');
         let color = $(this).css('background-color');
+        $('body').css('background-color', color);
         let board = $(this).text();
-        $('body').css('background-color', color)
+        $('.board-header').html(board);
         if (list === undefined) {
             $('.ui').append(
                 $('<div>').addClass('lists').attr('boardid', boardid)
-            );
-            $('.navbar.board').append(
-                $('<h1>').addClass('board-header').text(board)
             );
         } else {
             $('.lists').attr('boardid', boardid)
