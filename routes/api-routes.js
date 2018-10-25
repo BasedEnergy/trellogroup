@@ -89,16 +89,16 @@ module.exports = function (app) {
             });
     })
 
-    // app.put('/api/cards', function (req, res) {
-    //     db.Cards.findOneAndUpdate({ _id : req.body._id }, { $set: { card: req.body.card } })
-    //         .populate('cards')
-    //         .then(function (cards) {
-    //             res.json(cards);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+    app.put('/api/cards', function (req, res) {
+        db.Cards.findOneAndUpdate({card: req.body.card}, { $set: { listid: req.body.listid } })
+            .populate('cards')
+            .then(function (cards) {
+                res.json(cards);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
     // app.put('/api/lists', function (req, res) {
     //     db.Lists.findOneAndUpdate({ _id: req.body._id }, { $set: { list: req.body.list } })
