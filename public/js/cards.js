@@ -1,5 +1,8 @@
 const cardFunctions = {
 
+    /**
+     * @function cardFunctions.renderCard - renders all cards and finds their correct list
+     */
     renderCard: function () {
         $.ajax({ url: '/api/cards', method: 'GET' })
             .then(function (dataList) {
@@ -26,6 +29,9 @@ const cardFunctions = {
 
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     $(document).on('click', '#cancelButton', function () {
@@ -35,6 +41,9 @@ $(document).ready(function () {
         )
     });
 
+    /**
+     * @event addCard - on event renders add card fields
+     */
     $(document).on('click', '#clickAddCard', function () {
         $('footer').text('Add a card...').addClass('containers').attr('id', 'clickAddCard')
         $(this).empty();
@@ -57,6 +66,9 @@ $(document).ready(function () {
         $('.notificationsBox').remove();
     });
 
+    /**
+     * @event Edit - on event removes card text and renders edit fields to card
+     */
     $(document).on('click', '.cardEdit', function () {
         $(document).bind('cardEdit', function () {
             $(document).off('click', '.cardEdit');
@@ -78,6 +90,9 @@ $(document).ready(function () {
         );
     })
 
+    /**
+     * @event PUT - collects card data and updates card in DB
+     */
     $(document).on('click', '.cardEditCheck', function () {
         const newCard = $('.cardEditInput').val().trim()
         const id = $(this).attr('cardid')
@@ -90,12 +105,16 @@ $(document).ready(function () {
             .then(function () { listFunctions.renderList() })
     });
 
+    /**
+     * @function listFunctions.renderList - on event renders lists
+     */
     $(document).on('click', '.cardEditCancel', function () {
-        // listId = $(this).parent().parent().parent().attr('listid')
-        // cardFunctions.renderCard(listId);
         listFunctions.renderList();
     });
 
+    /**
+     * @event DELETE - collects card data and deletes it from DB
+     */
     $(document).on('click', '.cardDelete', function () {
         let card = $(this).parent()
         const whichCard = $(this).attr('cardid');
@@ -108,6 +127,9 @@ $(document).ready(function () {
             })
     });
 
+    /**
+     * @event POST - collects card data and sends it to DB
+     */
     $(document).on('click', '#addCardButton', function () {
         let listid = $(this).attr('listid');
         let newData = {
