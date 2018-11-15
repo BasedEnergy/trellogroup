@@ -1,4 +1,8 @@
 const dragNDropFunctions = {
+
+    /**
+     * @function dragNDropFunctions.dragNDrop - initiates name space/object
+     */
     dragNDrop: function () {
         let cardId;
         let firstBox;
@@ -6,6 +10,9 @@ const dragNDropFunctions = {
     },
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     let cardId;
@@ -33,14 +40,15 @@ $(document).ready(function () {
         ev.preventDefault();
     })
 
-
+    /**
+     * @event PUT - changes Card's listid to match new list
+     */
     $(document).on('drop', `.containers`, function () {
         let moveList = $(this).attr("listid");
         let changeCard = {
             card: card,
             listid: moveList,
         }
-        console.log(moveList)
         $.ajax({ url: '/api/cards', method: 'PUT', data: changeCard })
         $(`li[ cardid=${cardid} ]`).remove();
         $(`ul[ listid=${moveList} ]`).append(
@@ -60,6 +68,9 @@ $(document).ready(function () {
             )
         )
     })
+    /**
+     * @function dragNDropFunctions.dragNDrop - initiates objects
+     */
     dragNDropFunctions.dragNDrop();
 
 })
