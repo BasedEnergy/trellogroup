@@ -1,5 +1,8 @@
 const listFunctions = {
 
+    /**
+     * @function listFunctions.renderList - Renders all Lists to the page
+     */
     renderList: function () {
         $('.lists').empty();
         $.ajax({ url: '/api/lists', method: 'GET' })
@@ -28,6 +31,12 @@ const listFunctions = {
             })
     },
 
+    /**
+     * @function listFunctions.addList - pulls all list info
+     * @event POST - sends list to DB
+     * @function listFunctions.renderList - Re-renders Lists
+     * @function cardFunctions.renderCard - Renders Cards
+     */
     addList: function () {
         let boardid = $('.lists').attr('boardid')
         let newData = {
@@ -42,6 +51,9 @@ const listFunctions = {
     },
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     $(document).on('click', '#addListBox', function () {
