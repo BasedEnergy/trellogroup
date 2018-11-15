@@ -68,13 +68,9 @@ $(document).ready(function () {
             )
         )
     })
-<<<<<<< HEAD
-
-=======
     /**
      * @function dragNDropFunctions.dragNDrop - initiates objects
      */
->>>>>>> bd4043988907f6aa1624dd1f9eb5e8fc891e5a6a
     dragNDropFunctions.dragNDrop();
 
 })
