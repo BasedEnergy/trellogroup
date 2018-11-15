@@ -5,9 +5,10 @@ const listFunctions = {
      */
     renderList: function () {
         $('.lists').empty();
-        $.ajax({ url: '/api/lists', method: 'GET' })
+        let userID = localStorage.getItem('user_id');
+        $.ajax({ url: "/api/userLists/" + userID, method: "GET" })
             .then(function (dataList) {
-                dataList.forEach(e => {
+                dataList[0].list.forEach(e => {
                     $(`.lists[ boardid=${e.boardid} ]`).append(
                         $(`<div>`).attr('listid', `${e._id}`).addClass(`list`).append(
                             $('<header>').text(`${e.list}`).append(
@@ -38,8 +39,10 @@ const listFunctions = {
      * @function cardFunctions.renderCard - Renders Cards
      */
     addList: function () {
+        let userID = localStorage.getItem('user_id');
         let boardid = $('.lists').attr('boardid')
         let newData = {
+            _id: userID,
             list: $('#addListInput').val().trim(),
             boardid: boardid
         }
@@ -118,3 +121,30 @@ $(document).ready(function () {
     });
 
 })
+
+
+
+const logout = function () {
+    const userID = localStorage.getItem('user_id');
+    if (userID) {
+        $('.login').text('Logout').addClass('logout');
+        $('.logout').on('click', function () {
+            localStorage.clear('user_id');
+        })
+    }
+}
+
+const getData = function () {
+    const userID = localStorage.getItem('user_id');
+    if (userID) {
+        $.ajax({ url: '/api/users', method: 'GET', data: { _id: userID } })
+            .then(function (data) {
+
+                // listFunctions.renderList();
+            })
+    }
+}
+
+getData();
+
+logout();

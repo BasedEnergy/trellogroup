@@ -205,6 +205,35 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
 }
+.fa-window-close {
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+#add-btn {
+    font-family: 'Helvetica Neue,Arial,Helvetica,sans-serif';
+}
+
+a.login {
+    position: absolute;
+    right: 0px;
+    margin-right: 150px;
+    color: white;
+}
+a.login:hover {
+    color: blue;
+}
+.board-header{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+}
+.board h1{
+    cursor: pointer;
+}
+.container {
+    z-index: 2;
+}
 
 .boardsTitleBox {
     color: #17394d;
