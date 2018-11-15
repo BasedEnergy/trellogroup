@@ -1,5 +1,10 @@
 const noteFunctions = {
 
+    /**
+     * @param {string} first - takes list location
+     * @param {string} second - takes card id
+     * @function notefunctions.renderNotes - Renders each note to note modal
+    */
     openModal: function (listLocation, cardid) {
         $('#modal-content').remove();
         let noteBox = $('<div>').attr('id', 'modal-content');
@@ -13,10 +18,10 @@ const noteFunctions = {
             )
         )
         $('.notes-box').append(noteBox);
-        noteFunctions.renderNotes(cardid);
+        noteFunctions.renderNotes();
     },
 
-    renderNotes: function (cardid) {
+    renderNotes: function () {
         $.ajax({ url: '/api/notes', method: 'GET' })
             .then(function (dataList) {
                 dataList.forEach(e => {
@@ -32,6 +37,10 @@ const noteFunctions = {
             })
     },
 
+    /**
+     * @param {string} first - takes card id
+     * @event POST - adds note to DB
+    */
     saveNote: function (cardid) {
         let newNote = $(".note-input").val().trim(); 
         let newData = {
@@ -53,7 +62,16 @@ const noteFunctions = {
     },
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
+
+    /**
+     * @function noteFunctions.openModal - sends arguments to openModal
+     * @argument listLocation - list location
+     * @argument cardid - card id
+    */
 
     $(document).on('click', '#modal', function () {
         let listLocation = $(this).parent().parent().parent();
@@ -65,6 +83,9 @@ $(document).ready(function () {
         $('#modal-content').remove();
     });
 
+    /**
+     * @event DELETE - removes note from DB
+     */
     $(document).on('click', '#delete', function () {
         let cardid = $(this).attr('cardid');
         let noteid = $(this).attr('noteid');
@@ -75,6 +96,10 @@ $(document).ready(function () {
         $.ajax({ url: '/api/notes', method: 'DELETE', data: note })
     });
 
+    /**
+     * @function noteFunctions.saveNote - sends cardid to saveNote function
+     * @argument cardid - card id
+     */
     $(document).on('click', '.button-save', function () {
         let cardid = $(this).attr('cardid')
         noteFunctions.saveNote(cardid);

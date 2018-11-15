@@ -1,5 +1,8 @@
 const listFunctions = {
 
+    /**
+     * @function listFunctions.renderList - Renders all Lists to the page
+     */
     renderList: function () {
         $('.lists').empty();
         let userID = localStorage.getItem('user_id');
@@ -29,6 +32,12 @@ const listFunctions = {
             })
     },
 
+    /**
+     * @function listFunctions.addList - pulls all list info
+     * @event POST - sends list to DB
+     * @function listFunctions.renderList - Re-renders Lists
+     * @function cardFunctions.renderCard - Renders Cards
+     */
     addList: function () {
         let userID = localStorage.getItem('user_id');
         let boardid = $('.lists').attr('boardid')
@@ -45,6 +54,9 @@ const listFunctions = {
     },
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     $(document).on('click', '#addListBox', function () {

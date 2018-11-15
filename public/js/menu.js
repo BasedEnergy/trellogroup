@@ -1,5 +1,9 @@
 const menuFunctions = {
 
+    /**
+     * @function menuFunctions.renderHomePage - Renders the home page
+     * @function boardFunctions.renderBoard - Renders Boards
+    */
     renderHomePage: function () {
         $('.navbar.board').append(
             $('<div>').addClass('homePage').append(
@@ -17,6 +21,9 @@ const menuFunctions = {
         boardFunctions.renderBoard();
     },
 
+    /**
+     * @function menuFunctions.renderNotifications - renders notification Box
+     */
     renderNotifications: function () {
         $('.navbar.board').append(
             $('<div>').addClass('notificationsBox').append(
@@ -32,6 +39,9 @@ const menuFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.renderBoardSearch - Renders board search Box
+     */
     renderBoardSearch: function () {
         $('.navbar.board').append(
             $('<div>').addClass('boardSearchBox').append(
@@ -49,6 +59,9 @@ const menuFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.renderInfo - Renders Info Box
+     */
     renderInfo: function () {
         $('.createBoardBox').remove();
         $('.infoBox').remove();
@@ -83,6 +96,9 @@ const menuFunctions = {
         );
     },
 
+    /**
+     * @function menuFunctions.createBoardBox - Renders Create Board Box
+     */
     createBoardBox: function () {
         $('.infoBox').remove();
         $('.createBoardBox').remove();
@@ -108,6 +124,9 @@ const menuFunctions = {
         );
     },
 
+    /**
+     * @function menuFunctions.renderNavButtons - Renders all Navigation buttons to page
+     */
     renderNavButtons: function () {
         $('.navbar.app').append(
             $('<div>').addClass('navFull').append(
@@ -151,6 +170,9 @@ const menuFunctions = {
             )
     },
 
+    /**
+     * @function renderMenu - Renders the menu to the page
+     */
     renderMenu: function () {
         $('.menu').html('');
         let currentBG = $('body').css('background-color');
@@ -183,6 +205,9 @@ const menuFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.renderMenuBackgrounds - Renders background selectors to the menu
+     */
     renderMenuBackgrounds: function () {
         $('.menu').html('');
         $('.menu').append(
@@ -220,6 +245,9 @@ const menuFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.renderColorSelectors - Renders color selectors to the Menu
+     */
     renderColorSelectors: function () {
         $('.menu').html('')
         $('.menu').append(
@@ -260,6 +288,9 @@ const menuFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.closeMenu - Moves board outside of view
+     */
     closeMenu: function () {
         $('.menu').removeClass('closeMenuAnimation')
         $('.menu').remove()
@@ -268,6 +299,9 @@ const menuFunctions = {
 
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
 /*Click Drag and Scroll*/
