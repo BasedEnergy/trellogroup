@@ -116,6 +116,7 @@ textarea {
     font-size: 18px;
     font-weight: 700;
     line-height: 32px;
+    margin-left: 8px;
 }
 .board h1{
     cursor: pointer;
@@ -246,6 +247,8 @@ a.login:hover {
     justify-content: flex-start;
     align-items: center;
 }
+
+
 
 @keyframes lowerOpacity {
     0%{opacity: 1}

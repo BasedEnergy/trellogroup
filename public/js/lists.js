@@ -40,6 +40,7 @@ const listFunctions = {
         $.ajax({ url: '/api/lists', method: 'POST', data: newData })
             .then(function (e) {
                 listFunctions.renderList();
+                cardFunctions.renderCard();
             })
     },
 }
@@ -47,16 +48,16 @@ const listFunctions = {
 $(document).ready(function () {
 
     $(document).on('click', '#addListBox', function () {
-        $('#addListBox').attr('id', 'addingListBox').html(
+        $('#addListBox').empty()
+        $('#addListBox').attr('id', 'addingListBox').append(
             $('<input>').attr('id', 'addListInput').attr('placeholder', 'Enter list title...'),
-        );
-        $('#addingListBox').append(
+        ).append(
             $('<div>').addClass('addListBar').append(
                 $('<button>').attr('id', 'addListButton').text('Add List'),
                 $('<div>').attr('id', 'addListCancel').append(
                     $('<i>').addClass('fas fa-times')
                 )
-            )
+            )   
         )
         $('#addListInput').focus();
         $('#modal-content').remove();

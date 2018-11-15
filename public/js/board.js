@@ -94,18 +94,20 @@ const boardFunctions = {
 $(document).ready(function () {
 
     $(document).on('click', '.boardSelect', function () {
+        $('.lists').remove();
         let list = $('.lists').val();
         let boardid = $(this).attr('boardid');
-        let color = $(this).css('background-color')
-        $('body').css('background-color', color)
+        let color = $(this).css('background-color');
+        $('body').css('background-color', color);
+        let board = $(this).text();
+        $('.board-header').html(board);
         if (list === undefined) {
             $('.ui').append(
                 $('<div>').addClass('lists').attr('boardid', boardid)
             );
-        } else {
-            $('.lists').attr('boardid', boardid)
         }
         listFunctions.renderList();
+        cardFunctions.renderCard();
         $('.homePage').remove();
     })
 
