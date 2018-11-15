@@ -1,5 +1,8 @@
 const boardFunctions = {
 
+    /**
+     * @function boardFunctions.renderCreateBoard - renders the board creation widget
+     */
     renderCreateBoard: function () {
         $('body').addClass('lowerOpacity')
         $('html').append(
@@ -38,6 +41,10 @@ const boardFunctions = {
         )
     },
 
+    /**
+     * @function boardFunctions.renderBoard - renders all boards to '.homeCenter'
+     * @event GET - gets all boards
+     */
     renderBoard: function () {
         $('.homeCenter').empty();
         $.ajax({ url: '/api/boards', method: 'GET' })
@@ -63,10 +70,13 @@ const boardFunctions = {
             })
     },
 
+    /**
+     * @function boardFunctions.addBoard - collects all board data
+     * @event POST - sends board to DB
+     */
     addBoard: function () {
         let board = $('.createBoardInput').val().trim();
         let color = $('.boardBG').css('background-color');
-        console.log(color)
         let newBoard = {
             board: board,
             star: false,
@@ -78,6 +88,11 @@ const boardFunctions = {
             })
     },
 
+    /**
+     * @function boardFunctions.deleteBoard - deletes board
+     * @event DELETE - deletes board
+     * @function menuFunctions.renderHomePage - Re-renders home page
+     */
     deleteBoard: function () {
         $.ajax({ url: '/api/boards', method: 'DELETE' })
             .then(function () {
@@ -91,6 +106,9 @@ const boardFunctions = {
 
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     $(document).on('click', '.boardSelect', function () {
