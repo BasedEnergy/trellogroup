@@ -1,238 +1,150 @@
-$(function () {
+const listFunctions = {
 
-    const renderList = function () {
-
+    /**
+     * @function listFunctions.renderList - Renders all Lists to the page
+     */
+    renderList: function () {
         $('.lists').empty();
-        $.ajax({ url: "/api/lists", method: "GET" })
+        let userID = localStorage.getItem('user_id');
+        $.ajax({ url: "/api/userLists/" + userID, method: "GET" })
             .then(function (dataList) {
-                let contentHtml = $('.lists');
-                dataList.forEach(e => {
-                    contentHtml.append(
-                        $(`<div>`)
-                            .attr('data-id', `${e._id}`)
-                            .addClass(`list`).append(
-                                $('<header>')
-                                    .text(e.list).append(
-                                        $('<i>')
-                                            .addClass('far fa-window-close')
-                                            .attr('data-id', `${e._id}`)
-                                            .addClass('delete-btn'),
-                                ),
-                                $('<ul>')
-                                    .addClass(`${e.list}`)
-                                    .addClass('locateCard')
-                                    .addClass('containers')
-                                    .attr('data-idd', `${e._id}`),
-                                // create a footer add a card /button
-                                $('<footer>')
-                                    .text('Add a card...')
-                                    .addClass('clickAddList')
-                                    .attr('data-addCardId',`${e._id}`),
-
+                dataList[0].list.forEach(e => {
+                    $(`.lists[ boardid=${e.boardid} ]`).append(
+                        $(`<div>`).attr('listid', `${e._id}`).addClass(`list`).append(
+                            $('<header>').text(`${e.list}`).append(
+                                $('<i>').addClass('far fa-window-close delete-btn').attr('listid', `${e._id}`).addClass('delete-btn'),
+                            ),
+                            $('<ul>').attr('listid', `${e._id}`).addClass('containers'),
+                            $('<footer>').text('Add a card...').addClass('containers').attr('id', 'clickAddCard').attr('listid', `${e._id}`),
                         )
-                        
                     )
-
-                    renderCard(`${e._id}`,`${e.list}`);
-                    
-                    //this is the add a card button event
-                    $('.clickAddList').on('click', function () {
-                        $(".clickAddList").off("click")
-                        $(this)
-                            .text('')
-                            .append(
-                                $('<input>')
-                                    .addClass('addCard')
-                                    .attr('placeholder','name of the card')
-                                    .attr('type',"text"),
-                                $('<button>')
-                                    .addClass('addCardButton')
-                                    .text('Click to add card')
-                            )
-                        })
-                    $(`.lists`).append(contentHtml);
-                    
                 })
-                contentHtml.append(
-                    $('<div>').addClass('add').append(
-                        $('<form>').append(
-                            $('<input>')
-                                .addClass('list-input')
-                                .attr('type', "text")
-                                .attr('placeholder', "enter list title"),
-                            $('<button>')
-                                .addClass('add-btn')
-                                .text('Add List')
+                $('.lists').append(
+                    $('<div>').attr('id', 'addListBox').append(
+                        $('<div>').addClass('addListIcon').append(
+                            $('<i>').addClass('fas fa-plus')
+                        ),
+                        $('<div>').addClass('addListText').append(
+                            $('<p>').text('Add another list')
                         )
                     ),
                 )
             })
-        }
+    },
 
-const addList = function () {
-    let newData = {
-        list: $('.list-input').val().trim()
-    }
-    $.ajax({
-        url: '/api/lists',
-        method: 'POST',
-        data: newData
-    })
-        .then(function () {
-            renderList();
-        })
-}
-
-$(document).on('click', '.delete-btn', function () {
-    const deletedID = $(this).data('id');
-
-    const deleteID = {
-        _id : deletedID
-    }
-    $.ajax({
-        url: `/api/lists`,
-        method: "DELETE",
-        data: deleteID
-    })
-    .then(function () {
-        renderList();
-    })
-});
-        
-function renderCard(listId,className){
-    $.ajax({ url: `/api/lists/${listId}`, method: 'GET' })
-        .then(function (dataList) {
-            console.log('server response to get list by id', dataList[0].cards)
-            let cardList = $(`.${className}`).addClass('listOfCards')
-            console.log('cardList', cardList)
-            cardList.empty();
-            dataList[0].cards.forEach(eachCard =>
-                cardList.append(
-                    $('<li>')
-                        .text(eachCard.card)
-                        .attr('draggable', 'true')
-                        .attr('data-cardId', `${eachCard._id}`)
-                        .attr('data-cardName', `${eachCard.card}`)
-                        .addClass('dragCard')
-                        .addClass(`${eachCard.card}`)
-                        .append(
-                            $('<div>')
-                                .addClass('fas fa-comment')
-                                .attr('id','modal')
-                                .attr('data-id', `${eachCard._id}`)
-                                .attr('data-name', `${eachCard.card}`),
-                            
-                            $('<div>')
-                                .addClass('cardDelete')
-                                .addClass('fas fa-trash-alt')
-                                .attr('data-id', `${eachCard._id}`)
-                        )
-                )
-                
-            )
-
-            
-        })
-    }
-
-$(document).on('click','.cardEdit',function(){
-    $(document).bind('cardEdit',function(){
-        $(document).off('click','.cardEdit');
-    });
-    const list = $(this).parent();
-    const fromList = $(this).attr('data-id');
-    list.append(
-        $('<input>')
-            .attr('placeholder', "enter list title")
-            .addClass('cardEditInput'),
-        $('<button>')
-            .addClass('cardEditButton')
-            .text('Click to Edit')
-    )
-
-    $(document).on('click','.cardEditButton',function(){
-        
-        const newCard = $('.cardEditInput').val().trim()
-
-        console.log(newCard);
-
-        const newData = {
-        _id : fromList,
-        card : newCard 
-        }
-
-        $.ajax({ url: `/api/cards`, method: 'PUT', data: newData })
-        .then(function(){
-    
-            renderList();
-        })
-
-        
-    })
-    
-})
-
-
-
-$(document).on('click','.cardDelete',function(){
-    const whichCard = $(this).attr('data-id');
-    const fromList = $(this).parent().parent().parent().attr('data-id');
-
-    const newData = {
-        _id : whichCard
-    }
-    $.ajax({ url: `/api/lists/${fromList}`, method: 'DELETE', data: newData })
-    .then(function(){
-        renderList();
-    })
-})
-$(document).on('click','.addCardButton',function(){
-    let newData = {
-        card: $('.addCard').val().trim()
-    }
-    let whichList = $(this).parent().attr(`data-addCardId`);
-    $.ajax({ url: `/api/lists/${whichList}`, method: 'POST', data:newData })
-    .then(function(){
-        renderList();
-    })
-});
-
-
-function dragNDrop(){
-    let cardId;
-    let firstBox;
-    let moveList;
-
-    $(document).on('click','.add-btn', addList);
-
-    $(document).on('dragstart',`.dragCard`,function() { 
-        cardId = $(this).attr("data-cardName")
-        firstBox = $(this).parent().attr("data-Idd")
-    })
-
-    $(document).on('dragend',`.dragCard`,function() { 
-        
-    })
-
-    $(document).on('dragover',`.containers`,function(ev) { 
-        ev.preventDefault();
-    })
-
-    $(document).on('dragenter',`.containers`,function(ev) { 
-        ev.preventDefault();
-    })
-
-    $(document).on('drop',`.containers`,function() { 
-        moveList = $(this).attr("data-idd");
+    /**
+     * @function listFunctions.addList - pulls all list info
+     * @event POST - sends list to DB
+     * @function listFunctions.renderList - Re-renders Lists
+     * @function cardFunctions.renderCard - Renders Cards
+     */
+    addList: function () {
+        let userID = localStorage.getItem('user_id');
+        let boardid = $('.lists').attr('boardid')
         let newData = {
-            card: cardId
+            _id: userID,
+            list: $('#addListInput').val().trim(),
+            boardid: boardid
         }
-        $.ajax({ url: `/api/lists/${moveList}`, method: 'POST', data: newData })
-        $.ajax({ url: `/api/lists/${firstBox}`, method: 'DELETE', data: newData })
-        $('.lists').empty();
-        renderList();
-    })
+        $.ajax({ url: '/api/lists', method: 'POST', data: newData })
+            .then(function (e) {
+                listFunctions.renderList();
+                cardFunctions.renderCard();
+            })
+    },
 }
-    dragNDrop();
-    renderList();
-});
+
+/**
+* @event listeners - ready all event listeners
+*/
+$(document).ready(function () {
+
+    $(document).on('click', '#addListBox', function () {
+        $('#addListBox').empty()
+        $('#addListBox').attr('id', 'addingListBox').append(
+            $('<input>').attr('id', 'addListInput').attr('placeholder', 'Enter list title...'),
+        ).append(
+            $('<div>').addClass('addListBar').append(
+                $('<button>').attr('id', 'addListButton').text('Add List'),
+                $('<div>').attr('id', 'addListCancel').append(
+                    $('<i>').addClass('fas fa-times')
+                )
+            )   
+        )
+        $('#addListInput').focus();
+        $('#modal-content').remove();
+        $('.infoBox').remove();
+        $('.createBoardBox').remove();
+        $('.boardSearchBox').remove();
+        $('.notificationsBox').remove();
+    });
+
+    $(document).on('keydown', '#addListInput', function(event) {
+        if(event.which == 13) 
+           listFunctions.addList();
+      });
+
+    $(document).on('click', '#addListCancel', function () {
+        var removeListBar = function () {
+            $('.backUpList').remove();
+        };
+        $('.addListBar').removeClass('addListBar').addClass('backUpList');
+        $('#addingListBox').attr('id', 'addListBox');
+        $('#addListInput').remove();
+        $('#addListButton').remove();
+        $('#addListCancel').remove();
+        $('#addListBox').append(
+            $('<div>').addClass('addListIcon').append(
+                $('<i>').addClass('fas fa-plus')
+            ),
+            $('<div>').addClass('addListText').append(
+                $('<p>').text('Add another list')
+            )
+        )
+        setTimeout(removeListBar, 0.2 * 1000);
+    });
+
+    $(document).on('click', '#addListButton', function () {
+        listFunctions.addList();
+    });
+
+    $(document).on('click', '.delete-btn', function () {
+        const deletedID = $(this).attr('listid');
+        const target = $(this)
+        const deleteID = {
+            _id: deletedID
+        }
+        $.ajax({ url: `/api/lists`, method: "DELETE", data: deleteID })
+            .then(function () {
+                $(target).parent().parent().remove()
+            })
+    });
+
+})
+
+
+
+const logout = function () {
+    const userID = localStorage.getItem('user_id');
+    if (userID) {
+        $('.login').text('Logout').addClass('logout');
+        $('.logout').on('click', function () {
+            localStorage.clear('user_id');
+        })
+    }
+}
+
+const getData = function () {
+    const userID = localStorage.getItem('user_id');
+    if (userID) {
+        $.ajax({ url: '/api/users', method: 'GET', data: { _id: userID } })
+            .then(function (data) {
+
+                // listFunctions.renderList();
+            })
+    }
+}
+
+getData();
+
+logout();

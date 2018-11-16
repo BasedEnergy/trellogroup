@@ -1,139 +1,48 @@
+html {
+    background-color: black;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(0, 121, 191);
     font-size: 14px;
     line-height: 1.3em;
 }
-
-.ui {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 40px 50px 1fr;
-    background-color: #117ab6;
-    color: #eee;
+.lowerOpacity {
+    opacity: 0.25;
+    animation: lowerOpacity;
+    transition: ease 0.2s;
 }
-
-.navbar {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.colorSel {
-    opacity: 0.5;
-    height: 30px;
-    width: 30px;
-    margin: 5px;
-    border-radius: 4px;
-    float: right;
-}
-
-.colorSel:hover {
-    opacity: 0.8;
-}
-
-.navbar.app {
-    background-color: #126ca0;
-    background-image: url("../assets/trello-logo-white.png");
-    background-size: 78px 22px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.navbar.board {
-    font-size: 1.1rem;
-}
-
 .lists {
     display: flex;
     overflow-x: auto;
+    margin-bottom: 8px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 2;
 }
-
 .lists>* {
     flex: 0 0 auto;
     margin-left: 8px;
 }
-
 .lists::after {
     content: '';
     flex: 0 0 10px;
 }
-
-.list {
-    width: 300px;
-    height: calc(100% - 10px - 17px);
-}
-
-.list>* {
-    background-color: #e2e4e6;
-    color: #333;
-    padding: 0 10px;
-}
-
-.list header {
-    line-height: 36px;
-    font-size: 16px;
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    display: grid;
-    grid-template-columns: 200px 85px;
-    word-wrap: break-word;
-}
-
-.list footer {
-    line-height: 36px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: #888;
-    cursor: pointer;
-}
-
-.list ul {
-    list-style: none;
-    margin: 0;
-    max-height: calc(100% - 36px - 36px);
-    overflow-y: auto;
-}
-
-.list ul li {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-.list ul li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.list ul li img {
-    display: block;
-    width: calc(100% + 2 * 10px);
-    margin: -10px 0 10px -10px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-.add {
-    display: block;
+#modal-content {
+    display: inline-block;
     border-radius: 5px;
-    background-color: #e2e4e6;
-    height: 100px;
-    width: 300px;
-    color: #333;
-    border-radius: 3px;
-}
-
-.modal-content {
-    display: none;
-    border-radius: 5px;
+    background-color:grey;
     margin: 1px;
     padding-bottom: 7px;
     margin-top: 8px;
     max-width: 300px;
 }
-
 .add header {
     padding-left: 10px;
     text-align: left;
@@ -143,13 +52,6 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-
-.far {
-    font-weight: 400;
-    cursor: pointer;
-
-}
-
 #delete {
     margin: 5px;
     border: none;
@@ -158,11 +60,9 @@ body {
     font-size: 15px;
     cursor: pointer;
 }
-
 textarea {
     resize: none;
 }
-
 .button-save {
     background-color: #5aac44;
     box-shadow: 0 1px 0 0 #3f6f21;
@@ -176,35 +76,11 @@ textarea {
     height: 30px;
     width: 80px;
 }
-
-#notes-render {
-    max-width: 280px;
-    overflow: hidden;
-}
-
-#note-content {
-    width: 270px;
-    overflow: hidden;
-    background-color: whitesmoke;
-    padding-left: 5px;
-    border-radius: 3px;
-    margin-top: 5px;
-}
-
-.note-input {
-    margin: 0px;
-    width: 273px;
-    height: 65px;
-    border-radius: 5px;
-    border: none;
-}
-
-.closeBtn {
+#closeBtn {
     cursor: pointer;
     padding-left: 265px;
     font-size: 15px;
 }
-
 .add form {
     background-color: #e2e4e6;
     padding-top: 5px;
@@ -213,7 +89,6 @@ textarea {
     border-radius: 3px;
     height: auto;
 }
-
 .add form button {
     background-color: #5aac44;
     box-shadow: 0 1px 0 0 #3f6f21;
@@ -227,7 +102,6 @@ textarea {
     height: 30px;
     width: 80px;
 }
-
 .add form input {
     background: #fff;
     border: 1px solid #5ba4cf;
@@ -238,125 +112,145 @@ textarea {
     border-radius: 3px;
     height: 25px;
 }
-
-li {
+.board-header{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-left: 8px;
+}
+.board h1{
+    cursor: pointer;
+}
+.container {
+    z-index: 2;
+}
+.flex {
     display: flex;
+    align-items: center; 
+}
+.lists::-webkit-scrollbar {
+    overflow: auto;
+    margin: 0 auto;
+    height: 12px;
+}
+.lists::-webkit-scrollbar-track {
+    background: rgb(0,0,0,0.1);
+    border-radius: 4px;
+    margin: 10px;
+}
+.lists::-webkit-scrollbar-thumb {
+    margin: 10px;
+    border-radius: 4px;
+    height: 20px;
+    width: 8px;
+    background: rgb(255,255,255,0.4);
+}
+body::-webkit-scrollbar { 
+    display: none; 
 }
 
-
-.cardEdit {
-    width: 10%;
-    display: inline-block;
-    justify-content: right;
-    align-items: right;
-    border-radius: 1px;
+.homeCenter {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    top: 60px;
+    margin-top: 40px;
+    max-width: 860px;
+    max-height: calc(100% - 300px);
+    left: 34%;
 }
 
-.card {
-    width: 70%;
-    word-wrap: break-word;
+.boardSelect {
+    width: 188px;
+    height: 96px;
+    border-radius: 3px;
+    margin-left: 16px;
+    margin-top: 8px;
+    cursor: pointer;
 }
 
-.butt {
+.boardColorSel {
+    margin: 4px;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.boardRow {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
-
-    height: 24px;
-    width: 24px;
-    cursor: pointer;
+    width: 96px;
+    margin: 4px;
 }
 
-.butt:hover {
+.colorBox {
+    position: relative;
+    bottom: 4px;
+    width: 96px;
+    float: left;
+}
+
+.homeCreateBoard {
+    z-index: 4;
     background-color: silver;
-    opacity: 1;
-}
-
-.icon {
-    opacity: 0.5;
-}
-
-#addCardInput {
-    width: 96%;
-    margin: 2px;
-    line-height: 2em;
-}
-
-#addCardButton {
-    background-color: #5aac44;
-    box-shadow: 0 1px 0 0 #3f6f21;
-    border: none;
-    color: #fff;
-    margin-top: 5px;
+    width: 188px;
+    height: 96px;
+    border-radius: 3px;
+    margin-left: 16px;
+    margin-top: 8px;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    border-radius: 3px;
-    height: 30px;
-    width: 80px;
-    margin: 2px;
-}
-
-#cancelButton {
-    float: right;
-}
-
-.editCardInput {
-    width: 100%;
-}
-
-
-.cardDelete {
-    width: 10%;
-    display: inline-block;
-    justify-content: right;
-    align-items: right;
-    border-radius: 1px;
-    height: 24px;
-    width: 24px;
-}
-
-.cardDelete:hover {
-    background-color: silver;
-    opacity: 1;
-}
-
-.fa-trash-alt {
-    opacity: 0.5;
-    border-radius: 3px;
-    height: 30px;
-}
-
-.addCardField {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
-
 .fa-window-close {
     cursor: pointer;
     padding-top: 5px;
 }
 
+#add-btn {
+    font-family: 'Helvetica Neue,Arial,Helvetica,sans-serif';
+}
+
+a.login {
+    position: absolute;
+    right: 0px;
+    margin-right: 150px;
+    color: white;
+}
+a.login:hover {
+    color: blue;
+}
 .board-header{
     font-size: 18px;
     font-weight: 700;
     line-height: 32px;
 }
-
 .board h1{
     cursor: pointer;
 }
-
-.rainbow {
-    background-color: none;
-    background: linear-gradient(#ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3, #ff2400, #e81d1d);
-    background-size: 1800% 1800%;
-    animation: rainbow 5s;
-    animation-iteration-count: infinite;
+.container {
+    z-index: 2;
 }
 
-@keyframes rainbow { 
-    0%{background-position:0% 100%}
-    100%{background-position:100% 0%}
+.boardsTitleBox {
+    color: #17394d;
+    position: absolute;
+    top: -40px;
+    left: 24px;
+    height: 40px;
+    width: 200px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+@keyframes lowerOpacity {
+    0%{opacity: 1}
+    100%{opacity: 0.25}
 }

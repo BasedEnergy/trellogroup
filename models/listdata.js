@@ -10,12 +10,11 @@ const ListSchema = new Schema({
         type: String,
         required: true
     },
-    cards: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Cards"
-        }
-    ]
+    
+    boardid: {
+        type: String,
+    },
+
 });
 
 

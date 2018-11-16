@@ -11,12 +11,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static('public'));
+mongoose.Promise = Promise;
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/trellodata', {
     useNewUrlParser: true
 });
 
 require('./routes/api-routes')(app);
+require('./routes/html-routes')(app);
 
 app.listen(PORT, function () {
     console.log(`App running on port ${PORT}`);
