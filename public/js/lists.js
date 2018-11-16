@@ -6,7 +6,10 @@ const listFunctions = {
     renderList: function () {
         $('.lists').empty();
         let userID = localStorage.getItem('user_id');
-        $.ajax({ url: "/api/userLists/" + userID, method: "GET" })
+        $.ajax({
+                url: "/api/userLists/" + userID,
+                method: "GET"
+            })
             .then(function (dataList) {
                 dataList[0].list.forEach(e => {
                     $(`.lists[ boardid=${e.boardid} ]`).append(
@@ -46,7 +49,11 @@ const listFunctions = {
             list: $('#addListInput').val().trim(),
             boardid: boardid
         }
-        $.ajax({ url: '/api/lists', method: 'POST', data: newData })
+        $.ajax({
+                url: '/api/lists',
+                method: 'POST',
+                data: newData
+            })
             .then(function (e) {
                 listFunctions.renderList();
                 cardFunctions.renderCard();
@@ -55,8 +62,8 @@ const listFunctions = {
 }
 
 /**
-* @event listeners - ready all event listeners
-*/
+ * @event listeners - ready all event listeners
+ */
 $(document).ready(function () {
 
     $(document).on('click', '#addListBox', function () {
@@ -69,7 +76,7 @@ $(document).ready(function () {
                 $('<div>').attr('id', 'addListCancel').append(
                     $('<i>').addClass('fas fa-times')
                 )
-            )   
+            )
         )
         $('#addListInput').focus();
         $('#modal-content').remove();
@@ -79,10 +86,10 @@ $(document).ready(function () {
         $('.notificationsBox').remove();
     });
 
-    $(document).on('keydown', '#addListInput', function(event) {
-        if(event.which == 13) 
-           listFunctions.addList();
-      });
+    $(document).on('keydown', '#addListInput', function (event) {
+        if (event.which == 13)
+            listFunctions.addList();
+    });
 
     $(document).on('click', '#addListCancel', function () {
         var removeListBar = function () {
@@ -114,7 +121,11 @@ $(document).ready(function () {
         const deleteID = {
             _id: deletedID
         }
-        $.ajax({ url: `/api/lists`, method: "DELETE", data: deleteID })
+        $.ajax({
+                url: `/api/lists`,
+                method: "DELETE",
+                data: deleteID
+            })
             .then(function () {
                 $(target).parent().parent().remove()
             })
@@ -137,7 +148,13 @@ const logout = function () {
 const getData = function () {
     const userID = localStorage.getItem('user_id');
     if (userID) {
-        $.ajax({ url: '/api/users', method: 'GET', data: { _id: userID } })
+        $.ajax({
+                url: '/api/users',
+                method: 'GET',
+                data: {
+                    _id: userID
+                }
+            })
             .then(function (data) {
 
                 // listFunctions.renderList();
