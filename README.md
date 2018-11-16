@@ -6,7 +6,7 @@ A collaborative project intended to mock the functionality of the website called
 Class project assigned to facilitate working in a group environment while rehearsing coding techniques.
 
 ## Screenshots
-[Current Build](public/assets/trelloclonegt.herokuapp.com_.png)
+![](public/assets/trelloclonegt.herokuapp.com_.png)
 
  ## Tech/framework used
 jQuery, MongoDB/Mongoose, Node/Express
@@ -15,9 +15,8 @@ jQuery, MongoDB/Mongoose, Node/Express
 If you want to try it out locally, clone down the repo and run the following in the root directory:
 ```sh
 git clone https://github.com/BasedEnergy/trellogroup.git
-git checkout -b "branch-name"
 npm i
-node server
+npm start
 ```
 
  ## Contribute
