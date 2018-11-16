@@ -5,6 +5,7 @@ const listFunctions = {
      */
     renderList: function () {
         $('.lists').empty();
+
         $.ajax({ url: '/api/lists', method: 'GET' })
             .then(function (dataList) {
                 dataList.forEach(e => {
@@ -43,7 +44,11 @@ const listFunctions = {
             list: $('#addListInput').val().trim(),
             boardid: boardid
         }
-        $.ajax({ url: '/api/lists', method: 'POST', data: newData })
+        $.ajax({
+                url: '/api/lists',
+                method: 'POST',
+                data: newData
+            })
             .then(function (e) {
                 listFunctions.renderList();
                 cardFunctions.renderCard();
@@ -52,8 +57,8 @@ const listFunctions = {
 }
 
 /**
-* @event listeners - ready all event listeners
-*/
+ * @event listeners - ready all event listeners
+ */
 $(document).ready(function () {
 
     $(document).on('click', '#addListBox', function () {
@@ -66,7 +71,7 @@ $(document).ready(function () {
                 $('<div>').attr('id', 'addListCancel').append(
                     $('<i>').addClass('fas fa-times')
                 )
-            )   
+            )
         )
         $('#addListInput').focus();
         $('#modal-content').remove();
@@ -76,10 +81,10 @@ $(document).ready(function () {
         $('.notificationsBox').remove();
     });
 
-    $(document).on('keydown', '#addListInput', function(event) {
-        if(event.which == 13) 
-           listFunctions.addList();
-      });
+    $(document).on('keydown', '#addListInput', function (event) {
+        if (event.which == 13)
+            listFunctions.addList();
+    });
 
     $(document).on('click', '#addListCancel', function () {
         var removeListBar = function () {
@@ -111,10 +116,13 @@ $(document).ready(function () {
         const deleteID = {
             _id: deletedID
         }
-        $.ajax({ url: `/api/lists`, method: "DELETE", data: deleteID })
+        $.ajax({
+                url: `/api/lists`,
+                method: "DELETE",
+                data: deleteID
+            })
             .then(function () {
                 $(target).parent().parent().remove()
             })
     });
-
 })
