@@ -11,12 +11,12 @@
 }
 
 #addingListBox {
-    height: 40px;
+    height: 60px;
     width: 272px;
     border-radius: 4px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
     transition: .1s ease;
     background-color: rgba(0,0,0,.12);
     animation: addList;
@@ -39,7 +39,7 @@
     #addListInput {
         z-index: 2;
         padding: 6px 8px;
-        margin-left: 4px;
+        margin-top: 4px;
         height: 20px;
         width: 246px;
         border: 1px solid #5ba4cf;
@@ -49,13 +49,13 @@
     }
 
     .addListBar {
-        position: absolute;
+        position: relative;
         display: flex;
         align-items: center;
         border-radius: 3px;
-        top: 126px;
         width: 272px;
         height: 40px;
+        top: 20px;
         background-color: #fff;
         animation: addListDown;
         animation-duration: 0.2s;
@@ -75,6 +75,7 @@
     }
 
     #addListButton {
+        margin-bottom: 12px;
         margin-left: 4px;
         background-color: #5aac44;
         box-shadow: 0 1px 0 0 #3f6f21;
@@ -87,6 +88,7 @@
     }
 
     #addListCancel {
+        margin-bottom: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -209,8 +211,8 @@ ul::-webkit-scrollbar-thumb {
 }
 
 @keyframes addListDown { 
-    0%{background-color: rgba(0,0,0,.12); top: 106px}
-    100%{background-color: #fff; top: 126px}
+    0%{background-color: rgba(0,0,0,.12); top: 0px}
+    100%{background-color: #fff; top: 20px}
 }
 
 @keyframes addListUp { 
