@@ -1,31 +1,50 @@
+/**
+ * @class Card - Creates Card class in global scope
+ * @constructor - takes in card data
+ * @param {string} first - takes in listid
+ * @param {string} second - takes in cardid
+ * @param {string} third - takes in card string
+ */
+class Card {
+    constructor(listid, cardid, card) {
+        $(`ul[ listid=${listid} ]`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${listid}`).attr('cardid', `${cardid}`).addClass('dragCard containers').append(
+                $('<div>').addClass('card').append(
+                    $('<p>').append(card)
+                ),
+                $('<div>').addClass('cardEdit butt').append(
+                    $('<i>').addClass('fas fa-pen icon')
+                ),
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
+                    $('<i>').addClass('far fa-comment icon')
+                ),
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
+                    $('<i>').addClass('fas fa-trash-alt icon')
+                )
+            )
+        )
+    }
+}
+
 const cardFunctions = {
 
+    /**
+     * @function cardFunctions.renderCard - renders all cards and finds their correct list
+     */
     renderCard: function () {
         $.ajax({ url: '/api/cards', method: 'GET' })
             .then(function (dataList) {
                 dataList.forEach(e =>
-                    $(`ul[ listid=${e.listid} ]`).append(
-                        $('<li>').attr('draggable', 'true').attr('listid', `${e.listid}`).attr('cardid', `${e._id}`).addClass('dragCard containers').append(
-                            $('<div>').addClass('card').append(
-                                $('<p>').append(e.card)
-                            ),
-                            $('<div>').addClass('cardEdit butt').append(
-                                $('<i>').addClass('fas fa-pen icon')
-                            ),
-                            $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${e._id}`).attr('data-name', `${e.card}`).append(
-                                $('<i>').addClass('far fa-comment icon')
-                            ),
-                            $('<div>').addClass('cardDelete butt').attr('cardid', `${e._id}`).append(
-                                $('<i>').addClass('fas fa-trash-alt icon')
-                            )
-                        )
-                    )
+                    new Card(e.listid, e._id, e.card)
                 )
             })
     },
 
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
     $(document).on('click', '#cancelButton', function () {
@@ -35,6 +54,9 @@ $(document).ready(function () {
         )
     });
 
+    /**
+     * @event addCard - on event renders add card fields
+     */
     $(document).on('click', '#clickAddCard', function () {
         $('footer').text('Add a card...').addClass('containers').attr('id', 'clickAddCard')
         $(this).empty();
@@ -57,6 +79,9 @@ $(document).ready(function () {
         $('.notificationsBox').remove();
     });
 
+    /**
+     * @event Edit - on event removes card text and renders edit fields to card
+     */
     $(document).on('click', '.cardEdit', function () {
         $(document).bind('cardEdit', function () {
             $(document).off('click', '.cardEdit');
@@ -78,6 +103,9 @@ $(document).ready(function () {
         );
     })
 
+    /**
+     * @event PUT - collects card data and updates card in DB
+     */
     $(document).on('click', '.cardEditCheck', function () {
         const newCard = $('.cardEditInput').val().trim()
         const id = $(this).attr('cardid')
@@ -90,12 +118,16 @@ $(document).ready(function () {
             .then(function () { listFunctions.renderList() })
     });
 
+    /**
+     * @function listFunctions.renderList - on event renders lists
+     */
     $(document).on('click', '.cardEditCancel', function () {
-        // listId = $(this).parent().parent().parent().attr('listid')
-        // cardFunctions.renderCard(listId);
         listFunctions.renderList();
     });
 
+    /**
+     * @event DELETE - collects card data and deletes it from DB
+     */
     $(document).on('click', '.cardDelete', function () {
         let card = $(this).parent()
         const whichCard = $(this).attr('cardid');
@@ -104,10 +136,13 @@ $(document).ready(function () {
         }
         $.ajax({ url: '/api/cards', method: 'DELETE', data: newData })
             .then(function () {
-                card.remove()   
+                card.remove()
             })
     });
 
+    /**
+     * @event POST - collects card data and sends it to DB
+     */
     $(document).on('click', '#addCardButton', function () {
         let listid = $(this).attr('listid');
         let newData = {
@@ -116,25 +151,10 @@ $(document).ready(function () {
         }
         $.ajax({ url: '/api/cards', method: 'POST', data: newData })
             .then(function (e) {
-                $(`ul[ listid=${e.listid} ]`).append(
-                    $('<li>').attr('draggable', 'true').attr('listid', `${e.listid}`).attr('cardid', `${e._id}`).addClass('dragCard containers').attr('id', `${e.card}`).append(
-                        $('<div>').addClass('card').append(
-                            $('<p>').append(e.card)
-                        ),
-                        $('<div>').addClass('cardEdit butt').append(
-                            $('<i>').addClass('fas fa-pen icon')
-                        ),
-                        $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${e._id}`).attr('data-name', `${e.card}`).append(
-                            $('<i>').addClass('far fa-comment icon')
-                        ),
-                        $('<div>').addClass('cardDelete butt').attr('cardid', `${e._id}`).append(
-                            $('<i>').addClass('fas fa-trash-alt icon')
-                        )
-                    )
-                )
+                new Card(e.listid, e._id, e.card)
             })
-            $('#addCardInput').val('');
-            $('#addCardInput').focus();
+        $('#addCardInput').val('');
+        $('#addCardInput').focus();
     });
 
     cardFunctions.renderCard();
