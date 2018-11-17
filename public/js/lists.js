@@ -84,7 +84,7 @@ $(document).ready(function () {
                 $('<div>').attr('id', 'addListCancel').append(
                     $('<i>').addClass('fas fa-times')
                 )
-            )   
+            )
         )
         $('#addListInput').focus();
         $('#modal-content').remove();
