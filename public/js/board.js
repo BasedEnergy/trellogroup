@@ -1,5 +1,8 @@
 const boardFunctions = {
 
+    /**
+     * @function boardFunctions.renderCreateBoard - renders the board creation widget
+     */
     renderCreateBoard: function () {
         $('body').addClass('lowerOpacity')
         $('html').append(
@@ -38,6 +41,30 @@ const boardFunctions = {
         )
     },
 
+    /**
+     * @function menuFunctions.renderBoardSearch - Renders board search Box
+     */
+    renderBoardSearch: function () {
+        $('.navbar.board').append(
+            $('<div>').addClass('boardSearchBox').append(
+                $('<div>').addClass('boardSearchBar').append(
+                    $('<input>').attr('id', 'boardSearchInput')
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+            )
+
+        )
+    },
+
+    /**
+     * @function boardFunctions.renderBoard - renders all boards to '.homeCenter'
+     * @event GET - gets all boards
+     */
     renderBoard: function () {
         $('.homeCenter').empty();
         $.ajax({ url: '/api/boards', method: 'GET' })
@@ -63,10 +90,13 @@ const boardFunctions = {
             })
     },
 
+    /**
+     * @function boardFunctions.addBoard - collects all board data
+     * @event POST - sends board to DB
+     */
     addBoard: function () {
         let board = $('.createBoardInput').val().trim();
         let color = $('.boardBG').css('background-color');
-        console.log(color)
         let newBoard = {
             board: board,
             star: false,
@@ -78,6 +108,11 @@ const boardFunctions = {
             })
     },
 
+    /**
+     * @function boardFunctions.deleteBoard - deletes board
+     * @event DELETE - deletes board
+     * @function menuFunctions.renderHomePage - Re-renders home page
+     */
     deleteBoard: function () {
         $.ajax({ url: '/api/boards', method: 'DELETE' })
             .then(function () {
@@ -91,21 +126,35 @@ const boardFunctions = {
 
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
 
+    $(document).on('click', '#Boards', function () {
+        let ifBoardSearch = $('.boardSearchBox').val();
+        if (ifBoardSearch === undefined) {
+            boardFunctions.renderBoardSearch();
+        } else {
+            $('.boardSearchBox').remove();
+        }
+    });
+
     $(document).on('click', '.boardSelect', function () {
+        $('.lists').remove();
         let list = $('.lists').val();
         let boardid = $(this).attr('boardid');
-        let color = $(this).css('background-color')
-        $('body').css('background-color', color)
+        let color = $(this).css('background-color');
+        $('body').css('background-color', color);
+        let board = $(this).text();
+        $('.board-header').html(board);
         if (list === undefined) {
             $('.ui').append(
                 $('<div>').addClass('lists').attr('boardid', boardid)
             );
-        } else {
-            $('.lists').attr('boardid', boardid)
         }
         listFunctions.renderList();
+        cardFunctions.renderCard();
         $('.homePage').remove();
     })
 
