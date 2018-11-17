@@ -1,4 +1,8 @@
 const dragNDropFunctions = {
+
+    /**
+     * @function dragNDropFunctions.dragNDrop - initiates name space/object
+     */
     dragNDrop: function () {
         let cardId;
         let firstBox;
@@ -6,7 +10,14 @@ const dragNDropFunctions = {
     },
 }
 
+/**
+* @event listeners - ready all event listeners
+*/
 $(document).ready(function () {
+
+    let cardId;
+    let firstBox;
+    let moveList;
 
     $(document).on('click', '.add-btn', listFunctions.addList);
 
@@ -29,37 +40,22 @@ $(document).ready(function () {
         ev.preventDefault();
     })
 
-
+    /**
+     * @event PUT - changes Card's listid to match new list
+     */
     $(document).on('drop', `.containers`, function () {
         let moveList = $(this).attr("listid");
-        let moveCard = {
+        let changeCard = {
             card: card,
-            listid: moveList
+            listid: moveList,
         }
-        let removeCard = {
-            card: card,
-            listid: firstBox
-        }
-        $.ajax({ url: '/api/cards', method: 'POST', data: moveCard })
-        $.ajax({ url: '/api/cards', method: 'DELETE', data: removeCard })
+        $.ajax({ url: '/api/cards', method: 'PUT', data: changeCard })
         $(`li[ cardid=${cardid} ]`).remove();
-        $(`ul[ listid=${moveList} ]`).append(
-            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').append(
-                $('<div>').addClass('card').append(
-                    $('<p>').append(card)
-                ),
-                $('<div>').addClass('cardEdit butt').append(
-                    $('<i>').addClass('fas fa-pen icon')
-                ),
-                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
-                    $('<i>').addClass('far fa-comment icon')
-                ),
-                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
-                    $('<i>').addClass('fas fa-trash-alt icon')
-                )
-            )
-        )
+        new Card(moveList, cardid, card)
     })
+    /**
+     * @function dragNDropFunctions.dragNDrop - initiates objects
+     */
     dragNDropFunctions.dragNDrop();
 
 })
