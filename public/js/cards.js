@@ -1,3 +1,31 @@
+/**
+ * @class Card - Creates Card class in global scope
+ * @constructor - takes in card data
+ * @param {string} first - takes in listid
+ * @param {string} second - takes in cardid
+ * @param {string} third - takes in card string
+ */
+class Card {
+    constructor(listid, cardid, card) {
+        $(`ul[ listid=${listid} ]`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${listid}`).attr('cardid', `${cardid}`).addClass('dragCard containers').append(
+                $('<div>').addClass('card').append(
+                    $('<p>').append(card)
+                ),
+                $('<div>').addClass('cardEdit butt').append(
+                    $('<i>').addClass('fas fa-pen icon')
+                ),
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardid}`).attr('data-name', `${card}`).append(
+                    $('<i>').addClass('far fa-comment icon')
+                ),
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardid}`).append(
+                    $('<i>').addClass('fas fa-trash-alt icon')
+                )
+            )
+        )
+    }
+}
+
 const cardFunctions = {
 
     /**
@@ -7,22 +35,7 @@ const cardFunctions = {
         $.ajax({ url: '/api/cards', method: 'GET' })
             .then(function (dataList) {
                 dataList.forEach(e =>
-                    $(`ul[ listid=${e.listid} ]`).append(
-                        $('<li>').attr('draggable', 'true').attr('listid', `${e.listid}`).attr('cardid', `${e._id}`).addClass('dragCard containers').append(
-                            $('<div>').addClass('card').append(
-                                $('<p>').append(e.card)
-                            ),
-                            $('<div>').addClass('cardEdit butt').append(
-                                $('<i>').addClass('fas fa-pen icon')
-                            ),
-                            $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${e._id}`).attr('data-name', `${e.card}`).append(
-                                $('<i>').addClass('far fa-comment icon')
-                            ),
-                            $('<div>').addClass('cardDelete butt').attr('cardid', `${e._id}`).append(
-                                $('<i>').addClass('fas fa-trash-alt icon')
-                            )
-                        )
-                    )
+                    new Card(e.listid, e._id, e.card)
                 )
             })
     },
@@ -123,7 +136,7 @@ $(document).ready(function () {
         }
         $.ajax({ url: '/api/cards', method: 'DELETE', data: newData })
             .then(function () {
-                card.remove()   
+                card.remove()
             })
     });
 
@@ -138,25 +151,10 @@ $(document).ready(function () {
         }
         $.ajax({ url: '/api/cards', method: 'POST', data: newData })
             .then(function (e) {
-                $(`ul[ listid=${e.listid} ]`).append(
-                    $('<li>').attr('draggable', 'true').attr('listid', `${e.listid}`).attr('cardid', `${e._id}`).addClass('dragCard containers').attr('id', `${e.card}`).append(
-                        $('<div>').addClass('card').append(
-                            $('<p>').append(e.card)
-                        ),
-                        $('<div>').addClass('cardEdit butt').append(
-                            $('<i>').addClass('fas fa-pen icon')
-                        ),
-                        $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${e._id}`).attr('data-name', `${e.card}`).append(
-                            $('<i>').addClass('far fa-comment icon')
-                        ),
-                        $('<div>').addClass('cardDelete butt').attr('cardid', `${e._id}`).append(
-                            $('<i>').addClass('fas fa-trash-alt icon')
-                        )
-                    )
-                )
+                new Card(e.listid, e._id, e.card)
             })
-            $('#addCardInput').val('');
-            $('#addCardInput').focus();
+        $('#addCardInput').val('');
+        $('#addCardInput').focus();
     });
 
     cardFunctions.renderCard();

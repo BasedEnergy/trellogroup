@@ -42,6 +42,26 @@ const boardFunctions = {
     },
 
     /**
+     * @function menuFunctions.renderBoardSearch - Renders board search Box
+     */
+    renderBoardSearch: function () {
+        $('.navbar.board').append(
+            $('<div>').addClass('boardSearchBox').append(
+                $('<div>').addClass('boardSearchBar').append(
+                    $('<input>').attr('id', 'boardSearchInput')
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+                $('<div>').addClass('boardSearchBar').append(
+
+                ),
+            )
+
+        )
+    },
+
+    /**
      * @function boardFunctions.renderBoard - renders all boards to '.homeCenter'
      * @event GET - gets all boards
      */
@@ -110,6 +130,15 @@ const boardFunctions = {
 * @event listeners - ready all event listeners
 */
 $(document).ready(function () {
+
+    $(document).on('click', '#Boards', function () {
+        let ifBoardSearch = $('.boardSearchBox').val();
+        if (ifBoardSearch === undefined) {
+            boardFunctions.renderBoardSearch();
+        } else {
+            $('.boardSearchBox').remove();
+        }
+    });
 
     $(document).on('click', '.boardSelect', function () {
         $('.lists').remove();
