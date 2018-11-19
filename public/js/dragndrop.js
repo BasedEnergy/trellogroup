@@ -51,7 +51,22 @@ $(document).ready(function () {
         }
         $.ajax({ url: '/api/cards', method: 'PUT', data: changeCard })
         $(`li[ cardid=${cardid} ]`).remove();
-        new Card(moveList, cardid, card)
+        $(`ul[ listid=${moveList} ]`).append(
+            $('<li>').attr('draggable', 'true').attr('listid', `${moveList}`).attr('cardid', `${cardid}`).addClass('dragCard containers').append(
+                $('<div>').addClass('card').append(
+                    $('<p>').append(card)
+                ),
+                $('<div>').addClass('cardEdit butt').append(
+                    $('<i>').addClass('fas fa-pen icon')
+                ),
+                $('<div>').addClass('cardComment butt').attr('id', 'modal').attr('cardid', `${cardId}`).attr('data-name', `${card}`).append(
+                    $('<i>').addClass('far fa-comment icon')
+                ),
+                $('<div>').addClass('cardDelete butt').attr('cardid', `${cardId}`).append(
+                    $('<i>').addClass('fas fa-trash-alt icon')
+                )
+            )
+        )
     })
     /**
      * @function dragNDropFunctions.dragNDrop - initiates objects
