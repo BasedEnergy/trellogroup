@@ -1,24 +1,3 @@
-/**
- * @class Card - Creates List class in global scope
- * @constructor - takes in card data
- * @param {string} first - takes in boardid
- * @param {string} second - takes in listid
- * @param {string} third - takes in list string
- */
-class List {
-    constructor(boardid, listid, list) {
-        $(`.lists[ boardid=${boardid} ]`).append(
-            $(`<div>`).attr('listid', `${listid}`).addClass(`list`).append(
-                $('<header>').text(`${list}`).append(
-                    $('<i>').addClass('far fa-window-close delete-btn').attr('listid', `${listid}`).addClass('delete-btn'),
-                ),
-                $('<ul>').attr('listid', `${listid}`).addClass('containers'),
-                $('<footer>').text('Add a card...').addClass('containers').attr('id', 'clickAddCard').attr('listid', `${listid}`),
-            )
-        )
-    }
-}
-
 const listFunctions = {
 
     /**
@@ -30,7 +9,15 @@ const listFunctions = {
         $.ajax({ url: '/api/lists', method: 'GET' })
             .then(function (dataList) {
                 dataList.forEach(e => {
-                    new List(e.boardid, e._id, e.list)
+                    $(`.lists[ boardid=${e.boardid} ]`).append(
+                        $(`<div>`).attr('listid', `${e._id}`).addClass(`list`).append(
+                            $('<header>').text(`${e.list}`).append(
+                                $('<i>').addClass('far fa-window-close delete-btn').attr('listid', `${e._id}`).addClass('delete-btn'),
+                            ),
+                            $('<ul>').attr('listid', `${e._id}`).addClass('containers'),
+                            $('<footer>').text('Add a card...').addClass('containers').attr('id', 'clickAddCard').attr('listid', `${e._id}`),
+                        )
+                    )
                 })
                 $('.lists').append(
                     $('<div>').attr('id', 'addListBox').append(
@@ -58,10 +45,10 @@ const listFunctions = {
             boardid: boardid
         }
         $.ajax({
-            url: '/api/lists',
-            method: 'POST',
-            data: newData
-        })
+                url: '/api/lists',
+                method: 'POST',
+                data: newData
+            })
             .then(function (e) {
                 listFunctions.renderList();
                 cardFunctions.renderCard();
@@ -130,10 +117,10 @@ $(document).ready(function () {
             _id: deletedID
         }
         $.ajax({
-            url: `/api/lists`,
-            method: "DELETE",
-            data: deleteID
-        })
+                url: `/api/lists`,
+                method: "DELETE",
+                data: deleteID
+            })
             .then(function () {
                 $(target).parent().parent().remove()
             })
